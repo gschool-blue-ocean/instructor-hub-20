@@ -15,7 +15,7 @@ CREATE TABLE students (
   stu_name TEXT,
   email TEXT,
   github TEXT,
-  cohort_id INTEGER REFERENCES cohorts(cohort_number) ON DELETE CASCADE
+  cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS assessments;
@@ -54,15 +54,15 @@ CREATE TABLE assessment_scores (
   student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
   assess_id INTEGER REFERENCES assessments(id) ON DELETE CASCADE,
   grade INTEGER,
-  cohort_id INTEGER REFERENCES cohorts(cohort_number) ON DELETE CASCADE
+  cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS project_scores;
 
 CREATE TABLE project_scores (
   id SERIAL PRIMARY KEY,
-  group_id INTEGER REFERENCES groups(group_name) ON DELETE CASCADE,
+  group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE,
   project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
   grade INTEGER,
-  cohort_id INTEGER REFERENCES cohorts(cohort_number) ON DELETE CASCADE
+  cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE
 );
