@@ -5,8 +5,8 @@ import Projects from './Projects/Projects';
 const ProjectsPage = () => {
   return (
     <div id='ProjectsPage'>
-      ProjectsPage
       <Projects></Projects>
+      ProjectsPage
     </div>
   );
 };

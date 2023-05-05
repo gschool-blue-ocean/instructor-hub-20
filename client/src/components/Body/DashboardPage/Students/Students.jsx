@@ -3,7 +3,10 @@ import '../../../../styles/Students.css';
 
 const Students = () => {
   return (
-    <div id='Students'>
+    <div
+      id='Students'
+      className='building-block'
+    >
       Students
       <button>Add Students</button>
     </div>
