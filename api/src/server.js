@@ -2,7 +2,12 @@ import express from "express";
 
 import pg from "pg";
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+      rejectUnauthorized: false
+  }
+});
 
 const app = express();
 
@@ -99,7 +104,7 @@ app.put('/students/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { stu_name, email, github, cohort_id } = req.body;
-    const { rowCount } = await pool.query('UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5', [stu_name, email, github, cohort_id]);
+    const { rowCount } = await pool.query('UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5', [stu_name, email, github, cohort_id, id]);
 
     if (rowCount === 0) {
       res.sendStatus(404);
@@ -183,11 +188,11 @@ app.put('/cohorts/:id', async (req, res) => {
   }
 });
 
+
 app.delete('/cohorts/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { rowCount } = await pool.query('DELETE FROM cohorts WHERE id = $1', [id]);
-
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {
@@ -329,7 +334,6 @@ app.delete('/project/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { rowCount } = await pool.query('DELETE FROM project WHERE id = $1', [id]);
-
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {

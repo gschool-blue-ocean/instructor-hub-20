@@ -1,5 +1,5 @@
-INSERT INTO cohorts(cohort_number, start, graduation, instructor) VALUES (19, '01/17/2023', '05/26/2023', 'Phil Witkin');
-INSERT INTO cohorts(cohort_number, start, graduation, instructor) VALUES (20, '03/27/2023', '07/21/2023', 'Danny Andrews');
+INSERT INTO cohorts (cohort_number, start, graduation, instructor) VALUES (19, '01/17/2023', '05/26/2023', 'Phil Witkin');
+INSERT INTO cohorts (cohort_number, start, graduation, instructor) VALUES (20, '03/27/2023', '07/21/2023', 'Danny Andrews');
 
 
 INSERT INTO students (stu_name, email, github, cohort_id) VALUES ('David Ortiz', 'Ortiz123@example.com', 'https://github.com/Ortiz1', 1);
