@@ -17,25 +17,40 @@ INSERT INTO students (stu_name, email, github, cohort_id) VALUES ('Shane Metz', 
 
 
 
-INSERT INTO assessments(assess_name, type) VALUES ('DOM API Assessment', 'Assessment');
-INSERT INTO assessments(assess_name, type) VALUES ('Data Types', 'Checkpoint');
-INSERT INTO assessments(assess_name, type) VALUES ('Loops and Control Flow', 'Checkpoint');
-INSERT INTO assessments(assess_name, type) VALUES ('Functions', 'Checkpoint');
-INSERT INTO assessments(assess_name, type) VALUES ('Server and DB Assessment', 'Assessment');
-INSERT INTO assessments(assess_name, type) VALUES ('Server Side Assessment', 'Assessment');
-INSERT INTO assessments(assess_name, type) VALUES ('Event Listeners', 'Checkpoint');
-INSERT INTO assessments(assess_name, type) VALUES ('Arrays', 'Checkpoint');
-INSERT INTO assessments(assess_name, type) VALUES ('Objects', 'Checkpoint');
-INSERT INTO assessments(assess_name, type) VALUES ('React Assessment', 'Assessment');
+INSERT INTO assessments (assess_name, type) VALUES ('DOM API Assessment', 'Assessment');
+INSERT INTO assessments (assess_name, type) VALUES ('Data Types', 'Checkpoint');
+INSERT INTO assessments (assess_name, type) VALUES ('Loops and Control Flow', 'Checkpoint');
+INSERT INTO assessments (assess_name, type) VALUES ('Functions', 'Checkpoint');
+INSERT INTO assessments (assess_name, type) VALUES ('Server and DB Assessment', 'Assessment');
+INSERT INTO assessments (assess_name, type) VALUES ('Server Side Assessment', 'Assessment');
+INSERT INTO assessments (assess_name, type) VALUES ('Event Listeners', 'Checkpoint');
+INSERT INTO assessments (assess_name, type) VALUES ('Arrays', 'Checkpoint');
+INSERT INTO assessments (assess_name, type) VALUES ('Objects', 'Checkpoint');
+INSERT INTO assessments (assess_name, type) VALUES ('React Assessment', 'Assessment');
 
 
-INSERT INTO projects(project_name, type) VALUES ('Command Line Mystery', 'Solo');
-INSERT INTO projects(project_name, type) VALUES ('Guessing Game', 'Solo');
-INSERT INTO projects(project_name, type) VALUES ('MCSP Hack-a-Thon', 'Solo');
-INSERT INTO projects(project_name, type) VALUES ('Front-End Project', 'Solo');
-INSERT INTO projects(project_name, type) VALUES ('Back-End MVP Project', 'Solo');
-INSERT INTO projects(project_name, type) VALUES ('Checkerboard', 'Solo');
-INSERT INTO projects(project_name, type) VALUES ('Front End Capstone', 'Group');
-INSERT INTO projects(project_name, type) VALUES ('System Design Capstone', 'Group');
-INSERT INTO projects(project_name, type) VALUES ('Blue Ocean', 'Group');
+INSERT INTO projects (project_name, type) VALUES ('Command Line Mystery', 'Solo');
+INSERT INTO projects (project_name, type) VALUES ('Guessing Game', 'Solo');
+INSERT INTO projects (project_name, type) VALUES ('MCSP Hack-a-Thon', 'Solo');
+INSERT INTO projects (project_name, type) VALUES ('Front-End Project', 'Solo');
+INSERT INTO projects (project_name, type) VALUES ('Back-End MVP Project', 'Solo');
+INSERT INTO projects (project_name, type) VALUES ('Checkerboard', 'Solo');
+INSERT INTO projects (project_name, type) VALUES ('Front End Capstone', 'Group');
+INSERT INTO projects (project_name, type) VALUES ('System Design Capstone', 'Group');
+INSERT INTO projects (project_name, type) VALUES ('Blue Ocean', 'Group');
 
+
+INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES ('Yoshi''s Angels', 'David Ortiz', 'Billy Tomasello', 'Jesthen Baez', 'Shuyi Hoo', 'Shawn Couch', 'Tomas Corradini');
+INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES ('The 20-Somethings', 'Salvatore Paucek', 'Clyde Welch', 'Sonya Hermann', 'Scott Bogan', null, null);
+
+
+INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (2, 4, 100, 1);
+INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (3, 5, 100, 1);
+INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (4, 6, 100, 1);
+INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (7, 4, 90, 2);
+INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (8, 5, 90, 2);
+INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (9, 6, 90, 2);
+
+
+INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (1, 9, 100, 1);
+INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (2, 7, 90, 2);
