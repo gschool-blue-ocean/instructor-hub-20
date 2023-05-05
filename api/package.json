@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "echo 'add tests'"
+    "test": "echo 'add tests'",
+    "migrate": "node migration.js",
+    "seed": "node seeds.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
