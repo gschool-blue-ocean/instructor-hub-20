@@ -1,4 +1,10 @@
 #Footer {
-  background-color: brown;
-  height: 50px;
+  background: linear-gradient(45deg, var(--bgcolor3) 0vw, var(--bgcolor4) 40vw, var(--bgcolor6) 55vw);
+  height: 30px;
+  box-shadow: 0 0 1px 0.1px rgba(255, 255, 255, 0.541) inset;
+  transition: all 100ms;
+}
+
+#Footer:hover {
+  /* height: 100px; */
 }

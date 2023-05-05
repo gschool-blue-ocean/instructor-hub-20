@@ -1,18 +1,50 @@
+:root {
+  --galv-blue: rgb(13, 15, 74);
+  --galv-orange: rgb(239, 110, 71);
+  --color1: rgb(255, 255, 255);
+  --color2: rgb(0, 0, 0);
+  --bgcolor1: rgba(132, 41, 13, 0.993);
+  --bgcolor2: rgba(191, 45, 0, 0.959);
+  --bgcolor3: rgba(27, 102, 200, 0.974);
+  --bgcolor4: rgba(1, 50, 147, 0.951);
+  --bgcolor5: rgba(0, 30, 90, 0.955);
+  --bgcolor6: rgba(0, 30, 90, 0.99);
+  --bgsize: 10px;
+}
+
 body {
   margin: 0;
   /* padding: 1rem; */
   font-size: 10px;
 }
 
+* {
+  overflow-x: hidden;
+  color: rgb(113, 113, 113);
+  font-size: 1vw;
+}
+
 #App {
+  background: linear-gradient(135deg, var(--color1) 25%, transparent 25%), linear-gradient(225deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color1) 25%, transparent 25%), linear-gradient(45deg, var(--color1) 25%, transparent 25%);
+  background-size: var(--bgsize) var(--bgsize);
+  background-color: var(--color2);
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
 }
 
-.main {
-  padding: 8px;
+.building-block {
+  height: 30vh;
+  width: 40vw;
+  border-radius: 10px;
+  margin: 20px 25px;
+  padding: 20px;
+  box-shadow: 0 0 10px 1px black, 0 0 1px 0.2px rgba(255, 255, 255, 0.248) inset;
+  /* margin: 10px; */
+  background: linear-gradient(transparent -20%, rgba(27, 102, 200, 0.626) 10%, rgba(1, 50, 147, 0.708) 90%, transparent 110%);
+  /* border: 1px solid rgb(255, 0, 0); */
 }
 
 .task {
