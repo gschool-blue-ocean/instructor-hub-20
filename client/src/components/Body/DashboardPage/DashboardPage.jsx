@@ -6,9 +6,9 @@ import Students from './Students/Students';
 const DashboardPage = () => {
   return (
     <div id='DashboardPage'>
-      Dashboarrd Page
       <DashboardMenu></DashboardMenu>
       <Students></Students>
+      Dashboard Page
     </div>
   );
 };
