@@ -1,0 +1,10 @@
+#DashboardPage {
+  /* border: 1px solid red; */
+  flex-grow: 1;
+  width: 0vw;
+  transition: all 50ms;
+}
+
+#DashboardPage:hover {
+  /* width: 100vw; */
+}
