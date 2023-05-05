@@ -3,7 +3,10 @@ import '../../../../styles/Projects.css';
 
 const Projects = () => {
   return (
-    <div id='Projects'>
+    <div
+      id='Projects'
+      className='building-block'
+    >
       Projects
       <button>Select Cohort Dropdown</button>
       <button>Project Dropdown</button>

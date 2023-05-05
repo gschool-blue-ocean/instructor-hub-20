@@ -1,4 +1,11 @@
 #ProjectsPage {
-  border: 1px solid red;
-  flex-grow: 1;
+  /* border: 1px solid red; */
+  /* flex-grow: 1; */
+  /* width: 0.1vw; */
+  width: 50vw;
+  transition: all 50ms;
+}
+
+#ProjectsPage:hover {
+  /* width: 100vw; */
 }
