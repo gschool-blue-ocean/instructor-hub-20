@@ -13,6 +13,13 @@ const app = express();
 
 app.use(express.json());
 
+// app.use(cors())
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 // // Set up the PostgreSQL connection
 // const pool = new Pool({
 //   user: 'your_database_user',
