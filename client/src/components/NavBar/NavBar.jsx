@@ -4,6 +4,9 @@ import GalvanizeLogo from '../../styles/svgs/galvanize.svg';
 import GalvanizeTextLogo from '../../styles/svgs/galvanize-text-logo.svg';
 
 const NavBar = () => {
+  let renderDashboard = () => {
+    
+  }
   return (
     <div id='navbar'>
       <img
