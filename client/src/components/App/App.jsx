@@ -4,6 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import Body from '../Body/Body';
 import Footer from '../Footer/Footer';
 
+
 const App = () => {
   return (
     <div id='App'>
