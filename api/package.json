@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "echo 'add tests'"
+    "test": "echo 'add tests'",
+    "migrate": "node migration.js",
+    "seed": "node seeds.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
@@ -15,6 +17,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "pg": "^8.9.0"
+    "pg": "^8.10.0"
   }
 }
