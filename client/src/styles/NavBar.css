@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  z-index: 2;
   /* justify-content: space-evenly; */
   overflow: hidden;
   transition: all 100ms;
@@ -47,7 +48,7 @@
 
 #navbar-title {
   /* border: 1px solid red; */
-  color: #0d0f4a;
+  /* color: #ffffff; */
   font-weight: 700;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.5em;
