@@ -3,10 +3,7 @@ import express from "express";
 import pg from "pg";
 
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-      rejectUnauthorized: false
-  }
+  connectionString: process.env.DATABASE_URL
 });
 
 const app = express();
@@ -74,6 +71,17 @@ app.get('/students', async (req, res) => {
   try {
     const { rows } = await pool.query('SELECT * FROM students');
     res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/students/:cohort_id', async (req, res) => {
+  const { cohort_id } = req.params;
+  try {
+    const { rows } = await pool.query('SELECT * FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1', [cohort_id]);
+    res.status(201).json(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -646,3 +654,5 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+
+
