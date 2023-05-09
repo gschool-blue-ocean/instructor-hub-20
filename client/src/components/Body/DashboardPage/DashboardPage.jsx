@@ -8,7 +8,7 @@ const DashboardPage = () => {
     <div id='DashboardPage'>
       <DashboardMenu></DashboardMenu>
       <Students></Students>
-      Dashboard Page
+      {/* Dashboard Page */}
     </div>
   );
 };
