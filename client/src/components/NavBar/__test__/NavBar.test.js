@@ -1,9 +1,17 @@
-// import {render, screen} from '@testing-library/react'
-// import NavBar from '../NavBar'
+import React from "react";
+import { test, expect } from "vitest";
+import { render } from "@testing-library/react";
+import NavBar from "./NavBar";
 
+test("should render the correct text", () => {
+  const { getByText } = render(<NavBar />);
 
-// it.only('testing for NavBar component', async () => {
-//     render(<NavBar/>);
-//     const navBarText= screen.getByText(/instructor hub/i);
-//     expect(navBarText).toBeInTheDocument();
-// })
+  const navbarTitle = getByText("Instructor Hub");
+  expect(navbarTitle).toBeVisible();
+
+  const dashboardButton = getByText("Dashboard");
+  expect(dashboardButton).toBeVisible();
+
+  const projectsButton = getByText("Projects");
+  expect(projectsButton).toBeVisible();
+});

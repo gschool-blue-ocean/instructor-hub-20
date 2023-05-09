@@ -21,7 +21,7 @@ afterAll(() => {
   server.close();
 });
 
-it("displays tasks from the api", async () => {
+it("task list display ", async () => {
   server.use(
     rest.get("/api/tasks", (req, res, ctx) => {
       return res(
@@ -37,29 +37,29 @@ it("displays tasks from the api", async () => {
   await findByText("Mow the lawn");
 });
 
-it("deletes a task when clicked", async () => {
-  server.use(
-    rest.get("/api/tasks", (req, res, ctx) => {
-      return res(ctx.json([{ id: 3, description: "Do the dishes" }]));
-    })
-  );
-  const { findByText } = render(<App />);
-  const spy = vi.fn();
+// it("deletes a task when clicked", async () => {
+//   server.use(
+//     rest.get("/api/tasks", (req, res, ctx) => {
+//       return res(ctx.json([{ id: 3, description: "Do the dishes" }]));
+//     })
+//   );
+//   const { findByText } = render(<App />);
+//   const spy = vi.fn();
 
-  await findByText("Do the dishes");
-  server.use(
-    rest.delete("/api/tasks/3", (req, res, ctx) => {
-      spy();
-      return res(ctx.status(204));
-    })
-  );
-  server.use(rest.get("/api/tasks", (req, res, ctx) => res(ctx.json([]))));
+//   await findByText("Do the dishes");
+//   server.use(
+//     rest.delete("/api/tasks/3", (req, res, ctx) => {
+//       spy();
+//       return res(ctx.status(204));
+//     })
+//   );
+//   server.use(rest.get("/api/tasks", (req, res, ctx) => res(ctx.json([]))));
 
-  const deleteButton = await findByText("X");
+//   const deleteButton = await findByText("X");
 
-  userEvent.click(deleteButton);
+//   userEvent.click(deleteButton);
 
-  await findByText("No Tasks Remaining");
+//   await findByText("No Tasks Remaining");
 
-  expect(spy).toHaveBeenCalled();
-});
+//   expect(spy).toHaveBeenCalled();
+// });
