@@ -8,7 +8,6 @@ const Projects = () => {
       className='building-block'
     >
       Projects
-      <button>Select Cohort Dropdown</button>
       <button>Project Dropdown</button>
     </div>
   );
