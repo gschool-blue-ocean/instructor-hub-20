@@ -21,6 +21,7 @@ const NavBar = () => {
 
       <button>Dashboard</button>
       <button>Projects</button>
+      <button>Select Cohort Dropdown</button>
     </div>
   );
 };
