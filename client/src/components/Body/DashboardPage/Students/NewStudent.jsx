@@ -14,28 +14,29 @@ const NewStudent = (props) => {
         let email = document.getElementById('email');
         let gitHub = document.getElementById('gitHub');
         let allValues = {};
-        allValues.name = name.value;
+        allValues.stu_name = name.value;
         allValues.email = email.value;
         allValues.gitHub = gitHub.value;
+        allValues.cohort_number = parseInt(cohort);
         return allValues;
     }
 
     function handleClick() {
-        let newStudent = gatherValues();
+        const newStudent = gatherValues();
         console.log(newStudent);
-
-        props.onClose();
+        fetch('http://localhost:8000/students', 
+        { 
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {"Content-Type": 'application/json'},
+            body: JSON.stringify(newStudent)
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .then(props.onClose())
+        .then(props.onAdd());
     }
 
-    // useEffect(() => {
-    //   (async () => {
-    //     const response = await fetch(`http://localhost:8000/students/${cohort}`);
-    //     const studs = await response.json();
-    //     setStudents(studs);
-    //     console.log(studs);
-    //   })();
-    //   return () => {};
-    // }, [cohort]);
   
     return (
       <div className='student-modal' onClick={props.onClose}>

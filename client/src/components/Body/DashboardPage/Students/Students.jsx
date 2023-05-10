@@ -7,6 +7,7 @@ import '../../../../styles/Students.css';
 const Students = () => {
   const [students, setStudents] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [addStudent, setAddStudent] = useState(false);
   const { cohort } = useContext(CohortContext);
 
   useEffect(() => {
@@ -15,9 +16,12 @@ const Students = () => {
       const studs = await response.json();
       setStudents(studs);
       console.log(studs);
+      if (addStudent) {
+        setAddStudent(false);
+      }
     })();
     return () => {};
-  }, [cohort]);
+  }, [cohort, addStudent]);
 
 
   return (
@@ -25,8 +29,8 @@ const Students = () => {
       <div id='Students' className='building-block'>
         Students
         <button onClick={()=> setShowModal(true)}>Add Student</button>
-        <NewStudent onClose={()=> setShowModal(false)} showModal={showModal} />
-        <StudentTable stud={students} />
+        <NewStudent onClose={()=> setShowModal(false)} showModal={showModal} onAdd={()=> setAddStudent(true)}/>
+        <StudentTable stud={students} onAdd={()=> setAddStudent(true)} />
       </div>
     </div>
   );

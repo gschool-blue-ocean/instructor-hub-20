@@ -14,6 +14,9 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
   next();
 });
 
@@ -80,7 +83,7 @@ app.get('/students', async (req, res) => {
 app.get('/students/:cohort_id', async (req, res) => {
   const { cohort_id } = req.params;
   try {
-    const { rows } = await pool.query('SELECT * FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1', [cohort_id]);
+    const { rows } = await pool.query('SELECT students.id AS id, stu_name, email, github, cohort_id, cohort_number, graduation, instructor FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1', [cohort_id]);
     res.status(201).json(rows);
   } catch (error) {
     console.error(error);
@@ -106,9 +109,10 @@ app.get('/students/:id', async (req, res) => {
 
 app.post('/students', async (req, res) => {
   try {
-    const { stu_name, email, github, cohort_number} = req.body;
-    const { id } = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number]);
-    const { rows } = await pool.query('INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *', [stu_name, email, github, id]);
+    const { stu_name, email, gitHub, cohort_number } = req.body;
+    const response = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number]);
+    const id = response.rows[0].id;
+    const { rows } = await pool.query('INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *', [stu_name, email, gitHub, id]);
     res.status(201).json(rows[0]);
   } catch (error) {
     console.error(error);
@@ -119,9 +123,10 @@ app.post('/students', async (req, res) => {
 app.put('/students/:id', async (req, res) => {
   try {
     const stuID = req.params.id;
-    const { stu_name, email, github, cohort_number } = req.body;
-    const { id } = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number]);
-    const { rowCount } = await pool.query('UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5', [stu_name, email, github, id, stuID]);
+    const { stu_name, email, gitHub, cohort_number } = req.body;
+    const response = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number]);
+    const id = response.rows[0].id;
+    const { rowCount } = await pool.query('UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5', [stu_name, email, gitHub, id, stuID]);
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {
@@ -136,8 +141,7 @@ app.put('/students/:id', async (req, res) => {
 app.delete('/students/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { rowCount } = await pool.query('DELETE FROM students WHERE id = $1', [id]);
-
+    const { rowCount } = await pool.query('DELETE FROM students WHERE id = $1 RETURNING *', [id]);
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {
