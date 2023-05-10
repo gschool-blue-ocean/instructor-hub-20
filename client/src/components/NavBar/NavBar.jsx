@@ -17,10 +17,11 @@ const NavBar = () => {
         alt='galvanize text logo'
       />
 
-      <p id='navbar-title'>Instructor Hub</p>
+      <p id='navbar-title' data-testid="title">Instructor Hub</p>
 
       <button>Dashboard</button>
       <button>Projects</button>
+      <button>Select Cohort Dropdown</button>
     </div>
   );
 };
