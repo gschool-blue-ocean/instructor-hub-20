@@ -4,8 +4,11 @@
   width: 0.1vw;
   transition: all 50ms;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #DashboardPage:hover {
-  width: 100vw;
+  /* width: 100vw; */
 }

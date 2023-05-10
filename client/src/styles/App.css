@@ -19,7 +19,10 @@
 }
 ::-webkit-scrollbar-thumb {
   /* width: 10px; */
-  background: linear-gradient(rgba(0, 140, 255, 0.632), rgba(0, 64, 255, 0.626));
+  background: linear-gradient(
+    rgba(0, 140, 255, 0.632),
+    rgba(0, 64, 255, 0.626)
+  );
   border-radius: 10px;
 }
 
@@ -33,28 +36,48 @@ body {
   overflow-x: hidden;
   color: rgb(255, 255, 255);
   font-size: 1vw;
+  /* font-size: larger; */
 }
 
-button {
+button,
+select {
   /* all: unset; */
-  background: linear-gradient(30deg, rgba(28, 28, 28, 0.692), rgba(56, 56, 56, 0.659));
+  background: linear-gradient(
+    30deg,
+    rgba(28, 28, 28, 0.692),
+    rgba(56, 56, 56, 0.659)
+  );
   box-shadow: 0 0 1px 0.1px rgba(255, 255, 255, 0.171) inset, 0 0 0px 0px black;
   border-radius: 5px;
   margin: 5px;
-  padding: 5px;
+  padding: 1px 5px;
   font-family: inherit;
+  font-size: 1.2em;
   /* color: rgb(0, 0, 0); */
   transition: all 50ms;
 }
+select * {
+  all: unset;
+  background-color: rgb(0, 59, 131);
+}
+
+/* option {
+  all: unset;
+  background-color: rgb(109, 0, 0);
+  margin: 5px;
+} */
 
 button:hover {
   scale: 1.05 1.05 1;
-  box-shadow: -1px -1px 1px 0.1px rgba(255, 255, 255, 0.579) inset, 0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.579), 1px 1px 2px 0.1px black;
+  box-shadow: -1px -1px 1px 0.1px rgba(255, 255, 255, 0.579) inset,
+    0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.579), 1px 1px 2px 0.1px black;
 }
 
 #App {
-  background: linear-gradient(135deg, var(--color1) 25%, transparent 25%), linear-gradient(225deg, var(--color1) 25%, transparent 25%),
-    linear-gradient(315deg, var(--color1) 25%, transparent 25%), linear-gradient(45deg, var(--color1) 25%, transparent 25%);
+  background: linear-gradient(135deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color1) 25%, transparent 25%);
   background-size: var(--bgsize) var(--bgsize);
   background-color: var(--color2);
   display: flex;
@@ -71,7 +94,12 @@ button:hover {
   padding: 20px;
   box-shadow: 0 0 10px 1px black, 0 0 1px 0.2px rgba(255, 255, 255, 0.248) inset;
   /* margin: 10px; */
-  background: linear-gradient(transparent -20%, rgba(27, 102, 200, 0.626) 10%, rgba(1, 50, 147, 0.708) 90%, transparent 110%);
+  background: linear-gradient(
+    transparent -20%,
+    rgba(27, 102, 200, 0.626) 10%,
+    rgba(1, 50, 147, 0.708) 90%,
+    transparent 110%
+  );
   /* border: 1px solid rgb(255, 0, 0); */
 }
 

@@ -7,8 +7,10 @@ const DashboardPage = () => {
   return (
     <div id='DashboardPage'>
       <DashboardMenu></DashboardMenu>
-      <Students></Students>
-      <p>Dashboard Page</p>
+      <div className='dash-students-container'>
+        <Students></Students>
+      </div>
+      {/* <p>Dashboard Page</p> */}
     </div>
   );
 };
