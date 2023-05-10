@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import { CohortProvider } from '../Context/CohortContext.jsx';
 
 
+
 const App = () => {
   return (
     <div id='App'>
