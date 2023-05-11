@@ -1,7 +1,8 @@
 **/node_modules/
 /client/dist
 .env
+<<<<<<< HEAD
 docker-compose.yaml
-/test-results/
-/playwright-report/
-/playwright/.cache/
+=======
+docker-compose.yaml
+>>>>>>> develop
