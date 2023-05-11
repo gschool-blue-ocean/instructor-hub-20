@@ -1,4 +1,8 @@
 **/node_modules/
 /client/dist
 .env
+<<<<<<< HEAD
 docker-compose.yaml
+=======
+docker-compose.yaml
+>>>>>>> develop
