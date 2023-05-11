@@ -2,26 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext.jsx';
 import '../../../../styles/Students.css';
 
-const UpdateStudent = ({stud, keyID}) => {
-    const [stuName, setStuName] = useState();
-    const [stuEmail, setStuEmail] = useState();
-    const [stuGithub, setStuGithub] = useState();
+const UpdateStudent = ({stud, keyID, onAdd}) => {
     const { stu_name, email, github } = stud;
     const { cohort } = useContext(CohortContext);
-
-    // if (!showUpdate) {
-    //     return null;
-    // }
-    
-    function handleChange(e) {
-        if (e.target.id === `updateName${keyID}`) {
-            setStuName(e.target.value);
-        } else if (e.target.id === `updateEmail${keyID}`) {
-            setStuEmail(e.target.value);
-        } else if (e.target.id === `updateGithub${keyID}`) {
-            setStuGithub(e.target.value);
-        }
-    }
 
     function handleCancel() {
         const formName = document.getElementById(`updateName${keyID}`);
@@ -32,12 +15,6 @@ const UpdateStudent = ({stud, keyID}) => {
         formGithub.value = formGithub.defaultValue;
         document.getElementById(keyID).style.display = "none";
     }
-
-    // function clearState() {
-    //     setStuName(stu_name);
-    //     setStuEmail(email);
-    //     setStuGithub(github);
-    // }
 
     function gatherValues() {
         let name = document.getElementById(`updateName${keyID}`);
@@ -63,8 +40,7 @@ const UpdateStudent = ({stud, keyID}) => {
         // })
         // .then(response => response.json())
         // .then(response => console.log(response))
-        // .then(props.onClose())
-        // .then(props.onAdd());
+        // .then(onAdd());
         handleCancel();
     }
 
@@ -78,15 +54,15 @@ const UpdateStudent = ({stud, keyID}) => {
             <div className='student-modal-body'>
                 <div>
                     <label htmlFor="name">First and Last Name: </label>
-                    <input className="input-box" type="text" name='name' id={`updateName${keyID}`} defaultValue={stud.stu_name} required></input>
+                    <input className="input-box" type="text" name='name' id={`updateName${keyID}`} defaultValue={stu_name} required></input>
                 </div>
                 <div>
                     <label htmlFor="email">Email Address: </label>
-                    <input className="input-box" type="text" name='email' id={`updateEmail${keyID}`} defaultValue={stud.email} required></input>
+                    <input className="input-box" type="text" name='email' id={`updateEmail${keyID}`} defaultValue={email} required></input>
                 </div>
                 <div>
                     <label htmlFor="github">GitHub Account: </label>
-                    <input className="input-box" type="text" name='github' id={`updateGithub${keyID}`} defaultValue={stud.github} required></input>
+                    <input className="input-box" type="text" name='github' id={`updateGithub${keyID}`} defaultValue={github} required></input>
                 </div>
             </div>
             <div className='student-modal-buttons'>

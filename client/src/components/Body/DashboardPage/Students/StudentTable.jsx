@@ -4,7 +4,6 @@ import '../../../../styles/Students.css';
 
 
 const StudentTable = ({ stud, onAdd }) => {
-    // const [showUpdate, setShowUpdate] = useState(false);
 
     function handleDelete(num) {
       let studNum = parseInt(num);
@@ -38,7 +37,7 @@ const StudentTable = ({ stud, onAdd }) => {
                         <td>{val.graduation}</td>
                         <td>{val.cohort_number}</td>
                         <td><button className='delete-student' onClick={()=> handleDelete(val.id)}>Delete</button></td>
-                        <UpdateStudent keyID={`Student${key}`} stud={val} />
+                        <UpdateStudent keyID={`Student${key}`} stud={val} onAdd={onAdd} />
                     </tr>
                 )
             })}
