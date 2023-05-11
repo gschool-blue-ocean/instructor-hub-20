@@ -2,3 +2,6 @@
 /client/dist
 .env
 docker-compose.yaml
+/test-results/
+/playwright-report/
+/playwright/.cache/
