@@ -1,5 +1,5 @@
 import express from "express";
-
+import bcrypt from "bcrypt";
 import pg from "pg";
 
 const pool = new pg.Pool({
@@ -69,11 +69,53 @@ app.use((req, res, next) => {
 
 //-----------------------------------------ROUTES(SINGULAR NON JOINT)--------------------------------------------------//
 
+// --------------------- Users routes ----------------------------- // 
+
+app.post('/register', async (req, res) => {
+  try {
+    const { username, email, admin, password } = req.body;
+    const hashedPwd = await bcrypt.hash(password, 10);
+    const testUsername = await pool.query('SELECT username FROM users WHERE username = $1', [username]);
+    if (testUsername.rows[0]) {
+      res.status(409).send({ 'message': 'Error: Username already exists' });
+    } else {
+      const { rows } = await pool.query('INSERT INTO users (username, password, email, admin) VALUES ($1, $2, $3, $4) RETURNING *', [username, hashedPwd, email, admin]);
+      if (rows[0].username){
+        res.status(201).send({ 'message': 'User Successfully created!'})
+      } else {
+        res.status(500).send({ 'message': 'Internal Error' })
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ 'message': error });
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const response = await pool.query('SELECT username, password FROM users WHERE username = $1', [username]);
+    if (!response.rows[0]) {
+      res.status(404).send({ 'message': 'Error: User not found'})
+    } else if (await bcrypt.compare(password, response.rows[0].password)) {
+      res.status(200).send({ 'message': 'Login successful!'});
+    } else {
+      res.status(409).send({ 'message': 'Error: Incorrect Password'})
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+
+
 // --------------------- Students routes ----------------------------- //
 app.get('/students', async (req, res) => {
   try {
     const { rows } = await pool.query('SELECT * FROM students');
-    res.json(rows);
+    res.status(200).json(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
