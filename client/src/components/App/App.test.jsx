@@ -21,7 +21,7 @@ afterAll(() => {
   server.close();
 });
 
-it("displays tasks from the api", async () => {
+it("task list display ", async () => {
   server.use(
     rest.get("/api/tasks", (req, res, ctx) => {
       return res(

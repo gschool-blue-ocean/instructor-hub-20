@@ -12,6 +12,17 @@
   --bgsize: 10px;
 }
 
+::-webkit-scrollbar {
+  /* all: unset; */
+  width: 0.5vw;
+  /* background: transparent; */
+}
+::-webkit-scrollbar-thumb {
+  /* width: 10px; */
+  background: linear-gradient(rgba(0, 140, 255, 0.632), rgba(0, 64, 255, 0.626));
+  border-radius: 10px;
+}
+
 body {
   margin: 0;
   /* padding: 1rem; */
@@ -20,8 +31,25 @@ body {
 
 * {
   overflow-x: hidden;
-  color: rgb(113, 113, 113);
+  color: rgb(255, 255, 255);
   font-size: 1vw;
+}
+
+button {
+  /* all: unset; */
+  background: linear-gradient(30deg, rgba(28, 28, 28, 0.692), rgba(56, 56, 56, 0.659));
+  box-shadow: 0 0 1px 0.1px rgba(255, 255, 255, 0.171) inset, 0 0 0px 0px black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  font-family: inherit;
+  /* color: rgb(0, 0, 0); */
+  transition: all 50ms;
+}
+
+button:hover {
+  scale: 1.05 1.05 1;
+  box-shadow: -1px -1px 1px 0.1px rgba(255, 255, 255, 0.579) inset, 0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.579), 1px 1px 2px 0.1px black;
 }
 
 #App {
