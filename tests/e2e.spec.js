@@ -1,13 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test('end to end uses tab button to move thru fill blocks', async ({ page }) => {
+test('user data shows up in the cohort table', async ({ page }) => {
     // will need to preface with the authentication modal
   await page.goto('http://localhost:3000/');
-  await page.getByRole('button', { name: 'Dashboard' }).click();
-  await page.getByRole('button', { name: 'Projects' }).click();
-  await page.locator('#navbar').getByRole('button', { name: 'Select Cohort Dropdown' }).click();
-  await page.getByRole('button', { name: 'Assessments' }).click();
-  await page.getByRole('button', { name: 'Create New Cohort' }).click();
   await page.getByRole('button', { name: 'Add Student' }).click();
   const seeStudentModal = await page.isVisible('.student-modal-form;')
     if(!seeStudentModal){
@@ -26,9 +21,11 @@ const githubInput = 'testGithub';
   await page.getByPlaceholder('email...').press('Tab');
   // make sure tab moves to the next column
  const githubValue =  await page.getByPlaceholder('github...').fill(githubInput);
-        if (nameValue && emailValue && githubValue){
+        if (!nameValue || !emailValue || !githubValue){
+            throw new error('Not all forms slots are filled')
         }
- // expect 
+//make sure user input shows up in the table for the appropriate cohort
+expect(nameInput,emailInput,githubInput).isVisible('#student=table')
 });
 
 
