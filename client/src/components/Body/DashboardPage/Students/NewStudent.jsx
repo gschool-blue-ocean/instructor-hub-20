@@ -3,16 +3,26 @@ import CohortContext from '../../../Context/CohortContext.jsx';
 import '../../../../styles/Students.css';
 
 const NewStudent = (props) => {
+  const [inputError, setInputError] = useState('');
   const { cohort } = useContext(CohortContext);
 
   if (!props.showModal) {
     return null;
   }
 
+  function handleCancel() {
+    setInputError('');
+    props.onClose();
+  }
+
   function gatherValues() {
     let name = document.getElementById('studentName');
     let email = document.getElementById('email');
     let gitHub = document.getElementById('gitHub');
+    if (!name.value || !email.value || !gitHub.value) {
+      alert('All fields must contain information!');
+      return;
+    }
     let allValues = {};
     allValues.stu_name = name.value;
     allValues.email = email.value;
@@ -23,6 +33,10 @@ const NewStudent = (props) => {
 
   function handleClick() {
     const newStudent = gatherValues();
+    if (!newStudent) {
+      setInputError('Please fill out all fields!');
+      return;
+    }
     console.log(newStudent);
     fetch('http://localhost:8000/students', {
       method: 'POST',
@@ -39,7 +53,7 @@ const NewStudent = (props) => {
   return (
     <div
       className='student-modal'
-      onClick={props.onClose}
+      onClick={handleCancel}
     >
       <div
         className='student-modal-form'
@@ -51,6 +65,7 @@ const NewStudent = (props) => {
           </h3>
         </div>
         <div className='student-modal-body'>
+          <p>{inputError}</p>
           <div>
             <label htmlFor='name'>First and Last Name: </label>
             <input
@@ -93,7 +108,7 @@ const NewStudent = (props) => {
             Add Student
           </button>
           <button
-            onClick={props.onClose}
+            onClick={handleCancel}
             className='cancel-student'
           >
             Cancel
