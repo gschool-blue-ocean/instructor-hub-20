@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext.jsx';
-import StudentTable from "./StudentTable.jsx";
+import StudentTable from './StudentTable.jsx';
 import NewStudent from './NewStudent.jsx';
 import '../../../../styles/Students.css';
 
@@ -23,14 +23,25 @@ const Students = () => {
     return () => {};
   }, [cohort, addStudent]);
 
-
   return (
     <div>
-      <div id='Students' className='building-block'>
-        Students
-        <button onClick={()=> setShowModal(true)}>Add Student</button>
-        <NewStudent onClose={()=> setShowModal(false)} showModal={showModal} onAdd={()=> setAddStudent(true)}/>
-        <StudentTable stud={students} onAdd={()=> setAddStudent(true)} />
+      <div
+        id='Students'
+        className='building-block'
+      >
+        <div className='students-block-header'>
+          <h1>{`MCSP-${cohort}   ·  Students`}</h1>
+          <button onClick={() => setShowModal(true)}>Add Student</button>
+        </div>
+        <NewStudent
+          onClose={() => setShowModal(false)}
+          showModal={showModal}
+          onAdd={() => setAddStudent(true)}
+        />
+        <StudentTable
+          stud={students}
+          onAdd={() => setAddStudent(true)}
+        />
       </div>
     </div>
   );
