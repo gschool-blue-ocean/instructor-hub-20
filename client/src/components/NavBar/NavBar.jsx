@@ -4,22 +4,23 @@ import '../../styles/NavBar.css';
 import GalvanizeLogo from '../../styles/svgs/galvanize.svg';
 import GalvanizeTextLogo from '../../styles/svgs/galvanize-text-logo.svg';
 import CohortContext from '../Context/CohortContext';
+import Dropdown from './Dropdown';
 
 const NavBar = () => {
   const { cohort, setCohort } = useContext(CohortContext);
   const [cohorts, setCohorts] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`http://localhost:8000/cohorts`);
-      const data = await response.json();
-      setCohorts(data);
-      // console.log(cohorts);
-    })();
-    return () => {};
-  }, []);
-
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch(`http://localhost:8000/cohorts`);
+  //     const data = await response.json();
+  //     setCohorts(data);
+  //     console.log(`NavBar API call for select cohorts dropdown: `, data);
+  //   })();
+  //   return () => {};
+  // }, []);
   //
+
   return (
     <div id='navbar'>
       <img
@@ -36,17 +37,10 @@ const NavBar = () => {
         id='navbar-title'
         data-testid='title'
       >
-        Instructor Hub
+        · Instructor Hub
       </p>
-      <button>Dashboard</button>
-      <button>Projects</button>
-
-      <select onChange={(e) => setCohort(e.target.value)}>
-        <option>Select Cohort</option>
-        {cohorts.map((coh) => (
-          <option value={coh.cohort_number}>{coh.cohort_number}</option>
-        ))}
-      </select>
+      |<button>Dashboard</button>|<button>Projects</button>|
+      <Dropdown />
     </div>
   );
 };

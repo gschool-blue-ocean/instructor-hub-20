@@ -14,7 +14,6 @@ const Students = () => {
       const response = await fetch(`http://localhost:8000/students/${cohort}`);
       const studs = await response.json();
       setStudents(studs);
-      // console.log(studs);
     })();
     return () => {};
   }, [cohort]);
@@ -26,7 +25,7 @@ const Students = () => {
         className='building-block'
       >
         <div className='students-block-header'>
-          <h1>Students</h1>
+          <h1>{`MCSP-${cohort}   ·  Students`}</h1>
           <button onClick={() => setShowModal(true)}>Add Student</button>
         </div>
         <NewStudent
