@@ -111,12 +111,13 @@ body {
 
 .dropdown-container {
   display: flex;
+  /* z-index: 2; */
   align-items: center;
 }
 
 .dropdown {
   position: fixed;
-  z-index: 4;
+  z-index: 2;
   overflow-x: visible;
 }
 
@@ -164,7 +165,7 @@ button {
     rgba(255, 102, 0, 0.204),
     rgba(0, 76, 183, 0.21)
   );
-  z-index: 9;
+  z-index: 1;
   backdrop-filter: blur(3px);
   box-shadow: 0 0 5px 1px black;
   border: 0.1px solid rgba(255, 255, 255, 0.3);

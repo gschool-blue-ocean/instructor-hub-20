@@ -1,11 +1,12 @@
 #DashboardPage {
   /* border: 1px solid red; */
   flex-grow: 1;
-  width: 0.1vw;
+  /* width: 0.1vw; */
   transition: all 50ms;
   z-index: 1;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
 }
 

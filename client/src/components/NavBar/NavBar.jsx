@@ -9,17 +9,15 @@ import Dropdown from './Dropdown';
 const NavBar = () => {
   const { cohort, setCohort } = useContext(CohortContext);
   const [cohorts, setCohorts] = useState([]);
+  // const [bodyDisplay, setBodyDisplay] = useContext(CohortContext);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch(`http://localhost:8000/cohorts`);
-  //     const data = await response.json();
-  //     setCohorts(data);
-  //     console.log(`NavBar API call for select cohorts dropdown: `, data);
-  //   })();
-  //   return () => {};
-  // }, []);
-  //
+  const onProjectsHandle = () => {
+    setBodyDisplay('project');
+  };
+
+  const onDashboardHandle = () => {
+    setBodyDisplay('body');
+  };
 
   return (
     <div id='navbar'>
@@ -39,7 +37,8 @@ const NavBar = () => {
       >
         · Instructor Hub
       </p>
-      |<button>Dashboard</button>|<button>Projects</button>|
+      |<button onClick={onDashboardHandle}>Dashboard</button>|
+      <button onClick={onProjectsHandle}>Projects</button>|
       <Dropdown />
     </div>
   );
