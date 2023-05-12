@@ -6,3 +6,6 @@ docker-compose.yaml
 =======
 docker-compose.yaml
 >>>>>>> develop
+/test-results/
+/playwright-report/
+/playwright/.cache/
