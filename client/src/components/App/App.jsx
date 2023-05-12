@@ -8,6 +8,8 @@ import { CohortProvider } from '../Context/CohortContext.jsx';
 
 
 const App = () => {
+  const [ userAuth, setUserAuth ] = useState(false);
+
   return (
     <div id='App'>
       <CohortProvider>
