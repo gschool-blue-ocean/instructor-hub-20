@@ -6,7 +6,6 @@ const ProjectsPage = () => {
   return (
     <div id='ProjectsPage'>
       <Projects></Projects>
-      ProjectsPage
     </div>
   );
 };
