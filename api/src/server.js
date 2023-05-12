@@ -73,15 +73,15 @@ app.use((req, res, next) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { username, email, admin, password } = req.body;
+    const { email, admin, password } = req.body;
     const hashedPwd = await bcrypt.hash(password, 10);
-    const testUsername = await pool.query('SELECT username FROM users WHERE username = $1', [username]);
+    const testUsername = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
     if (testUsername.rows[0]) {
-      res.status(409).send({ 'message': 'Error: Username already exists' });
+      res.status(409).send({ 'message': 'Error: Email already exists' });
     } else {
-      const { rows } = await pool.query('INSERT INTO users (username, password, email, admin) VALUES ($1, $2, $3, $4) RETURNING *', [username, hashedPwd, email, admin]);
+      const { rows } = await pool.query('INSERT INTO users (email, password, admin) VALUES ($1, $2, $3) RETURNING *', [hashedPwd, email, admin]);
       if (rows[0].username){
-        res.status(201).send({ 'message': 'User Successfully created!'})
+        res.status(201).send({ 'message': 'Account successfully registered!'})
       } else {
         res.status(500).send({ 'message': 'Internal Error' })
       }
@@ -94,8 +94,8 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const response = await pool.query('SELECT username, password FROM users WHERE username = $1', [username]);
+    const { email, password } = req.body;
+    const response = await pool.query('SELECT email, password FROM users WHERE email = $1', [email]);
     if (!response.rows[0]) {
       res.status(404).send({ 'message': 'Error: User not found'})
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
