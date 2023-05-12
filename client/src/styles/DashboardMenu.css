@@ -1,12 +1,6 @@
 #DashboardMenu {
   /* border: 1px solid red; */
-  background: linear-gradient(
-    96deg,
-    transparent 3.8vw,
-    rgba(27, 102, 200, 0.416) 6vw,
-    rgba(0, 30, 90, 0.832) 94vw,
-    transparent 100vw
-  );
+  background: linear-gradient(96deg, transparent 3.8vw, var(--bgcolor3) 6vw, var(--bgcolor5) 94vw, transparent 100vw);
   box-shadow: -10px 10px 10px 0.1px rgba(0, 0, 0, 0.425) inset;
   box-shadow: 0 0 10px 1px black, 0 0 1px 0.2px rgba(255, 255, 255, 0.248) inset;
   /* padding: 5px; */
@@ -14,8 +8,12 @@
   /* height: 30px; */
   display: flex;
   justify-content: space-around;
-  border-radius: 0 0 50px 50px;
+  border-radius: 0 0 10px 0;
   /* tab back in when finished */
-  width: 95.5%;
-  /* backdrop-filter: blur(2px); */
+  width: 95%;
+  /* transition: all 1s; */
+}
+
+#DashboardMenu:hover {
+  /* scale: 1.005 1.005 1; */
 }
