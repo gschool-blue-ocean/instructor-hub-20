@@ -3,9 +3,14 @@
   /* flex-grow: 1;
   width: 0.1vw; */
   transition: all 50ms;
-  z-index: 3;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* #DashboardPage:hover {
-  width: 100vw;
-} */
+
+#DashboardPage:hover {
+  /* width: 100vw; */
+}
+
