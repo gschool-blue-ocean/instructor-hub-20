@@ -1,29 +1,23 @@
 import React, { useState } from "react";
 import "../../../../styles/Projects.css";
-import CohortDropDown from "./cohortDropDownDiv.jsx"
-import ProjectDropDown from "./projectDropDownDiv.jsx"
+// import CohortDropDown from "./cohortDropDownDiv.jsx";
+import { ProjectDropDown, CohortDropDown } from "./projectDropDownDiv.jsx";
+import './dropDown.css';
+// import CohortDropDown from "./cohortDropDownDiv";
 
 const Projects = () => {
-  const [openDiv, setOpenDiv] = useState(false);
-  const cohortDropDown = "cohortDropDown";
-  const projectDropDown = "projectDropDown";
+  const [selectedCohort, setSelectedCohort] = useState(null);
+
+  function handleCohortSelection(cohort){
+    console.log("Selected Cohort:", cohort);
+    setSelectedCohort(cohort);
+  }
+
   return (
     <div id="Projects" className="building-block">
       Projects
-      <button
-        className="cohortDropDown"
-        onClick={() => setOpenDiv(cohortDropDown)}
-      >
-        Select Cohort Dropdown
-      </button>
-      <button
-        className="projectDropDown"
-        onClick={() => setOpenDiv(projectDropDown)}
-      >
-        Project Dropdown
-      </button>
-      {openDiv === "cohortDropDown" ? <CohortDropDown /> : null}
-      {openDiv === "projectDropDown" ? <ProjectDropDown /> : null}
+       <CohortDropDown onCohortChange={handleCohortSelection}/>
+       <ProjectDropDown selectedCohort={selectedCohort}/> 
     </div>
   );
 };
