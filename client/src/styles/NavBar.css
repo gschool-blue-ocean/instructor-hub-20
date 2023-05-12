@@ -1,19 +1,12 @@
 #navbar {
-  background: linear-gradient(
-    45deg,
-    var(--bgcolor1) 4.8vh,
-    var(--bgcolor2) 5.8vh,
-    var(--bgcolor3) 3vw,
-    var(--bgcolor4) 30vw,
-    var(--bgcolor6) 40vw
-  );
-  box-shadow: 0 0 1px 0.1px rgba(255, 255, 255, 0.5) inset;
+  background: linear-gradient(45deg, var(--bgcolor1) 4.8vh, var(--bgcolor2) 5.8vh, var(--bgcolor3) 3vw, var(--bgcolor4) 30vw, var(--bgcolor6) 40vw);
+  box-shadow: 0 0 1px 0.1px rgba(255, 255, 255, 0.541) inset;
   /* border: 1px solid red; */
-  height: 6vh;
+  height: 3vw;
   display: flex;
   align-items: center;
   gap: 10px;
-  /* z-index: 2; */
+  z-index: 2;
   /* justify-content: space-evenly; */
   overflow: hidden;
   transition: all 100ms;
