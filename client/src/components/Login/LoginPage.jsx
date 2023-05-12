@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/Login.css';
 
 
 const LoginPage = ({ showReg, userAuth }) => {
+    const [ errorLogin, setErrorLogin ] = useState('');
 
     function handleLogin() {
-        const username = document.getElementById("username-login");
+        const email = document.getElementById("email-login");
         const password = document.getElementById("password-login");
+        if (!email.value || !password.value) {
+            setErrorLogin('Username and password must be provided!');
+            return;
+        }
         let login = {};
-        login.username = username.value;
+        login.email = email.value;
         login.password = password.value;
         console.log(login);
         userAuth(true);
@@ -19,16 +24,16 @@ const LoginPage = ({ showReg, userAuth }) => {
     }
 
     return (
-        <div>
+        <div className='login-container'>
+            <h1 className='login-header'>Sign In</h1>
             <form>
-                <label for="username">User Name:</label><br></br>
-                <input type="text" name="username" className='login-input' id="username-login"></input><br></br>
-                <label for="password">Password:</label><br></br>
-                <input type="password" name="password" className='login-input' id="password-login"></input><br></br>
+                <p>{errorLogin}</p>
+                <input type="text" name="username" className='login-input' id="email-login" placeholder='Email Address'></input><br></br>
+                <input type="password" name="password" className='login-input' id="password-login" placeholder='Password'></input><br></br>
             </form>
-            <div>
-                <button onClick={handleLogin}>Log In</button>
-                <button onClick={handleReg}>Register</button>
+            <div className='login-button-container'>
+                <button className='login-button' onClick={handleLogin}>Sign In</button>
+                <button className='login-button' onClick={handleReg}>Register</button>
             </div>
         </div>
     );

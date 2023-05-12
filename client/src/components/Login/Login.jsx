@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginPage from './LoginPage.jsx';
 import RegisterPage from './RegisterPage.jsx';
 import '../../styles/Login.css';
 
 
 const Login = ({ userAuth }) => {
-  const [showReg, setShowReg] = useState(false)
+  const [ showReg, setShowReg ] = useState(false)
     
     return (
       <div>
