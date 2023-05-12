@@ -1,8 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
+
 import '../../../../styles/Students.css';
 
 const StudentTable = ({ stud }) => {
   const { stu_name, cohort_number, email, github, graduation } = stud;
+
 
   return (
     <div className='student-table'>
@@ -32,5 +35,6 @@ const StudentTable = ({ stud }) => {
     </div>
   );
 };
+
 
 export default StudentTable;

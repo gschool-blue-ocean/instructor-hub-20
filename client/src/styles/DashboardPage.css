@@ -1,7 +1,7 @@
 #DashboardPage {
   /* border: 1px solid red; */
-  flex-grow: 1;
-  width: 0.1vw;
+  /* flex-grow: 1;
+  width: 0.1vw; */
   transition: all 50ms;
   z-index: 1;
   display: flex;
@@ -9,6 +9,8 @@
   align-items: center;
 }
 
+
 #DashboardPage:hover {
   /* width: 100vw; */
 }
+

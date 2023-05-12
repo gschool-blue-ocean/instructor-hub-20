@@ -5,6 +5,7 @@ import '../../../../styles/Students.css';
 const NewStudent = (props) => {
   const { cohort } = useContext(CohortContext);
 
+
   if (!props.showModal) {
     return null;
   }
@@ -100,6 +101,7 @@ const NewStudent = (props) => {
             Cancel
           </button>
         </div>
+
       </div>
     </div>
   );
