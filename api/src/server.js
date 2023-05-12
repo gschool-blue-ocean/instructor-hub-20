@@ -1,5 +1,5 @@
 import express from "express";
-
+import bcrypt from "bcrypt";
 import pg from "pg";
 
 const pool = new pg.Pool({
@@ -14,6 +14,9 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
   next();
 });
 
@@ -66,11 +69,53 @@ app.use((req, res, next) => {
 
 //-----------------------------------------ROUTES(SINGULAR NON JOINT)--------------------------------------------------//
 
+// --------------------- Users routes ----------------------------- // 
+
+app.post('/register', async (req, res) => {
+  try {
+    const { username, email, admin, password } = req.body;
+    const hashedPwd = await bcrypt.hash(password, 10);
+    const testUsername = await pool.query('SELECT username FROM users WHERE username = $1', [username]);
+    if (testUsername.rows[0]) {
+      res.status(409).send({ 'message': 'Error: Username already exists' });
+    } else {
+      const { rows } = await pool.query('INSERT INTO users (username, password, email, admin) VALUES ($1, $2, $3, $4) RETURNING *', [username, hashedPwd, email, admin]);
+      if (rows[0].username){
+        res.status(201).send({ 'message': 'User Successfully created!'})
+      } else {
+        res.status(500).send({ 'message': 'Internal Error' })
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ 'message': error });
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const response = await pool.query('SELECT username, password FROM users WHERE username = $1', [username]);
+    if (!response.rows[0]) {
+      res.status(404).send({ 'message': 'Error: User not found'})
+    } else if (await bcrypt.compare(password, response.rows[0].password)) {
+      res.status(200).send({ 'message': 'Login successful!'});
+    } else {
+      res.status(409).send({ 'message': 'Error: Incorrect Password'})
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+
+
 // --------------------- Students routes ----------------------------- //
 app.get('/students', async (req, res) => {
   try {
     const { rows } = await pool.query('SELECT * FROM students');
-    res.json(rows);
+    res.status(200).json(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -80,7 +125,7 @@ app.get('/students', async (req, res) => {
 app.get('/students/:cohort_id', async (req, res) => {
   const { cohort_id } = req.params;
   try {
-    const { rows } = await pool.query('SELECT * FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1', [cohort_id]);
+    const { rows } = await pool.query('SELECT students.id AS id, stu_name, email, github, cohort_id, cohort_number, graduation, instructor FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1', [cohort_id]);
     res.status(201).json(rows);
   } catch (error) {
     console.error(error);
@@ -106,9 +151,10 @@ app.get('/students/:id', async (req, res) => {
 
 app.post('/students', async (req, res) => {
   try {
-    const { stu_name, email, github, cohort_number} = req.body;
-    const { id } = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number])
-    const { rows } = await pool.query('INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *', [stu_name, email, github, id]);
+    const { stu_name, email, gitHub, cohort_number } = req.body;
+    const response = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number]);
+    const id = response.rows[0].id;
+    const { rows } = await pool.query('INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *', [stu_name, email, gitHub, id]);
     res.status(201).json(rows[0]);
   } catch (error) {
     console.error(error);
@@ -118,9 +164,11 @@ app.post('/students', async (req, res) => {
 
 app.put('/students/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { stu_name, email, github, cohort_id } = req.body;
-    const { rowCount } = await pool.query('UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5', [stu_name, email, github, cohort_id, id]);
+    const stuID = req.params.id;
+    const { stu_name, email, gitHub, cohort_number } = req.body;
+    const response = await pool.query('SELECT id FROM cohorts WHERE cohort_number = $1', [cohort_number]);
+    const id = response.rows[0].id;
+    const { rowCount } = await pool.query('UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5', [stu_name, email, gitHub, id, stuID]);
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {
@@ -135,8 +183,7 @@ app.put('/students/:id', async (req, res) => {
 app.delete('/students/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { rowCount } = await pool.query('DELETE FROM students WHERE id = $1', [id]);
-
+    const { rowCount } = await pool.query('DELETE FROM students WHERE id = $1 RETURNING *', [id]);
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {

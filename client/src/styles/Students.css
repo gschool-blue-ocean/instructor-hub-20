@@ -4,7 +4,7 @@
 }
 
 .student-table {
-  background-color: honeydew;
+  background-color: rgb(4, 103, 4);
 }
 
 .student-modal {
@@ -15,6 +15,18 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
   align-items: center;
   justify-content: center;
 }
