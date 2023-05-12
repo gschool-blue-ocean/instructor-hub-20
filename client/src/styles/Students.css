@@ -20,6 +20,7 @@ h1 {
 }
 
 .student-table {
+
   /* all: unset; */
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
@@ -54,6 +55,7 @@ table {
   border-spacing: 0px 3px;
   /* padding: 0px 10px; */
   /* width: 95vw; */
+
 }
 
 .student-modal {

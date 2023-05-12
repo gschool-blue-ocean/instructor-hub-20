@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from 'react';
 
 import '../../styles/NavBar.css';
@@ -20,17 +21,14 @@ const NavBar = () => {
   };
 
   return (
-    <div id='navbar'>
+    <div id="navbar">
+      <img id="galvanize-logo" src={GalvanizeLogo} alt="galvanize logo" />
       <img
-        id='galvanize-logo'
-        src={GalvanizeLogo}
-        alt='galvanize logo'
-      />
-      <img
-        id='galvanize-text-logo'
+        id="galvanize-text-logo"
         src={GalvanizeTextLogo}
-        alt='galvanize text logo'
+        alt="galvanize text logo"
       />
+
       <p
         id='navbar-title'
         data-testid='title'
@@ -40,6 +38,7 @@ const NavBar = () => {
       |<button onClick={onDashboardHandle}>Dashboard</button>|
       <button onClick={onProjectsHandle}>Projects</button>|
       <Dropdown />
+
     </div>
   );
 };
