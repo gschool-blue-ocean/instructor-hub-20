@@ -1,12 +1,12 @@
 #ProjectsPage {
   /* border: 1px solid red; */
-  flex-grow: 0;
+  flex-grow: 1;
   /* width: 0.1vw; */
   width: 0.1vw;
   transition: all 50ms;
   z-index: 3;
 }
 
-#ProjectsPage:hover {
+/* #ProjectsPage:hover {
   width: 100vw;
-}
+} */

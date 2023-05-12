@@ -114,7 +114,7 @@ app.post('/students', async (req, res) => {
     console.error(error);
     res.sendStatus(500);
   }
-});
+}); 
 
 app.put('/students/:id', async (req, res) => {
   try {

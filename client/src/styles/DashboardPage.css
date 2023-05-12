@@ -1,11 +1,11 @@
 #DashboardPage {
   /* border: 1px solid red; */
-  flex-grow: 1;
+  flex-grow: 0;
   width: 0.1vw;
   transition: all 50ms;
   z-index: 3;
 }
 
-#DashboardPage:hover {
+/* #DashboardPage:hover {
   width: 100vw;
-}
+} */

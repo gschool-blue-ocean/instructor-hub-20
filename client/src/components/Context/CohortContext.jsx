@@ -2,6 +2,7 @@ import React, { useState, createContext } from 'react'
 
 const CohortContext = createContext();
 
+
 export const CohortProvider = ({children}) => {
     const [cohort, setCohort] = useState("19")
     const [bodyDisplay, setBodyDisplay] = useState('')
