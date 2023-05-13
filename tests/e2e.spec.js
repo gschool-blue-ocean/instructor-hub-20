@@ -8,6 +8,11 @@ const githubInput = 'testGithub';
 test('user data shows up in the cohort table', async ({ page }) => {
     // will need to preface with the authentication modal
   await page.goto('http://localhost:3000/');
+  await page.getByPlaceholder('Email Address').click();
+await page.getByPlaceholder('Email Address').fill('fdsafa');
+await page.getByPlaceholder('Email Address').press('Tab');
+await page.getByPlaceholder('Password').fill('jklsa;df');
+await page.getByRole('button', { name: 'Sign In' }).click();
   await page.getByRole('button', { name: 'Dashboard' }).click();
   await page.getByRole('button', { name: 'Add Student' }).click();
   const seeStudentModal = await page.isVisible('.student-modal-form')
@@ -31,32 +36,20 @@ test('user data shows up in the cohort table', async ({ page }) => {
      await page.isVisible(`text= ${githubInput}`)){}
 });
 
+test('sign in', async ({ page }) => {
+  // will need to preface with the authentication modal
+await page.goto('http://localhost:3000/');
+await page.getByPlaceholder('Email Address').click();
+await page.getByPlaceholder('Email Address').fill('fdsafa');
+await page.getByPlaceholder('Email Address').press('Tab');
+await page.getByPlaceholder('Password').fill('jklsa;df');
+await page.getByRole('button', { name: 'Sign In' }).click();
+const signInBox = await page.isVisible('Sign InRegister')
+expect(signInBox).toBe(false)
+
+});
 
 
 
 
 
-// test('end to end clicks thru fill blocks', async ({ page }) => {
-//     // will need to preface with the authentication modal
-//   await page.goto('http://localhost:3000/');
-//   await page.getByRole('button', { name: 'Dashboard' }).click();
-//   await page.getByRole('button', { name: 'Projects' }).click();
-//   await page.locator('#navbar').getByRole('button', { name: 'Select Cohort Dropdown' }).click();
-//   await page.getByRole('button', { name: 'Assessments' }).click();
-//   await page.getByRole('button', { name: 'Create New Cohort' }).click();
-//   await page.getByRole('button', { name: 'Add Student' }).click();
-//   const seeStudentModal = await page.isVisible('.student-modal-form')
-//     if(!seeStudentModal){
-//             throw new Error('Add student modal did not appear')
-//         }
-// // should be able to hit cancel button at any time that the user wants to drop the window, regadless of what info they have filled out
-// // user should be able to 
-//   await page.getByPlaceholder('name...').click();
-//   await page.getByPlaceholder('name...').fill('billytomasello');
-//   await page.getByPlaceholder('name...').click();
-//   await page.getByPlaceholder('email...').fill('billytomasello1@gmail.com');
-//   await page.getByPlaceholder('email...').click();
-//   await page.getByPlaceholder('github...').fill('billytomasello');
-
-//   await page.locator('div').filter({ hasText: /^Add StudentCancel$/ }).getByRole('button', { name: 'Add Student' }).click();
-// });
