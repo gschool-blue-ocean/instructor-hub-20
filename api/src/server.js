@@ -1,5 +1,5 @@
 import express from "express";
-
+import bcrypt from "bcrypt";
 import pg from "pg";
 
 const pool = new pg.Pool({
@@ -69,11 +69,53 @@ app.use((req, res, next) => {
 
 //-----------------------------------------ROUTES(SINGULAR NON JOINT)--------------------------------------------------//
 
+// --------------------- Users routes ----------------------------- // 
+
+app.post('/register', async (req, res) => {
+  try {
+    const { email, admin, password } = req.body;
+    const hashedPwd = await bcrypt.hash(password, 10);
+    const testUsername = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
+    if (testUsername.rows[0]) {
+      res.status(409).send({ 'message': 'Error: Email already exists' });
+    } else {
+      const { rows } = await pool.query('INSERT INTO users (email, password, admin) VALUES ($1, $2, $3) RETURNING *', [hashedPwd, email, admin]);
+      if (rows[0].username){
+        res.status(201).send({ 'message': 'Account successfully registered!'})
+      } else {
+        res.status(500).send({ 'message': 'Internal Error' })
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ 'message': error });
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const response = await pool.query('SELECT email, password FROM users WHERE email = $1', [email]);
+    if (!response.rows[0]) {
+      res.status(404).send({ 'message': 'Error: User not found'})
+    } else if (await bcrypt.compare(password, response.rows[0].password)) {
+      res.status(200).send({ 'message': 'Login successful!'});
+    } else {
+      res.status(409).send({ 'message': 'Error: Incorrect Password'})
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+
+
 // --------------------- Students routes ----------------------------- //
 app.get('/students', async (req, res) => {
   try {
     const { rows } = await pool.query('SELECT * FROM students');
-    res.json(rows);
+    res.status(200).json(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -118,7 +160,7 @@ app.post('/students', async (req, res) => {
     console.error(error);
     res.sendStatus(500);
   }
-});
+}); 
 
 app.put('/students/:id', async (req, res) => {
   try {
@@ -648,6 +690,59 @@ app.delete('/projects/:id', async (req, res) => {
   }
 });
 
+// new joint table route for Student, Project name and Project_Score
+//get route that will put the above data
+
+app.get('/student_project_scores', async (req, res) => {
+  try {
+    const query = `
+      SELECT 
+        students.stu_name AS student_name,
+        projects.project_name AS project_name,
+        project_scores.grade AS project_score
+      FROM 
+        students
+      JOIN 
+        project_scores ON students.id = project_scores.group_id
+      JOIN 
+        projects ON project_scores.project_id = projects.id
+    `;
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/student_project_scores/:cohort_id', async (req, res) => {
+  try {
+    const { cohort_id } = req.params;
+    const query = `
+    SELECT groups.group_name AS group_name,
+groups.student1 AS student1,
+groups.student2 AS student2,
+groups.student3 AS student3,
+groups.student4 AS student4,
+groups.student5 AS student5,
+groups.student6 AS student6,
+projects.project_name AS project_name,
+project_scores.grade AS project_score,
+cohorts.cohort_number AS cohort_number
+FROM groups 
+JOIN 
+project_scores ON groups.id = project_scores.group_id
+JOIN 
+projects ON project_scores.project_id = projects.id 
+JOIN 
+cohorts ON project_scores.cohort_id = cohorts.id WHERE cohorts.cohort_number = $1`;
+    const { rows } = await pool.query(query, [cohort_id]);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
 
 // app.listen(port, () => {
 //   console.log(`Server is running at http://localhost:${port}`);
