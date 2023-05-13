@@ -8,6 +8,7 @@ const githubInput = 'testGithub';
 test('user data shows up in the cohort table', async ({ page }) => {
     // will need to preface with the authentication modal
   await page.goto('http://localhost:3000/');
+  await page.getByRole('button', { name: 'Dashboard' }).click();
   await page.getByRole('button', { name: 'Add Student' }).click();
   const seeStudentModal = await page.isVisible('.student-modal-form')
     if(!seeStudentModal){
