@@ -1,8 +1,13 @@
-.login-header{color: rgb(51, 133, 7);}
+.login-header{
+    color: #c6c6c6;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+}
 
 .login-container{
     display:flex;
-    justify-content:center
+    justify-content:center;
+    text-align: center;
 }
 
 .login-button{

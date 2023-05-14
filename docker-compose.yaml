@@ -45,12 +45,14 @@ services:
       API_URL: http://api
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
       NODE_ENV: test
-      PORT: 6000 
+      PORT: ${TESTING_PORT}
     depends_on:
     - database
     - api
     - app
     ports:
     - ${TESTING_PORT}:${TESTING_PORT}
+    volumes: 
+    - ./tests/src:/code/src
 volumes:
   pg-data:

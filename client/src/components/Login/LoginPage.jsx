@@ -35,6 +35,7 @@ const LoginPage = ({ showReg, userAuth }) => {
                 <button className='login-button' onClick={handleLogin}>Sign In</button>
                 <button className='login-button' onClick={handleReg}>Register</button>
             </div>
+            <span class = 'or-sign-in'>or sign in using a service</span>
         </div>
     );
   };
