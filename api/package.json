@@ -10,11 +10,12 @@
     "seed": "node seeds.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.12",
     "supertest": "^6.3.3",
     "vitest": "^0.29.2"
   },
   "dependencies": {
+    "nodemon":"2.0.22",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
