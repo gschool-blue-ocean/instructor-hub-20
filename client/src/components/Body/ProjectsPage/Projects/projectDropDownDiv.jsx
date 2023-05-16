@@ -1,25 +1,8 @@
 import React, { useState, useEffect } from "react";
-import CohortContext from "../../../Context/CohortContext.jsx";
-import { useContext } from "react";
+// import CohortContext from "../../../Context/CohortContext.jsx";
+// import { useContext } from "react";
 
-export function ProjectDropDown() {
-  const [projects, setProjects] = useState([]);
-  const { cohort } = useContext(CohortContext);
-
-  useEffect(() => {
-    fetchProjects();
-  }, [cohort]);
-
-  const fetchProjects = () => {
-    fetch(`http://localhost:8000/student_project_scores/${cohort}`)
-      .then(response => response.json())
-      .then(data => setProjects(data))
-      .catch(err => console.error(err));
-  };
-
-  useEffect(() => {
-    console.log("Projects:", projects);
-  }, [projects]);
+export function ProjectDropDown({projects}) {
 
   return (
     <div>
@@ -66,14 +49,14 @@ export function ProjectDropDown() {
       onCohortChange(e.target.value);
     }
   
-    console.log("what's in here", cohorts);
-  
+    // console.log("what's in here", cohorts);
+    
     return (
       <div>
         <h2>Cohort</h2>
         <select onChange={changeCohort}>
           {cohorts.map(cohort => (
-            <option value={cohort}>
+            <option key={cohort.id} value={JSON.stringify(cohort)}>
               {cohort.cohort_number}: {cohort.start} - {cohort.graduation} | {cohort.instructor}
             </option>
           ))}
