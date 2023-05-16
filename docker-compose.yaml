@@ -5,7 +5,7 @@ services:
     # Load all env vars from .env into the container's environment.
     env_file: .env
     ports:
-      - 5432:5432
+      - 6432:5432
     volumes:
       - pg-data:/var/lib/postgresql/data
       - ./api/src/db/migration.sql:/docker-entrypoint-initdb.d/migration.sql
@@ -16,6 +16,7 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
       NODE_ENV: development
       PORT: 80
+      CHOKIDAR_USEPOLLING: "true"
     depends_on:
       - database
     ports:
@@ -30,6 +31,7 @@ services:
     environment:
       API_URL: http://api
       PORT: ${CLIENT_PORT}
+      CHOKIDAR_USEPOLLING: "true"
     depends_on:
       - api
     ports:
@@ -39,5 +41,21 @@ services:
       # filesystem to the container's.
       - ./client/src:/code/src
     command: npm run dev
+  tests:
+    build: ./tests
+    environment:
+      API_URL: http://api
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
+      NODE_ENV: test
+      PORT: ${TESTING_PORT}
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+    - database
+    - api
+    - app
+    ports:
+    - ${TESTING_PORT}:${TESTING_PORT}
+    volumes: 
+    - ./tests/src:/code/src
 volumes:
   pg-data:
