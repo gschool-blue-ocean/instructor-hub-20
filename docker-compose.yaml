@@ -39,5 +39,18 @@ services:
       # filesystem to the container's.
       - ./client/src:/code/src
     command: npm run dev
+  tests:
+    build: ./tests
+    environment:
+      API_URL: http://api
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
+      NODE_ENV: test
+      PORT: 6000 
+    depends_on:
+    - database
+    - api
+    - app
+    ports:
+    - ${TESTING_PORT}:${TESTING_PORT}
 volumes:
   pg-data:
