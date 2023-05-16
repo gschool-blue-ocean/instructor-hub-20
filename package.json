@@ -10,12 +10,12 @@
     "seed": "node /api/src/db/seed.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.33.0",
     "concurrently": "^7.1.0",
     "prettier": "^2.8.4"
   },
   "dependencies": {
-    "k6": "^0.0.0",
+    "@playwright/test": "^1.33.0",
+    "ci": "^2.2.0",
     "pg": "^8.10.0"
   }
 }

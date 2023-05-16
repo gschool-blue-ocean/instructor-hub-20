@@ -5,18 +5,47 @@ import '../../styles/Login.css';
 const LoginPage = ({ showReg, userAuth }) => {
     const [ errorLogin, setErrorLogin ] = useState('');
 
-    function handleLogin() {
-        const email = document.getElementById("email-login");
-        const password = document.getElementById("password-login");
-        if (!email.value || !password.value) {
-            setErrorLogin('Username and password must be provided!');
-            return;
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    async function handleLogin() {
+        try {
+            const email = document.getElementById("email-login");
+            const password = document.getElementById("password-login");
+            const testedEmail = isValidEmail(email.value);
+            if (!email.value || !password.value) {
+                setErrorLogin('Username and password must be provided.');
+                return;
+            } else if (!testedEmail) {
+                setErrorLogin('Invalid email');
+                return;
+            }
+            let login = {};
+            login.email = email.value;
+            login.password = password.value;
+            // console.log(login);
+            const response = await fetch('http://localhost:8000/login', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(login),
+            })
+            const loggedIn = response.json();
+            // console.log(response);
+            if (response.status === 404) {
+                setErrorLogin('User email not found.');
+                return;
+            } else if (response.status === 409) {
+                setErrorLogin('Incorrect password, please try again.');
+                return;
+            } else if (response.status === 200) {
+                setErrorLogin('Login successful!');
+                userAuth(true);
+            }
+        } catch (error) {
+            console.log(error);
         }
-        let login = {};
-        login.email = email.value;
-        login.password = password.value;
-        console.log(login);
-        userAuth(true);
     }
     
     function handleReg() {
@@ -27,7 +56,7 @@ const LoginPage = ({ showReg, userAuth }) => {
         <div className='login-container'>
             <h1 className='login-header'>Sign In</h1>
             <form>
-                <p>{errorLogin}</p>
+                <h3 className='error-text'>{errorLogin}</h3>
                 <input type="text" name="username" className='login-input' id="email-login" placeholder='Email Address'></input><br></br>
                 <input type="password" name="password" className='login-input' id="password-login" placeholder='Password'></input><br></br>
             </form>
@@ -35,6 +64,7 @@ const LoginPage = ({ showReg, userAuth }) => {
                 <button className='login-button' onClick={handleLogin}>Sign In</button>
                 <button className='login-button' onClick={handleReg}>Register</button>
             </div>
+            <span class = 'or-sign-in'>or sign in using a service</span>
         </div>
     );
   };

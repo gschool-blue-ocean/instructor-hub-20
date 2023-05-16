@@ -9,6 +9,27 @@ const pool = new Pool({
 });
 
 
+const users = async function() {
+    try {
+        await pool.query(`DROP TABLE IF EXISTS users CASCADE`, (err, data)=>{
+            if (err){
+                console.log('Drop Users Table failed')
+            }
+            pool.query(`CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            name TEXT,
+            password TEXT,
+            email TEXT,
+            admin BOOLEAN)`, (err, data)=>{
+                console.log('Create Users Table successful');
+            })
+        });
+    } catch (error) {
+        console.error(error);
+        console.log("Create Users Table failed");
+    }
+};
+
 
 const cohorts = async function() {
     try {
@@ -163,5 +184,5 @@ const projectScores = async function() {
 };
         
 
-cohorts().then(()=> students().then(()=> assessments().then(()=> projects().then(
-    ()=> groups().then(()=> assessScores().then(()=> projectScores().then(()=> pool.end())))))));
+users().then(()=> cohorts().then(()=> students().then(()=> assessments().then(()=> projects().then(
+    ()=> groups().then(()=> assessScores().then(()=> projectScores().then(()=> pool.end()))))))));

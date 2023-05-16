@@ -1,0 +1,18 @@
+.login-header{
+    color: #c6c6c6;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+}
+
+.login-container{
+    display:flex;
+    justify-content:center;
+    text-align: center;
+}
+
+.login-button{
+    text-transform:uppercase;
+    border: radius 40px;
+    background-color: #00808C;
+    border-color:#00808C;
+}
