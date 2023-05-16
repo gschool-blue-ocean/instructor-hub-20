@@ -1,18 +1,56 @@
-.login-header{
-    color: #c6c6c6;
-    letter-spacing: 0.3px;
-    font-weight: 300;
+/* parent container */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: black 1px solid;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: auto;
 }
 
-.login-container{
-    display:flex;
-    justify-content:center;
-    text-align: center;
+.login-image {
+  vertical-align: middle;
+  border-style: none;
+  height: 70px;
+  width: 50%;
 }
 
-.login-button{
-    text-transform:uppercase;
-    border: radius 40px;
-    background-color: #00808C;
-    border-color:#00808C;
+.login-header {
+  color: #292b2c;
+  letter-spacing: 0.3px;
+  font-weight: 300;
+  justify-content: center;
+}
+
+.login-button {
+  text-transform: uppercase;
+  border: radius 40px;
+  background-color: #00808c;
+  border-color: #00808c;
+}
+
+.or-sign-in {
+  color: #292b2c;
+}
+
+.sign-in-btn-primary {
+  text-transform: uppercase;
+  border: radius 40px;
+  background-color: #00808c;
+  border-color: #00808c;
+}
+
+.login-github-link {
+  color: #00808c;
+}
+
+.forgetYourPW {
+  color: #00808c;
+}
+
+.sign-in-form {
+  border: red 1px solid;
 }
