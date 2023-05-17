@@ -53,6 +53,7 @@ export function ProjectDropDown({projects}) {
     
     return (
       <div>
+        
         <h2>Cohort</h2>
         <select onChange={changeCohort}>
           {cohorts.map(cohort => (
