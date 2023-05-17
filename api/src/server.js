@@ -3,7 +3,7 @@ dotenv.config();
 import express from "express";
 import bcrypt from "bcrypt";
 import pg from "pg";
-const jwt = require('jsonwebtoken');
+import jwt from "jsonwebtoken";
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL
