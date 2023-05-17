@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import pg from "pg";
 import jwt from "jsonwebtoken";
 
+
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL
 });
@@ -72,6 +73,9 @@ app.use((req, res, next) => {
 
 //-----------------------------------------ROUTES(SINGULAR NON JOINT)--------------------------------------------------//
 
+
+
+
 // --------------------- Users routes ----------------------------- // 
 
 app.post('/register', async (req, res) => {
@@ -102,8 +106,10 @@ app.post('/login', async (req, res) => {
     if (!response.rows[0]) {
       res.status(404).send({ 'message': 'User not found'})
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
-      const token = jwt.sign({ email: response.rows[0].email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' })
-      res.status(200).send({ token });
+      const user = response.rows[0];
+      console.log(process.env.JWT_SECRET)
+      const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '2h' })
+      res.status(200).json({ token, user: { email: user.email } });
     } else {
       res.status(409).send({ 'message': 'Incorrect Password'})
     }
