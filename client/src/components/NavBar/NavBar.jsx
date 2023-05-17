@@ -6,8 +6,7 @@ import CohortContext from '../Context/CohortContext';
 import Dropdown from './Dropdown';
 import { useSignOut } from 'react-auth-kit'
 
-
-const NavBar = ( {userAuth}) => {
+const NavBar = ({ userAuth }) => {
   const { setBodyDisplay } = useContext(CohortContext);
   const signOut = useSignOut();
 

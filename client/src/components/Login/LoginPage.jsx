@@ -25,7 +25,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       let login = {};
       login.email = email.value;
       login.password = password.value;
-      // console.log(login);
+      console.log(login);
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
         credentials: "same-origin",
@@ -33,7 +33,13 @@ const LoginPage = ({ showReg, userAuth }) => {
         body: JSON.stringify(login),
       });
       const loggedIn = response.json();
-      // console.log(response);
+    //   console.log(loggedIn);
+      signIn({
+            token: response.token,
+            expiresIn: 7200,
+            tokenType: "Bearer",
+            authState: { email: login.email }
+      });
       if (response.status === 404) {
         setErrorLogin("User email not found.");
         return;
