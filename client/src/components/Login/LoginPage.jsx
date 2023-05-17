@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useSignIn } from 'react-auth-kit';
 import '../../styles/Login.css';
 
 
 const LoginPage = ({ showReg, userAuth }) => {
     const [ errorLogin, setErrorLogin ] = useState('');
+    const signIn = useSignIn();
 
     function isValidEmail(email) {
         return /\S+@\S+\.\S+/.test(email);
@@ -32,7 +34,7 @@ const LoginPage = ({ showReg, userAuth }) => {
                 body: JSON.stringify(login),
             })
             const loggedIn = response.json();
-            // console.log(response);
+            console.log(loggedIn);
             if (response.status === 404) {
                 setErrorLogin('User email not found.');
                 return;
@@ -64,7 +66,7 @@ const LoginPage = ({ showReg, userAuth }) => {
                 <button className='login-button' onClick={handleLogin}>Sign In</button>
                 <button className='login-button' onClick={handleReg}>Register</button>
             </div>
-            <span class = 'or-sign-in'>or sign in using a service</span>
+            <span className='or-sign-in'>or sign in using a service</span>
         </div>
     );
   };
