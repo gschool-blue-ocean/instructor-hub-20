@@ -53,14 +53,15 @@ const LoginPage = ({ showReg, userAuth }) => {
 
   return (
     <div className="login-container">
-      <img className="login-image"
+      <img
+        className="login-image"
         id="logo"
         src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
         alt="logo"
       />
-        <h2 className="login-header">Sign In</h2>
+      <h2 className="login-header">Sign In</h2>
       <div>
-        <form className = 'sign-in-form'>
+        <form className="sign-in-form">
           <h3 className="error-text">{errorLogin}</h3>
           <input
             type="email"
@@ -91,7 +92,9 @@ const LoginPage = ({ showReg, userAuth }) => {
         <br></br>
         <span class="or-sign-in">or sign in using a service</span>
         <div>
-          <a class="login-github-link" href="https://github.com">GITHUB</a>
+          <a class="login-github-link" href="https://github.com">
+            GITHUB
+          </a>
         </div>
       </div>
     </div>
