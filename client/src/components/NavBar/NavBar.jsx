@@ -4,9 +4,13 @@ import GalvanizeLogo from '../../styles/svgs/galvanize.svg';
 import GalvanizeTextLogo from '../../styles/svgs/galvanize-text-logo.svg';
 import CohortContext from '../Context/CohortContext';
 import Dropdown from './Dropdown';
+import { useSignOut } from 'react-auth-kit'
 
-const NavBar = () => {
+
+const NavBar = ( {userAuth}) => {
   const { setBodyDisplay } = useContext(CohortContext);
+  const signOut = useSignOut();
+
   return (
     <div id='navbar'>
       <img
@@ -29,6 +33,8 @@ const NavBar = () => {
 
       <button onClick={() => setBodyDisplay('body')}>Dashboard</button>
       <button onClick={() => setBodyDisplay('project')}>Projects</button>
+      <button onClick={signOut}>Sign out</button>
+     
       <Dropdown />
     </div>
   );
