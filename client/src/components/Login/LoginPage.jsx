@@ -26,7 +26,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       let login = {};
       login.email = email.value;
       login.password = password.value;
-      // console.log(login);
+      console.log(login);
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
         credentials: "same-origin",
@@ -34,7 +34,13 @@ const LoginPage = ({ showReg, userAuth }) => {
         body: JSON.stringify(login),
       });
       const loggedIn = response.json();
-      // console.log(response);
+    //   console.log(loggedIn);
+      signIn({
+            token: response.token,
+            expiresIn: 7200,
+            tokenType: "Bearer",
+            authState: { email: login.email }
+      });
       if (response.status === 404) {
         setErrorLogin("User email not found.");
         return;
@@ -90,11 +96,11 @@ const LoginPage = ({ showReg, userAuth }) => {
         <button className="login-button" onClick={handleReg}>
           Register
         </button>
-        <span class="forgetYourPW">Forgot your password?</span>
+        <span className="forgetYourPW">Forgot your password?</span>
         <br></br>
-        <span class="or-sign-in">or sign in using a service</span>
+        <span className="or-sign-in">or sign in using a service</span>
         <div>
-          <a class="login-github-link" href="https://github.com">GITHUB</a>
+          <a className="login-github-link" href="https://github.com">GITHUB</a>
         </div>
       </div>
     </div>

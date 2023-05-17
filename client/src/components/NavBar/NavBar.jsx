@@ -5,7 +5,7 @@ import GalvanizeTextLogo from '../../styles/svgs/galvanize-text-logo.svg';
 import CohortContext from '../Context/CohortContext';
 import Dropdown from './Dropdown';
 
-const NavBar = () => {
+const NavBar = ({ userAuth }) => {
   const { setBodyDisplay } = useContext(CohortContext);
   return (
     <div id='navbar'>
