@@ -33,12 +33,12 @@ const LoginPage = ({ showReg, userAuth }) => {
         body: JSON.stringify(login),
       });
       const loggedIn = response.json();
-    //   console.log(loggedIn);
+      //   console.log(loggedIn);
       signIn({
-            token: response.token,
-            expiresIn: 7200,
-            tokenType: "Bearer",
-            authState: { email: login.email }
+        token: response.token,
+        expiresIn: 7200,
+        tokenType: "Bearer",
+        authState: { email: login.email },
       });
       if (response.status === 404) {
         setErrorLogin("User email not found.");
@@ -71,7 +71,7 @@ const LoginPage = ({ showReg, userAuth }) => {
           />
         </div>
         <h2 className="login-sign-in-text">Sign In</h2>
-        <div>
+        <div className="sign-in-form-container">
           <form className="sign-in-form">
             <h3 className="error-text">{errorLogin}</h3>
             <input
