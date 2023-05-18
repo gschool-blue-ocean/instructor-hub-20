@@ -1,7 +1,13 @@
 {
-  "name": "api",
-  "version": "1.0.0",
   "type": "module",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0"
+  },
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
@@ -13,14 +19,5 @@
     "nodemon": "^2.0.12",
     "supertest": "^6.3.3",
     "vitest": "^0.29.2"
-  },
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.17.3",
-    "jsonwebtoken": "^9.0.0",
-    "nodemon": "2.0.22",
-    "pg": "^8.10.0"
   }
 }

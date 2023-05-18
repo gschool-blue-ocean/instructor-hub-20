@@ -34,6 +34,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       });
       const loggedIn = response.json();
       //   console.log(loggedIn);
+      //   console.log(loggedIn);
       signIn({
         token: response.token,
         expiresIn: 7200,
