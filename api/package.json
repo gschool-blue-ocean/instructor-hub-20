@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -6,9 +7,13 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0"
-    
-  }, "scripts": {
-
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "echo 'add tests'",
+    "migrate": "node migration.js",
+    "seed": "node seeds.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.12",
