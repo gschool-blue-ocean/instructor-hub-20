@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { AuthProvider } from "react-auth-kit";
-import Login from "../Login/Login";
-import "../../styles/App.css";
-import NavBar from "../NavBar/NavBar";
-import Body from "../Body/Body";
-import Footer from "../Footer/Footer";
-import { CohortProvider } from "../Context/CohortContext.jsx";
+import React, { useState } from 'react';
+import { AuthProvider } from 'react-auth-kit';
+import Login from '../Login/Login';
+import '../../styles/App.css';
+import NavBar from '../NavBar/NavBar';
+import Body from '../Body/Body';
+import Footer from '../Footer/Footer';
+import { CohortProvider } from '../Context/CohortContext.jsx';
 
 const App = () => {
-  const [ userAuth, setUserAuth ] = useState(false);
+  const [userAuth, setUserAuth] = useState(true);
 
   return (
-    <div id="App">
+    <div id='App'>
       <AuthProvider
-        authType={"cookie"}
-        authName={"_auth"}
+        authType={'cookie'}
+        authName={'_auth'}
         cookieDomain={window.location.hostname}
         cookieSecure={false}
       >

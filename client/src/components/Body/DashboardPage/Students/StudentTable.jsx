@@ -25,6 +25,7 @@ const StudentTable = ({ stud, onAdd }) => {
           <th>GitHub</th>
           <th>Graduation Date</th>
           <th>Cohort</th>
+          <th>Options</th>
         </tr>
         {stud.map((val, key) => {
           return (
@@ -42,13 +43,16 @@ const StudentTable = ({ stud, onAdd }) => {
                 <td>{val.github}</td>
                 <td>{val.graduation}</td>
                 <td>{val.cohort_number}</td>
+                <td>
+                  <button
+                    className='delete-student'
+                    onClick={() => handleDelete(val.id, val.stu_name)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
-              <button
-                className='delete-student'
-                onClick={() => handleDelete(val.id, val.stu_name)}
-              >
-                Delete
-              </button>
+
               <UpdateStudent
                 keyID={`Student${key}`}
                 stud={val}
