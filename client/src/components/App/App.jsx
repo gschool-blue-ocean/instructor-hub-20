@@ -8,7 +8,7 @@ import Footer from "../Footer/Footer";
 import { CohortProvider } from "../Context/CohortContext.jsx";
 
 const App = () => {
-  const [userAuth, setUserAuth] = useState(false);
+  const [ userAuth, setUserAuth ] = useState(false);
 
   return (
     <div id="App">
