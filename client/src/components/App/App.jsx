@@ -7,24 +7,26 @@ import Body from '../Body/Body';
 import Footer from '../Footer/Footer';
 import { CohortProvider } from '../Context/CohortContext.jsx';
 
-
-
 const App = () => {
-  const [ userAuth, setUserAuth ] = useState(true);
+  const [userAuth, setUserAuth] = useState(true);
 
   return (
     <div id='App'>
       <AuthProvider
-      authType={'cookie'}
-      authName={'_auth'}
-      cookieDomain={window.location.hostname}
-      cookieSecure={false}>
-        {!userAuth ? <Login userAuth={()=> setUserAuth(true)}/> :
-        <CohortProvider>
-          <NavBar userAuth={()=> setUserAuth(false)}></NavBar>
-          <Body></Body>
-          <Footer></Footer>
-        </CohortProvider>}
+        authType={'cookie'}
+        authName={'_auth'}
+        cookieDomain={window.location.hostname}
+        cookieSecure={false}
+      >
+        {!userAuth ? (
+          <Login userAuth={() => setUserAuth(true)} />
+        ) : (
+          <CohortProvider>
+            <NavBar userAuth={() => setUserAuth(false)}></NavBar>
+            <Body></Body>
+            <Footer></Footer>
+          </CohortProvider>
+        )}
       </AuthProvider>
     </div>
   );

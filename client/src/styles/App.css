@@ -9,7 +9,7 @@
   --bgcolor4: rgba(1, 50, 147, 0.951);
   --bgcolor5: rgba(0, 30, 90, 0.955);
   --bgcolor6: rgba(0, 30, 90, 0.99);
-  --bgsize: 10px;
+  --bgsize: 5px;
   --tablewidth: 90vw;
 }
 
@@ -25,6 +25,19 @@
     rgba(0, 64, 255, 0.626)
   );
   border-radius: 10px;
+}
+
+#App {
+  background: linear-gradient(135deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color1) 25%, transparent 25%);
+  background-size: var(--bgsize) var(--bgsize);
+  background-color: var(--color2);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 }
 
 body {

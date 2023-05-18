@@ -41,7 +41,7 @@
     drop-shadow(-100px 0px 1px rgb(0, 0, 0))
     drop-shadow(100px 0px 1px rgb(0, 0, 0));
 
-  animation: rotation 40s infinite linear;
+  animation: rotation 200s infinite linear;
 }
 
 @keyframes rotation {

@@ -1,26 +1,33 @@
-.cohortDropDown,.projectDropDown{
-    position: relative;
-    flex-wrap: wrap;
-    display: inline-block;
-    padding: 5px;
-    margin-right: 5px;
-    bottom: -10px;
+.cohortDropDown,
+.projectDropDown {
+  position: relative;
+  flex-wrap: wrap;
+  display: inline-block;
+  padding: 5px;
+  margin-right: 5px;
+  bottom: -10px;
 }
-
-select, option{
-  background: linear-gradient( transparent -20%, rgba(27, 102, 200, 0.626) 10%, rgba(1, 50, 147, 0.708) 90%, transparent 110% );
+/* 
+select,
+option {
+  background: linear-gradient(
+    transparent -20%,
+    rgba(27, 102, 200, 0.626) 10%,
+    rgba(1, 50, 147, 0.708) 90%,
+    transparent 110%
+  );
   border: 3px solid rgb(84, 73, 116);
   width: 300px;
   height: 30px;
   box-shadow: 0 0 10px 1px black, 0 0 1px 0.2px rgba(255, 255, 255, 0.248) inset;
   font-size: large;
-}
+} */
 
-table, th, td {
+/* table, th, td {
     text-align: center;
     height: 30px;
     box-shadow: 0 0 10px 1px black, 0 0 1px 0.2px rgba(255, 255, 255, 0.248) inset;
     font-size: large;
     background-color: rgba(0, 110, 255, 0.2);
     filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0));
-}
+} */
