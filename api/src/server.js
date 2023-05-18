@@ -1,9 +1,12 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import express from "express";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs'
 import pg from "pg";
 import jwt from "jsonwebtoken";
+
+const salt = bcrypt.genSaltSync(10)
+const hash = bcrypt.hashSync('B4c0/\/',salt)
 
 
 const pool = new pg.Pool({
