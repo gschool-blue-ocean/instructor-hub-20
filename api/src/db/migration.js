@@ -209,4 +209,4 @@ const projectScores = async function() {
         
 
 users().then(()=> cohorts().then(()=> students().then(()=> assessments().then(()=> projects().then(
-    ()=> groups().then(()=> assessScores().then(()=> projectScores().then(()=> pool.end()))))))));
+    ()=> groups().then(()=> assessScores().then(()=> projectScores())))))));

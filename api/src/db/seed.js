@@ -163,4 +163,4 @@ const projectScoreData = async function() {
 
 
 cohortData().then(()=> studentData().then(()=> assessData().then(()=> projectData().then(
-    ()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData().then(()=> pool.end())))))));
+    ()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData()))))));
