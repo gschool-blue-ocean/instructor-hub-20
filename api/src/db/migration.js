@@ -9,6 +9,79 @@ const pool = new pg.Pool({
 });
 
 
+const clearTables = async () => {
+    try {
+        const user = await pool.query('Drop TABLE IF EXISTS users');
+        const cohort = await pool.query('Drop TABLE IF EXISTS cohorts');
+        const student = await pool.query('Drop TABLE IF EXISTS students');
+        const project = await pool.query('Drop TABLE IF EXISTS projects');
+        const assessment = await pool.query('Drop TABLE IF EXISTS assessments');
+        const group = await pool.query('Drop TABLE IF EXISTS groups');
+        const assessScore = await pool.query('Drop TABLE IF EXISTS assessment_scores');
+        const projScore = await pool.query('Drop TABLE IF EXISTS project_scores');
+    } catch (error) {
+        console.error(error);
+        console.log("Drop Tables failed");
+    }
+}
+
+
+const migrateTables = async () => {
+    try {
+        const cohort = await pool.query(`CREATE TABLE cohorts (
+            id SERIAL PRIMARY KEY,
+            cohort_number INTEGER,
+            start TEXT,
+            graduation TEXT,
+            instructor TEXT)`);
+        const user = await pool.query(`CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            name TEXT,
+            password TEXT,
+            email TEXT,
+            admin BOOLEAN)`);
+        const student = await pool.query(`CREATE TABLE students (
+            id SERIAL PRIMARY KEY,
+            stu_name TEXT,
+            email TEXT,
+            github TEXT,
+            cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE)`);
+        const group = await pool.query(`CREATE TABLE groups (
+            id serial PRIMARY KEY,
+            group_name TEXT,
+            student1 TEXT,
+            student2 TEXT,
+            student3 TEXT,
+            student4 TEXT,
+            student5 TEXT,
+            student6 TEXT)`);
+        const assessment = await pool.query(`CREATE TABLE assessments (
+            id serial PRIMARY KEY,
+            assess_name TEXT,
+            type TEXT)`);
+        const project = await pool.query(`CREATE TABLE projects (
+            id serial PRIMARY KEY,
+            project_name TEXT,
+            type TEXT)`);
+        const assessScore = await pool.query(`CREATE TABLE assessment_scores (
+            id serial PRIMARY KEY,
+            student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
+            assess_id INTEGER REFERENCES assessments(id) ON DELETE CASCADE,
+            grade INTEGER,
+            cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE)`);
+        const projScore = await pool.query(`CREATE TABLE project_scores (
+            id serial PRIMARY KEY,
+            group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE,
+            project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
+            grade INTEGER,
+            cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE)`);
+    } catch (error) {
+        console.error(error);
+        console.log("Create Tables failed");
+    }
+    
+}
+
 const users = function() {
     try {
         pool.query(`DROP TABLE IF EXISTS users`, (err, data)=>{
@@ -209,14 +282,8 @@ function projectScores() {
         
 
 async function fullMigration() {
-    const cohort = await cohorts();
-    const user = await users();
-    const student = await students();
-    const group = await groups();
-    const assessment = await assessments();
-    const project = await projects();
-    const projScore = await projectScores();
-    const assessScore = await assessScores();
+    const cohort = await clearTables();
+    const user = await migrateTables();
 }
 
 fullMigration();
