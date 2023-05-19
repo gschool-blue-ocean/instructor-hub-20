@@ -22,7 +22,7 @@ const App = () => {
           <Login userAuth={() => setUserAuth(true)} />
         ) : (
           <CohortProvider>
-            <NavBar logout= {() => setUserAuth(false)}></NavBar>
+            <NavBar logout={() => setUserAuth(false)}></NavBar>
             <Body></Body>
             <Footer></Footer>
           </CohortProvider>
