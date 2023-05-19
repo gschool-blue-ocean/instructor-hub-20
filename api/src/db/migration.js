@@ -183,7 +183,7 @@ const assessScores = async function() {
 };
 
 
-const projectScores = async function() {
+async function projectScores() {
     try {
         await pool.query(`DROP TABLE IF EXISTS project_scores`, (err, data)=>{
             if (err){
@@ -208,5 +208,11 @@ const projectScores = async function() {
 };
         
 
-users().then(()=> cohorts().then(()=> students().then(()=> assessments().then(()=> projects().then(
-    ()=> groups().then(()=> assessScores().then(()=> projectScores())))))));
+cohorts()
+.then(()=> users()
+.then(()=> groups()
+.then(()=> students()
+.then(()=> projects()
+.then(()=> assessments()
+.then(()=> assessScores()
+.then(()=> projectScores())))))));

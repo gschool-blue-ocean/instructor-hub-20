@@ -147,7 +147,7 @@ const projectScoreData = async function() {
         (1, 8, 95, 1),
         (1, 7, 95, 1),
         (2, 8, 95, 2),
-        (2, 9, 90, 2)
+        (2, 9, 90, 2),
         (2, 7, 90, 2)`, (err, data)=>{
             if (err) {
                 console.log(err);
