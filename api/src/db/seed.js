@@ -161,6 +161,16 @@ const projectScoreData = async function() {
 };
 
 
+async function seedData() {
+    const cohort = await cohortData();
+    const student = await studentData();
+    const assess = await assessData();
+    const project = await projectData();
+    const group = await groupData();
+    const assessScore = await assessScoreData();
+    const projectScore = await projectScoreData();
+}
 
-cohortData().then(()=> studentData().then(()=> assessData().then(()=> projectData().then(
-    ()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData()))))));
+seedData();
+
+// cohortData().then(()=> studentData().then(()=> assessData().then(()=> projectData().then(()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData()))))));
