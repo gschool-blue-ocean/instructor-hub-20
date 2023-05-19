@@ -12,8 +12,8 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "test": "echo 'add tests'",
-    "migrate": "node src/migration.js",
-    "seed": "node src/seed.js"
+    "migrate": "node src/db/migration.js",
+    "seed": "node src/db/seed.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.12",
