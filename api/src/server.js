@@ -1,5 +1,5 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+// import * as dotenv from "dotenv";
+// dotenv.config();
 import express from "express";
 import bcrypt from 'bcryptjs';
 import pg from "pg";
@@ -11,6 +11,9 @@ const hash = bcrypt.hashSync('B4c0/\/',salt)
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const app = express();
