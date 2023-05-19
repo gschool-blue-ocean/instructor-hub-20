@@ -9,9 +9,9 @@ const pool = new pg.Pool({
 });
 
 
-const users = async function() {
+const users = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS users`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS users`, (err, data)=>{
             if (err){
                 console.log('Drop Users Table failed')
             }
@@ -34,9 +34,9 @@ const users = async function() {
 };
 
 
-const cohorts = async function() {
+const cohorts = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS cohorts`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS cohorts`, (err, data)=>{
             if (err){
                 console.log('Drop Cohorts Table failed')
             }
@@ -59,9 +59,9 @@ const cohorts = async function() {
 };
 
 
-const students = async function() {
+const students = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS students`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS students`, (err, data)=>{
             if (err){
                 console.log('Drop Students Table failed');
             }
@@ -84,9 +84,9 @@ const students = async function() {
 };
 
 
-const assessments = async function() {
+const assessments = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS assessments`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS assessments`, (err, data)=>{
             if (err){
                 console.log('Drop Assessments Table failed');
             }
@@ -107,9 +107,9 @@ const assessments = async function() {
 };
 
 
-const projects = async function() {
+const projects = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS projects`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS projects`, (err, data)=>{
             if (err){
                 console.log('Drop Projects Table failed');
             }
@@ -130,9 +130,9 @@ const projects = async function() {
 };
 
 
-const groups = async function() {
+const groups = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS groups`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS groups`, (err, data)=>{
             if (err){
                 console.log('Drop Groups Table failed');
             }
@@ -158,9 +158,9 @@ const groups = async function() {
 };
 
 
-const assessScores = async function() {
+const assessScores = function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS assessment_scores`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS assessment_scores`, (err, data)=>{
             if (err){
                 console.log('Drop Assessment Scores Table failed');
             }
@@ -183,9 +183,9 @@ const assessScores = async function() {
 };
 
 
-async function projectScores() {
+function projectScores() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS project_scores`, (err, data)=>{
+        pool.query(`DROP TABLE IF EXISTS project_scores`, (err, data)=>{
             if (err){
                 console.log('Drop Project Scores Table failed');
             }
