@@ -107,7 +107,6 @@ app.post('/login', async (req, res) => {
       res.status(404).send({ 'message': 'User not found'})
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
       const user = response.rows[0];
-      console.log(process.env.JWT_SECRET)
       const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '2h' })
       res.status(200).json({ token, user: { email: user.email } });
     } else {
