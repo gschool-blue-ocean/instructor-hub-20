@@ -1,7 +1,7 @@
-const { Pool } = require('pg');
+import pg from "pg";
 
 
-const pool = new Pool({
+const pool = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -21,6 +21,9 @@ const users = async function() {
             password TEXT,
             email TEXT,
             admin BOOLEAN)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Users Table successful');
             })
         });
@@ -43,6 +46,9 @@ const cohorts = async function() {
             start TEXT,
             graduation TEXT,
             instructor TEXT)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Cohorts Table successful');
             })
         });
@@ -65,6 +71,9 @@ const students = async function() {
             email TEXT,
             github TEXT,
             cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Students Table successful');
             })
         })
@@ -85,6 +94,9 @@ const assessments = async function() {
             id serial PRIMARY KEY,
             assess_name TEXT,
             type TEXT)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Assessments Table successful');
             })
         });
@@ -105,6 +117,9 @@ const projects = async function() {
             id serial PRIMARY KEY,
             project_name TEXT,
             type TEXT)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Projects Table successful');
             })
         });
@@ -130,6 +145,9 @@ const groups = async function() {
             student4 TEXT,
             student5 TEXT,
             student6 TEXT)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Groups Table successful');
             })
         });
@@ -152,6 +170,9 @@ const assessScores = async function() {
             assess_id INTEGER REFERENCES assessments(id) ON DELETE CASCADE,
             grade INTEGER,
             cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Assessment Scores Table successful');
             })
         });
@@ -174,6 +195,9 @@ const projectScores = async function() {
             project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
             grade INTEGER,
             cohort_id INTEGER REFERENCES cohorts(id) ON DELETE CASCADE)`, (err, data)=>{
+                if (err) {
+                    console.log(err);
+                }
                 console.log('Create Project Scores Table successful');
             })
         });

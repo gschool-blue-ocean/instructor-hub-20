@@ -1,9 +1,11 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+// import * as dotenv from "dotenv";
+// dotenv.config();
 import express from "express";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import pg from "pg";
 import jwt from "jsonwebtoken";
+
+const PORT = process.env.PORT;
 
 const salt = bcrypt.genSaltSync(10)
 const hash = bcrypt.hashSync('B4c0/\/',salt)
@@ -11,6 +13,9 @@ const hash = bcrypt.hashSync('B4c0/\/',salt)
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const app = express();
@@ -897,6 +902,11 @@ app.get("/student_project_scores/:cohort_id", async (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
 
 export default app;

@@ -4,7 +4,7 @@ const CohortContext = createContext();
 
 export const CohortProvider = ({ children }) => {
   const [cohort, setCohort] = useState('19');
-  const [bodyDisplay, setBodyDisplay] = useState('');
+  const [bodyDisplay, setBodyDisplay] = useState('body');
 
   return (
     <CohortContext.Provider

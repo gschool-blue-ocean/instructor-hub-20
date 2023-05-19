@@ -19,44 +19,59 @@ const StudentTable = ({ stud, onAdd }) => {
   return (
     <div className='student-table'>
       <table>
-        <tr className='student-table-header'>
-          <th>Name</th>
-          <th>Email</th>
-          <th>GitHub</th>
-          <th>Graduation Date</th>
-          <th>Cohort</th>
-        </tr>
-        {stud.map((val, key) => {
-          return (
-            <>
-              <tr
-                className='table-row'
-                key={`Student${key}`}
-                onClick={() =>
-                  (document.getElementById(`Student${key}`).style.display =
-                    'flex')
-                }
-              >
-                <td>{val.stu_name}</td>
-                <td>{val.email}</td>
-                <td>{val.github}</td>
-                <td>{val.graduation}</td>
-                <td>{val.cohort_number}</td>
-              </tr>
-              <button
-                className='delete-student'
-                onClick={() => handleDelete(val.id, val.stu_name)}
-              >
-                Delete
-              </button>
-              <UpdateStudent
-                keyID={`Student${key}`}
-                stud={val}
-                onAdd={onAdd}
-              />
-            </>
-          );
-        })}
+        <thead>
+          <tr className='student-table-header'>
+            <th key='nameHead'>Name</th>
+            <th key='emailHead'>Email</th>
+            <th key='githubHead'>GitHub</th>
+            <th key='gradHead'>Graduation Date</th>
+            <th key='cohortHead'>Cohort</th>
+            <th key='optionsHead'>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stud.map((val, key) => {
+            return (
+              <>
+                <tr
+                  className='table-row'
+                  key={`Student${key}`}
+                >
+                  <td key={`Stu_Name${key}`}>{val.stu_name}</td>
+                  <td key={`Email${key}`}>{val.email}</td>
+                  <td key={`Github${key}`}>{val.github}</td>
+                  <td key={`Grad${key}`}>{val.graduation}</td>
+                  <td key={`Cohort${key}`}>{val.cohort_number}</td>
+                  <td key={`Buttons${key}`}>
+                    <button
+                      key={`update${key}`}
+                      className='update-student'
+                      onClick={() =>
+                        (document.getElementById(`Student${key}`).style.display =
+                          'flex')
+                      }
+                    >
+                      Update
+                    </button>
+                    <button
+                      key={`delete${key}`}
+                      className='delete-student'
+                      onClick={() => handleDelete(val.id, val.stu_name)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+
+                <UpdateStudent
+                  keyID={`Students${key}`}
+                  stud={val}
+                  onAdd={onAdd}
+                />
+              </>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
