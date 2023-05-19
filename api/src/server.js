@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 import pg from "pg";
 import jwt from "jsonwebtoken";
 
@@ -124,8 +124,9 @@ app.post("/login", async (req, res) => {
     if (!response.rows[0]) {
       res.status(404).send({ message: "User not found" });
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
-      const token = jwt.sign({ email: response.rows[0].email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' })
-      res.status(200).send({ token });
+      const token = jwt.sign({ email: response.rows[0].email }, process.env.JWT_SECRET, { expiresIn: '2h' })
+      console.log(token);
+      res.status(200).send({ token, user: { email: response.rows[0].email } });
     } else {
       res.status(409).send({ message: "Incorrect Password" });
     }
