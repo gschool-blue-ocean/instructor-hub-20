@@ -208,11 +208,26 @@ async function projectScores() {
 };
         
 
-cohorts()
-.then(()=> users()
-.then(()=> groups()
-.then(()=> students()
-.then(()=> projects()
-.then(()=> assessments()
-.then(()=> projectScores()
-.then(()=> assessScores())))))));
+async function fullMigration() {
+    const cohort = await cohorts();
+    const user = await users();
+    const student = await students();
+    const group = await groups();
+    const assessment = await assessments();
+    const project = await projects();
+    const projScore = await projectScores();
+    const assessScore = await assessScores();
+}
+
+fullMigration();
+
+
+
+// cohorts()
+// .then(()=> users()
+// .then(()=> groups()
+// .then(()=> students()
+// .then(()=> projects()
+// .then(()=> assessments()
+// .then(()=> projectScores()
+// .then(()=> assessScores())))))));
