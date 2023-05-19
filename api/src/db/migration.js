@@ -11,7 +11,7 @@ const pool = new pg.Pool({
 
 const users = async function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS users CASCADE`, (err, data)=>{
+        await pool.query(`DROP TABLE IF EXISTS users`, (err, data)=>{
             if (err){
                 console.log('Drop Users Table failed')
             }
@@ -36,7 +36,7 @@ const users = async function() {
 
 const cohorts = async function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS cohorts CASCADE`, (err, data)=>{
+        await pool.query(`DROP TABLE IF EXISTS cohorts`, (err, data)=>{
             if (err){
                 console.log('Drop Cohorts Table failed')
             }
@@ -61,7 +61,7 @@ const cohorts = async function() {
 
 const students = async function() {
     try {
-        await pool.query(`DROP TABLE IF EXISTS students CASCADE`, (err, data)=>{
+        await pool.query(`DROP TABLE IF EXISTS students`, (err, data)=>{
             if (err){
                 console.log('Drop Students Table failed');
             }
@@ -214,5 +214,5 @@ cohorts()
 .then(()=> students()
 .then(()=> projects()
 .then(()=> assessments()
-.then(()=> assessScores()
-.then(()=> projectScores())))))));
+.then(()=> projectScores()
+.then(()=> assessScores())))))));
