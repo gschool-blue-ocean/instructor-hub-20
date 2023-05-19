@@ -28,6 +28,12 @@ h1 {
   text-align: center;
   background-color: rgba(0, 110, 255, 0.2);
   filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0));
+  /* max-height: 8px; */
+}
+
+td {
+  padding: 10px;
+  /* border: 1px solid red; */
 }
 
 .table-row:hover {
@@ -37,8 +43,8 @@ h1 {
 
 .table-data,
 .student-table-header {
-  font-size: 1vw;
-  padding: 5px 2vw;
+  font-size: 1.3vw;
+  /* padding: 5px 2vw; */
   transition: all 1s ease;
 }
 
