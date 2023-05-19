@@ -15,8 +15,8 @@ export function ProjectDropDown({projects}) {
             value={student_project_scores.id}
           >
             {student_project_scores.group_name}
-            {student_project_scores.student_name} |{" "}
-            {student_project_scores.project_name} |{" "}
+            {student_project_scores.student_name} 
+            {student_project_scores.project_name} 
             {student_project_scores.project_score}
           </option>
         ))}
@@ -58,7 +58,7 @@ export function ProjectDropDown({projects}) {
         <select onChange={changeCohort}>
           {cohorts.map(cohort => (
             <option key={cohort.id} value={JSON.stringify(cohort)}>
-              {cohort.cohort_number}: {cohort.start} - {cohort.graduation} | {cohort.instructor}
+             MCSP {cohort.cohort_number}: {cohort.start} - {cohort.graduation} | {cohort.instructor}
             </option>
           ))}
         </select>

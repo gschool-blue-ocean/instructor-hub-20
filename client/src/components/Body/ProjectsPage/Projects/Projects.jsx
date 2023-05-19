@@ -28,9 +28,9 @@ const Projects = () => {
       }
   };
 
-  useEffect(() => {
-    console.log("Projects:", projects);
-  }, [projects])
+  // useEffect(() => {
+  //   console.log("Projects:", projects);
+  // }, [projects])
 
 
   return (
