@@ -10,10 +10,10 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "start": "node src/serverDeployed.js",
     "test": "echo 'add tests'",
-    "migrate": "node migration.js",
-    "seed": "node seeds.js"
+    "migrate": "node src/db/migration.js",
+    "seed": "node src/db/seed.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.12",

@@ -8,8 +8,11 @@ import { useSignOut } from 'react-auth-kit'
 
 const NavBar = ({ logout }) => {
   const { setBodyDisplay } = useContext(CohortContext);
+  const signOut = useSignOut();
+  
   const handleLogout= () => {
-    logout()
+    signOut();
+    logout();
   }
 
   return (

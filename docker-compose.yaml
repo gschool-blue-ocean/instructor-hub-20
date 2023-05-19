@@ -5,7 +5,7 @@ services:
     # Load all env vars from .env into the container's environment.
     env_file: .env
     ports:
-      - 6432:5432
+      - 5433:5432
     volumes:
       - pg-data:/var/lib/postgresql/data
       - ./api/src/db/migration.sql:/docker-entrypoint-initdb.d/migration.sql
@@ -59,3 +59,5 @@ services:
     - ./tests/src:/code/src
 volumes:
   pg-data:
+
+

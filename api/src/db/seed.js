@@ -1,7 +1,7 @@
-const { Pool } = require('pg');
+import pg from "pg";
 
 
-const pool = new Pool({
+const pool = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -14,6 +14,9 @@ const cohortData = async function() {
         await pool.query(`INSERT INTO cohorts (cohort_number, start, graduation, instructor) VALUES 
         (19, '01/17/2023', '05/26/2023', 'Phil Witkin'),
         (20, '03/27/2023', '07/21/2023', 'Danny Andrews')`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Cohorts Table successfully seeded.')
         });
     } catch (error) {
@@ -38,6 +41,9 @@ const studentData = async function() {
         ('Scott Bogan', 'boganator@gmail.com', 'https://github.com/Gus36', 2),
         ('Shelia Barrows', 'sbarrows1972@gmail.com', 'https://github.com/Alyson37', 2),
         ('Shane Metz', 'Smetzyboi88@yahoo.com', 'https://github.com/Rocio55', 2)`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Students Table successfully seeded.')
         });
     } catch (error) {
@@ -60,6 +66,9 @@ const assessData = async function() {
         ('Arrays', 'Checkpoint'),
         ('Objects', 'Checkpoint'),
         ('React Assessment', 'Assessment')`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Assessments Table successfully seeded.')
         });
     } catch (error) {
@@ -81,6 +90,9 @@ const projectData = async function() {
         ('Front End Capstone', 'Group'),
         ('System Design Capstone', 'Group'),
         ('Blue Ocean', 'Group')`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Projects Table successfully seeded.')
         });
     } catch (error) {
@@ -95,6 +107,9 @@ const groupData = async function() {
         await pool.query(`INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES 
         ('Yoshi''s Angels', 'David Ortiz', 'Billy Tomasello', 'Jesthen Baez', 'Shuyi Hoo', 'Shawn Couch', 'Tomas Corradini'),
         ('The 20-Somethings', 'Salvatore Paucek', 'Clyde Welch', 'Sonya Hermann', 'Scott Bogan', null, null)`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Groups Table successfully seeded.')
         });
     } catch (error) {
@@ -113,6 +128,9 @@ const assessScoreData = async function() {
         (7, 4, 90, 2),
         (8, 5, 90, 2),
         (9, 6, 90, 2)`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Assessment Scores Table successfully seeded.')
         });
     } catch (error) {
@@ -126,7 +144,14 @@ const projectScoreData = async function() {
     try {
         await pool.query(`INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES 
         (1, 9, 100, 1),
+        (1, 8, 95, 1),
+        (1, 7, 95, 1),
+        (2, 8, 95, 2),
+        (2, 9, 90, 2),
         (2, 7, 90, 2)`, (err, data)=>{
+            if (err) {
+                console.log(err);
+            }
             console.log('Project Scores Table successfully seeded.')
         });
     } catch (error) {
@@ -138,4 +163,4 @@ const projectScoreData = async function() {
 
 
 cohortData().then(()=> studentData().then(()=> assessData().then(()=> projectData().then(
-    ()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData().then(()=> pool.end())))))));
+    ()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData()))))));
