@@ -25,7 +25,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       let login = {};
       login.email = email.value;
       login.password = password.value;
-      console.log(login);
+      // console.log(login);
       const response = await fetch('http://localhost:8000/login', {
         method: 'POST',
         credentials: 'same-origin',
@@ -34,7 +34,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       });
       const loggedIn = response.json();
       //   console.log(loggedIn);
-      //   console.log(loggedIn);
+      console.log(response.token)
       signIn({
         token: response.token,
         expiresIn: 7200,

@@ -126,6 +126,10 @@ const projectScoreData = async function() {
     try {
         await pool.query(`INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES 
         (1, 9, 100, 1),
+        (1, 8, 95, 1),
+        (1, 7, 95, 1),
+        (2, 8, 95, 2),
+        (2, 9, 90, 2)
         (2, 7, 90, 2)`, (err, data)=>{
             console.log('Project Scores Table successfully seeded.')
         });

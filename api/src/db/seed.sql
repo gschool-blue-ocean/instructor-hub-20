@@ -53,4 +53,8 @@ INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES (
 
 
 INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (1, 9, 100, 1);
+INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (1, 8, 95, 1);
+INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (1, 7, 95, 1);
+INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (2, 8, 95, 2);
+INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (2, 9, 90, 2);
 INSERT INTO project_scores (group_id, project_id, grade, cohort_id) VALUES (2, 7, 90, 2);

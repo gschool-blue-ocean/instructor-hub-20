@@ -13,6 +13,7 @@ const NewCohort = ({ showCohort, onClose }) => {
     }
 
     function handleCancel() {
+      setInputError('');
       onClose(false);
     }
 
@@ -22,7 +23,6 @@ const NewCohort = ({ showCohort, onClose }) => {
       let grad = document.getElementById('gradDate');
       let instructor = document.getElementById('instructor');
       if (!cohortNum.value || !start.value || !grad.value || !instructor.value) {
-        // setInputError('All fields must contain information!');
         return;
       }
       let cohortVals = {};
