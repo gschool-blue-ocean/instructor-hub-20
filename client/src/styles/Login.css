@@ -1,67 +1,44 @@
-/* parent container */
-
-.login-container {
-  /* border: solid 0.5px red; */
-  box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.05), 0 1px 6px 0 rgba(0, 0, 0, 0.2);
-  box-sizing: content-box;
-  color: rgb(41, 43, 44);
+#login-root {
   display: flex;
-  flex-basis: 50%;
-  flex-direction: column;
-  flex-grow: 5;
-  flex-shrink: 0;
-  height: 520.375px;
-  line-height: 24px;
-  margin: 16px 50px 16px 650px;
-  margin-top: 140px;
-  max-width: 495px;
-  min-height: auto;
-  min-width: 0px;
-  padding: 40px;
-  width: 439px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  height: 100vh;
 }
 
-.login-subcontainer {
-  /* border: solid 0.5px red; */
-  box-sizing: border-box;
+.login-container {
+  box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.05), 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+  color: rgb(41, 43, 44);
   display: flex;
-  flex-basis: 50%;
   flex-direction: column;
-  flex-grow: 5;
+  padding: 50px;
+  min-width: 25vw;
 }
 
 .login-image-container {
-  /* border: solid 0.5px red; */
-  display: block;
-  height: 48.7875px;
-  margin-bottom: 24px;
-  width: 436px;
+  margin: -20px 0 0 0;
 }
 
 .login-image {
-  /* border: solid 0.5px red; */
   max-width: 250px;
-  margin: 0 80px 0 80px;
-  vertical-align: middle;
+  margin: 0 80px;
 }
 
 .login-sign-in-text {
-  /* border: solid 0.5px red; */
   color: #292b2c;
   letter-spacing: 0.3px;
   font-family: sans-serif;
   font-size: 32px;
   font-weight: 300;
   text-align: center;
-  margin: 10px 55px 0px 55px;
-  line-height: 1.14;
+  margin: 10px 55px -30px 55px;
 }
 
 .login-input {
-  border: solid 0.1px gray;
+  all: unset;
+  border: solid 0.1px rgba(0, 0, 0, 0.277);
   border-radius: 4px;
-  background-color: #e8f0fe;
-  color: black;
+  color: #464a4c;
   width: 93%;
   padding: 0.5rem 0.75rem;
   line-height: 1.25;
@@ -69,57 +46,97 @@
   font-size: 16px;
   font-weight: 400;
   margin: 10px 0px 10px 0px;
+  overflow: hidden;
+}
+
+.login-input:focus {
+  border: 0.1px solid #00808c;
 }
 
 .login-button-container {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  overflow: hidden;
 }
 
 .login-button {
-  /* border: solid 0.5px red; */
+  all: unset;
+  text-align: center;
+  box-shadow: none;
   text-transform: uppercase;
   border-radius: 40px;
   background-color: #00808c;
   border-color: #00808c;
-  margin: 10px 0px;
+  margin: 10px 0;
+  font-size: 14px;
+  padding: 9px;
+}
+
+.login-button:hover {
+  background-image: none;
+  box-shadow: none;
+  background-color: #292b2c;
 }
 
 .forgetYourPW {
-  /* border: solid 0.5px red; */
   color: #00808c;
   text-align: center;
   font-family: sans-serif;
   font-size: 16px;
   font-weight: 400;
-  margin: 10px 0px 0px 0px;
 }
 
-.or-sign-in-text {
-  /* border: solid 0.5px red; */
+span.or-sign-in-text {
+  display: flex;
+  align-items: center;
+  flex: 0;
   color: #292b2c;
-  text-align: center;
   font-family: sans-serif;
   font-size: 16px;
   font-weight: 400;
+  margin: 0 0 15px 0;
+}
+span.or-sign-in-text:before,
+span.or-sign-in-text:after {
+  flex: auto;
+  height: 0;
+  margin: 10px 10px;
+  border-top: 2px solid #e6e6e6;
+  content: '';
 }
 
 .login-github-container {
-  /* border: solid 1px red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  padding: 4px 1px 14px 1px;
-  height: 15px;
-  width: 436px;
+  padding: 10px;
   font-family: sans-serif;
   font-size: 12px;
   font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
-  margin: 13px 0px;
+  margin: 13px 1px;
 }
 
 .login-github-link {
   color: #00808c;
   text-decoration-line: none;
+  overflow: hidden;
+}
+
+.error-text {
+  color: var(--galv-orange);
+  margin: 40px 0 0px 0;
+  text-align: center;
+}
+
+/* Register Page Specific  */
+
+#register-root {
+  background-color: #fafafa;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

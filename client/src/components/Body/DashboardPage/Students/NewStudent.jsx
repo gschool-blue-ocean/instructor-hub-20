@@ -27,7 +27,7 @@ const NewStudent = (props) => {
     allValues.stu_name = name.value;
     allValues.email = email.value;
     allValues.gitHub = gitHub.value;
-    allValues.cohort_number = parseInt(cohort);
+    allValues.cohort_number = cohort;
     return allValues;
   }
 

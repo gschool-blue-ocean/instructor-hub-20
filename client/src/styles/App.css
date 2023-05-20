@@ -9,8 +9,9 @@
   --bgcolor4: rgba(1, 50, 147, 0.951);
   --bgcolor5: rgba(0, 30, 90, 0.955);
   --bgcolor6: rgba(0, 30, 90, 0.99);
-  --bgsize: 10px;
+  --bgsize: 5px;
   --tablewidth: 90vw;
+  font-family: sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -25,6 +26,19 @@
     rgba(0, 64, 255, 0.626)
   );
   border-radius: 10px;
+}
+
+#App {
+  background: linear-gradient(135deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color1) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color1) 25%, transparent 25%);
+  background-size: var(--bgsize) var(--bgsize);
+  background-color: var(--color2);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 }
 
 body {
@@ -73,11 +87,11 @@ button:hover {
 } */
 
 .building-block {
-  height: 30vh;
+  /* height: 30vh; */
   /* width: 90vw; */
   border-radius: 10px;
   margin: 20px 25px;
-  padding: 20px;
+  /* padding: 20px; */
   box-shadow: 0 0 10px 1px black, 0 0 1px 0.2px rgba(255, 255, 255, 0.248) inset;
   /* margin: 10px; */
   background: linear-gradient(
@@ -86,6 +100,9 @@ button:hover {
     rgba(1, 50, 147, 0.708) 90%,
     transparent 110%
   );
+  height: auto;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.259);
   /* border: 1px solid rgb(255, 0, 0); */
 }
 
@@ -100,12 +117,18 @@ button:hover {
   display: flex;
   /* z-index: 2; */
   align-items: center;
+  /* border: 2px solid red; */
+}
+
+.project-dropdown {
+  margin: 2vw 0;
 }
 
 .dropdown {
   position: fixed;
   z-index: 2;
   overflow-x: visible;
+  /* border: 2px solid red; */
 }
 
 .dropdown-list {
@@ -157,6 +180,17 @@ button {
   box-shadow: 0 0 5px 1px black;
   border: 0.1px solid rgba(255, 255, 255, 0.3);
   /* transition: all 2s; */
+}
+
+#trashcan-svg {
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  filter: grayscale() brightness(50);
+}
+#trashcan-svg:hover {
+  cursor: pointer;
+  filter: brightness(1);
 }
 
 button:hover {

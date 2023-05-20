@@ -63,7 +63,6 @@ function Dropdown() {
                 {`MCSP - ${item.cohort_number}`}
               </div>
             ))}
-            {/* {console.log(options)} */}
           </div>
         )}
       </div>
