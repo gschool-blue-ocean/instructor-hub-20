@@ -11,14 +11,14 @@ const pool = new pg.Pool({
 
 const clearTables = async () => {
     try {
-        const user = await pool.query('Drop TABLE IF EXISTS users');
-        const cohort = await pool.query('Drop TABLE IF EXISTS cohorts');
-        const student = await pool.query('Drop TABLE IF EXISTS students');
-        const project = await pool.query('Drop TABLE IF EXISTS projects');
-        const assessment = await pool.query('Drop TABLE IF EXISTS assessments');
-        const group = await pool.query('Drop TABLE IF EXISTS groups');
-        const assessScore = await pool.query('Drop TABLE IF EXISTS assessment_scores');
-        const projScore = await pool.query('Drop TABLE IF EXISTS project_scores');
+        const user = await pool.query('Drop TABLE IF EXISTS users CASCADE');
+        const cohort = await pool.query('Drop TABLE IF EXISTS cohorts CASCADE');
+        const student = await pool.query('Drop TABLE IF EXISTS students CASCADE');
+        const project = await pool.query('Drop TABLE IF EXISTS projects CASCADE');
+        const assessment = await pool.query('Drop TABLE IF EXISTS assessments CASCADE');
+        const group = await pool.query('Drop TABLE IF EXISTS groups CASCADE');
+        const assessScore = await pool.query('Drop TABLE IF EXISTS assessment_scores CASCADE');
+        const projScore = await pool.query('Drop TABLE IF EXISTS project_scores CASCADE');
     } catch (error) {
         console.error(error);
         console.log("Drop Tables failed");
