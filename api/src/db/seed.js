@@ -163,9 +163,9 @@ const projectScoreData = async function() {
 
 async function seedData() {
     const cohort = await cohortData();
-    const student = await studentData();
     const assess = await assessData();
     const project = await projectData();
+    const student = await studentData();
     const group = await groupData();
     const assessScore = await assessScoreData();
     const projectScore = await projectScoreData();
