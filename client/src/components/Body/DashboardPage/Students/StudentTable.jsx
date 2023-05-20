@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import UpdateStudent from './UpdateStudent.jsx';
 import '../../../../styles/Students.css';
+import trashcan from '../../../../styles/svgs/trashcan.svg';
 
 const StudentTable = ({ stud, onAdd }) => {
   function handleDelete(num, name) {
@@ -47,19 +48,25 @@ const StudentTable = ({ stud, onAdd }) => {
                       key={`update${key}`}
                       className='update-student'
                       onClick={() =>
-                        (document.getElementById(`Student${key}`).style.display =
-                          'flex')
+                        (document.getElementById(
+                          `Student${key}`
+                        ).style.display = 'flex')
                       }
                     >
                       Update
                     </button>
-                    <button
+                    {/* <button
                       key={`delete${key}`}
                       className='delete-student'
                       onClick={() => handleDelete(val.id, val.stu_name)}
-                    >
-                      Delete
-                    </button>
+                    > */}
+                    <img
+                      id='trashcan-svg'
+                      src={trashcan}
+                      alt='trash can'
+                      onClick={() => handleDelete(val.id, val.stu_name)}
+                    />
+                    {/* </button> */}
                   </td>
                 </tr>
 
