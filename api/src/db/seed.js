@@ -147,7 +147,7 @@ const projectScoreData = async function() {
         (1, 8, 95, 1),
         (1, 7, 95, 1),
         (2, 8, 95, 2),
-        (2, 9, 90, 2)
+        (2, 9, 90, 2),
         (2, 7, 90, 2)`, (err, data)=>{
             if (err) {
                 console.log(err);
@@ -161,6 +161,16 @@ const projectScoreData = async function() {
 };
 
 
+async function seedData() {
+    const cohort = await cohortData();
+    const student = await studentData();
+    const assess = await assessData();
+    const project = await projectData();
+    const group = await groupData();
+    const assessScore = await assessScoreData();
+    const projectScore = await projectScoreData();
+}
 
-cohortData().then(()=> studentData().then(()=> assessData().then(()=> projectData().then(
-    ()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData().then(()=> pool.end())))))));
+seedData();
+
+// cohortData().then(()=> studentData().then(()=> assessData().then(()=> projectData().then(()=> groupData().then(()=> assessScoreData().then(()=> projectScoreData()))))));
