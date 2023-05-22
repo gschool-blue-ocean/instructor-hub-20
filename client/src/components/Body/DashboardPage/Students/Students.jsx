@@ -12,7 +12,7 @@ const Students = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`http://localhost:8000/students/${cohort}`);
+      const response = await fetch(`https://blueocean-instructorhub.onrender.com/students/${cohort}`);
       const studs = await response.json();
       setStudents(studs);
       console.log(studs);

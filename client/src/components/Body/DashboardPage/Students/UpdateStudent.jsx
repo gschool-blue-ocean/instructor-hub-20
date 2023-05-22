@@ -40,7 +40,7 @@ const UpdateStudent = ({stud, keyID, onAdd}) => {
         const updateStud = gatherValues();
         console.log(updateStud);
         console.log(id);
-        fetch(`http://localhost:8000/students/${id}`, 
+        fetch(`https://blueocean-instructorhub.onrender.com/students/${id}`, 
         { 
             method: 'PUT',
             credentials: "same-origin",
