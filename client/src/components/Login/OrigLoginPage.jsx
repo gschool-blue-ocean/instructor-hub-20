@@ -24,7 +24,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       login.email = email.value;
       login.password = password.value;
       // console.log(login);
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("https://blueocean-instructorhub.onrender.com/login", {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },

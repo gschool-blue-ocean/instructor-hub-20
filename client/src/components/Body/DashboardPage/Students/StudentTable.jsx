@@ -7,7 +7,7 @@ const StudentTable = ({ stud, onAdd }) => {
   function handleDelete(num, name) {
     if (confirm(`Are you sure you want to delete ${name}?`)) {
       const studNum = parseInt(num);
-      fetch(`http://localhost:8000/students/${studNum}`, {
+      fetch(`https://blueocean-instructorhub.onrender.com/students/${studNum}`, {
         method: 'DELETE',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },

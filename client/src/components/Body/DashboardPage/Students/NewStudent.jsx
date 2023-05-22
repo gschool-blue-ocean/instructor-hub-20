@@ -38,7 +38,7 @@ const NewStudent = (props) => {
       return;
     }
     console.log(newStudent);
-    fetch('http://localhost:8000/students', {
+    fetch('https://blueocean-instructorhub.onrender.com/students', {
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
