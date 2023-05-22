@@ -49,17 +49,12 @@ const StudentTable = ({ stud, onAdd }) => {
                       className='update-student'
                       onClick={() =>
                         (document.getElementById(
-                          `Student${key}`
+                          `Students${key}`
                         ).style.display = 'flex')
                       }
                     >
                       Update
                     </button>
-                    {/* <button
-                      key={`delete${key}`}
-                      className='delete-student'
-                      onClick={() => handleDelete(val.id, val.stu_name)}
-                    > */}
                     <img
                       id='trashcan-svg'
                       src={trashcan}
