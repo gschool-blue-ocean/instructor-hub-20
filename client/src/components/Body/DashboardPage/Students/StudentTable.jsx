@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import UpdateStudent from './UpdateStudent.jsx';
 import '../../../../styles/Students.css';
+import trashcan from '../../../../styles/svgs/trashcan.svg';
 
 const StudentTable = ({ stud, onAdd }) => {
   function handleDelete(num, name) {
     if (confirm(`Are you sure you want to delete ${name}?`)) {
       const studNum = parseInt(num);
-      fetch(`http://localhost:8000/students/${studNum}`, {
+      fetch(`https://blueocean-instructorhub.onrender.com/students/${studNum}`, {
         method: 'DELETE',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
@@ -47,19 +48,25 @@ const StudentTable = ({ stud, onAdd }) => {
                       key={`update${key}`}
                       className='update-student'
                       onClick={() =>
-                        (document.getElementById(`Student${key}`).style.display =
-                          'flex')
+                        (document.getElementById(
+                          `Student${key}`
+                        ).style.display = 'flex')
                       }
                     >
                       Update
                     </button>
-                    <button
+                    {/* <button
                       key={`delete${key}`}
                       className='delete-student'
                       onClick={() => handleDelete(val.id, val.stu_name)}
-                    >
-                      Delete
-                    </button>
+                    > */}
+                    <img
+                      id='trashcan-svg'
+                      src={trashcan}
+                      alt='trash can'
+                      onClick={() => handleDelete(val.id, val.stu_name)}
+                    />
+                    {/* </button> */}
                   </td>
                 </tr>
 

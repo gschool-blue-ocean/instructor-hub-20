@@ -9,7 +9,7 @@ function Dropdown() {
 
   useEffect(() => {
     // Make your API call here and update the options state when it's done
-    fetch('http://localhost:8000/cohorts')
+    fetch('https://blueocean-instructorhub.onrender.com/cohorts')
       .then((response) => response.json())
       .then((data) => setCohorts(data))
       .catch((error) => console.log(error));
@@ -63,7 +63,6 @@ function Dropdown() {
                 {`MCSP - ${item.cohort_number}`}
               </div>
             ))}
-            {/* {console.log(options)} */}
           </div>
         )}
       </div>
