@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 const PORT = process.env.PORT;
 
 const salt = bcrypt.genSaltSync(10)
-const hash = bcrypt.hashSync('B4c0/\/',salt)
+// const hash = bcrypt.hashSync('B4c0/\/',salt)
 
 
 const pool = new pg.Pool({
@@ -130,7 +130,7 @@ app.post("/login", async (req, res) => {
       res.status(404).send({ message: "User not found" });
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
       const token = jwt.sign({ email: response.rows[0].email }, process.env.JWT_SECRET, { expiresIn: '2h' })
-      console.log(token);
+      // console.log(token);
       res.status(200).send({ token, user: { email: response.rows[0].email } });
     } else {
       res.status(409).send({ message: "Incorrect Password" });
@@ -895,9 +895,6 @@ app.get("/student_project_scores/:cohort_id", async (req, res) => {
   }
 });
 
-// app.listen(port, () => {
-//   console.log(`Server is running at http://localhost:${port}`);
-// });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
