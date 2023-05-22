@@ -43,7 +43,7 @@ const NewCohort = ({ showCohort, onClose }) => {
         return;
       }
       console.log(newCohort);
-      fetch('http://localhost:8000/cohorts', {
+      fetch('https://blueocean-instructorhub.onrender.com/cohorts', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
