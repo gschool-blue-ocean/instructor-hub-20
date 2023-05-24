@@ -2,16 +2,20 @@ import React, { useContext, useState } from 'react';
 import UpdateStudent from './UpdateStudent.jsx';
 import '../../../../styles/Students.css';
 import trashcan from '../../../../styles/svgs/trashcan.svg';
+import editpencil from '../../../../styles/svgs/editpencil.svg';
 
 const StudentTable = ({ stud, onAdd }) => {
   function handleDelete(num, name) {
     if (confirm(`Are you sure you want to delete ${name}?`)) {
       const studNum = parseInt(num);
-      fetch(`https://blueocean-instructorhub.onrender.com/students/${studNum}`, {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-      })
+      fetch(
+        `https://blueocean-instructorhub.onrender.com/students/${studNum}`,
+        {
+          method: 'DELETE',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
         .then((response) => response.json())
         .then(onAdd());
     }
@@ -44,29 +48,24 @@ const StudentTable = ({ stud, onAdd }) => {
                   <td key={`Grad${key}`}>{val.graduation}</td>
                   <td key={`Cohort${key}`}>{val.cohort_number}</td>
                   <td key={`Buttons${key}`}>
-                    <button
-                      key={`update${key}`}
-                      className='update-student'
+                    <img
+                      key={`update-btn${key}`}
+                      id='trashcan-svg'
+                      src={editpencil}
+                      alt='edit pencil'
                       onClick={() =>
                         (document.getElementById(
                           `Student${key}`
                         ).style.display = 'flex')
                       }
-                    >
-                      Update
-                    </button>
-                    {/* <button
-                      key={`delete${key}`}
-                      className='delete-student'
-                      onClick={() => handleDelete(val.id, val.stu_name)}
-                    > */}
+                    />
                     <img
+                      key={`delete-btn${key}`}
                       id='trashcan-svg'
                       src={trashcan}
                       alt='trash can'
                       onClick={() => handleDelete(val.id, val.stu_name)}
                     />
-                    {/* </button> */}
                   </td>
                 </tr>
 

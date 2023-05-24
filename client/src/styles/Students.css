@@ -81,7 +81,12 @@ table {
 }
 
 .student-modal-form {
-  width: 25vw;
+  /* border: 1px solid red; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: 33vw;
+  /* height: auto; */
+  /* overflow: auto; */
   background-color: rgba(0, 63, 131, 0.5);
 
   border-radius: 5px;
@@ -92,7 +97,7 @@ table {
 
 .student-modal-form:hover {
   filter: drop-shadow(0px 20px 5px rgba(0, 0, 0, 0.5));
-  scale: 1.01 1.01 1.1;
+  /* scale: 1.01 1.01 1.1; */
 }
 
 .student-modal-header,
@@ -106,7 +111,8 @@ table {
 }
 
 .student-modal-body {
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;

@@ -115,7 +115,7 @@ button:hover {
 
 .dropdown-container {
   display: flex;
-  /* z-index: 2; */
+  /* z-index: 999; */
   align-items: center;
   /* border: 2px solid red; */
 }
@@ -126,13 +126,16 @@ button:hover {
 
 .dropdown {
   position: fixed;
-  z-index: 2;
+  z-index: 10;
   overflow-x: visible;
+  height: fit-content;
   /* border: 2px solid red; */
 }
 
 .dropdown-list {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 100%;
   left: 0;
   right: 0;
@@ -155,7 +158,7 @@ button:hover {
     rgba(255, 102, 0, 0.204),
     rgba(0, 76, 183, 0.21)
   );
-  z-index: 9;
+  /* z-index: 15; */
   backdrop-filter: blur(3px);
   box-shadow: 0 0 15px 1px black;
   border: 0.1px solid rgba(255, 255, 255, 0.3);
@@ -175,7 +178,7 @@ button {
     rgba(255, 102, 0, 0.204),
     rgba(0, 76, 183, 0.21)
   );
-  z-index: 1;
+  /* z-index: 1; */
   backdrop-filter: blur(3px);
   box-shadow: 0 0 5px 1px black;
   border: 0.1px solid rgba(255, 255, 255, 0.3);
@@ -184,7 +187,7 @@ button {
 
 #trashcan-svg {
   height: 20px;
-  margin: 0;
+  margin: 0 5px;
   padding: 0;
   filter: grayscale() brightness(50);
 }
