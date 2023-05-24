@@ -10,6 +10,10 @@ const NewStudent = (props) => {
     return null;
   }
 
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
   function handleCancel() {
     setInputError('');
     props.onClose();
@@ -19,8 +23,12 @@ const NewStudent = (props) => {
     let name = document.getElementById('studentName');
     let email = document.getElementById('email');
     let gitHub = document.getElementById('gitHub');
+    const testedEmail = isValidEmail(email.value);
     if (!name.value || !email.value || !gitHub.value) {
-      // alert('All fields must contain information!');
+      setInputError('Please fill out all fields!');
+      return;
+    } else if (!testedEmail) {
+      setInputError('Invalid Email');
       return;
     }
     let allValues = {};
@@ -34,9 +42,8 @@ const NewStudent = (props) => {
   function handleClick() {
     const newStudent = gatherValues();
     if (!newStudent) {
-      setInputError('Please fill out all fields!');
       return;
-    }
+    } 
     console.log(newStudent);
     fetch('https://blueocean-instructorhub.onrender.com/students', {
       method: 'POST',
