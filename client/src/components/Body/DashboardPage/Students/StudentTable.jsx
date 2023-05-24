@@ -55,7 +55,7 @@ const StudentTable = ({ stud, onAdd }) => {
                       alt='edit pencil'
                       onClick={() =>
                         (document.getElementById(
-                          `Student${key}`
+                          `Students${key}`
                         ).style.display = 'flex')
                       }
                     />
