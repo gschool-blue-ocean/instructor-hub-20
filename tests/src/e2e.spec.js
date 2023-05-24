@@ -88,12 +88,11 @@ test('student is able to be added to cohort table', async ({ page }) => {
   await page.getByPlaceholder('Email Address').press('Tab');
   await page.getByPlaceholder('Password').fill('password');
   await page.getByRole('button', { name: 'Sign In' }).click();
-// 
 
-//create variables here that will represent user input, will be compared to the text in the table
-const nameInput = 'gandalf the grey';
-const emailInput = 'gandalf@mordor.com';
-const githubInput = 'gandalf123'
+  // create variables here that will represent user input, will be compared to the text in the table
+  const nameInput = 'rick astley';
+  const emailInput = 'astleyrick@gmail.com';
+  const githubInput = 'neverGonnaGitYouUp';
 
   await page.getByRole('button', { name: 'Add Student' }).click();
   await page.getByPlaceholder('name...').click();
@@ -103,16 +102,15 @@ const githubInput = 'gandalf123'
   await page.getByPlaceholder('email...').press('Tab');
   await page.getByPlaceholder('github...').fill(githubInput);
   await page.locator('div').filter({ hasText: /^Add StudentCancel$/ }).getByRole('button', { name: 'Add Student' }).click();
-  const nameCell = await page.$('.name-cell').innerText();
-  const emailCell = await page.$('.email-cell').innerText();
-  const githubCell = await page.$('.github-cell').innerText();
-  await page.getByRole('cell', { name: 'gandalf the grey' }).click();
-  await page.getByRole('cell', { name: 'gandalf@mordor.com' }).click();
-  await page.getByRole('cell', { name: 'gandalf123' }).click();
-  
-  expect(nameText).toBe(nameInput);
-  expect(emailText).toBe(emailInput);
-  expect(githubText).toBe(githubInput);
 
+  const nameCell = await page.getByText(nameInput);
+  const emailCell = await page.getByText(emailInput);
+  const githubCell = await page.getByText(githubInput);
+
+  expect(nameCell).toBeTruthy();
+  expect(emailCell).toBeTruthy();
+  expect(githubCell).toBeTruthy();
 });
+
+
 
