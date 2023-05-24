@@ -113,4 +113,29 @@ test('student is able to be added to cohort table', async ({ page }) => {
 });
 
 
+test('projects button', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.getByPlaceholder('Email Address').click();
+  await page.getByPlaceholder('Email Address').fill('ortiz123@example.com');
+  await page.getByPlaceholder('Email Address').press('Tab');
+  await page.getByPlaceholder('Password').fill('password');
+  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.getByRole('button', { name: 'Projects' }).click();
+  await page.getByText('MCSP-19 · ProjectsSelect a ProjectGroup nameStudentsProjectScoreYoshi\'s AngelsDa').click();
+});
 
+
+test('dashboard button goes back to dashboard', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.getByPlaceholder('Email Address').click();
+  await page.getByPlaceholder('Email Address').fill('ortiz123@example.com');
+  await page.getByPlaceholder('Email Address').press('Tab');
+  await page.getByPlaceholder('Password').fill('password');
+  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.getByRole('button', { name: 'Projects' }).click();
+  await page.getByRole('button', { name: 'Selected Cohort: 19' }).click();
+  await page.getByText('MCSP - 19').click();
+  await page.getByRole('button', { name: 'Dashboard' }).click();
+ const dashboard =  await page.isVisible('heading', { name: 'MCSP-19 · Students' })
+expect(dashboard).toBe(true)
+});
