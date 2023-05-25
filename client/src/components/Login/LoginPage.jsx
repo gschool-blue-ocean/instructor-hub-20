@@ -32,22 +32,22 @@ const LoginPage = ({ showReg, userAuth }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(login),
       });
-      const loggedIn = response.json();
-      //   console.log(loggedIn);
-      console.log(response.token)
-      signIn({
-        token: response.token,
-        expiresIn: 7200,
-        tokenType: 'Bearer',
-        authState: { email: login.email },
-      });
+      const loggedIn = await response.json();
+      // console.log(loggedIn);
+      // console.log(response);
       if (response.status === 404) {
         setErrorLogin('User email not found.');
         return;
       } else if (response.status === 409) {
         setErrorLogin('Incorrect password, please try again.');
         return;
-      } else if (response.status === 200) {
+      } else if (response.status === 200 && loggedIn.token) {
+        signIn({
+          token: loggedIn.token,
+          expiresIn: 7200,
+          tokenType: 'Bearer',
+          authState: { email: loggedIn.user.email },
+        });
         setErrorLogin('Login successful!');
         userAuth(true);
       }
