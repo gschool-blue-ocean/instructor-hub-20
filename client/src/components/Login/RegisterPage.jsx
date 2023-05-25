@@ -36,7 +36,7 @@ const RegisterPage = ({ showReg }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registerVals),
       });
-      const register = response.json();
+      const register = await response.json();
       // console.log(register);
       if (response.status === 409) {
         setErrorText('Email already exists.');
