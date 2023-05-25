@@ -41,10 +41,18 @@ The app can be started with two steps:
 - [`prettier`](https://prettier.io/) - Code formatter/checker.
 - [`react-testing-library`](https://testing-library.com/docs/react-testing-library/api/) - React component test helper.
 - [`msw`](https://testing-library.com/docs/react-testing-library/api/) - Request mocking library for writing frontend tests.
+- ['react-auth-kit] (https://authkit.arkadip.dev/) - Authentication kit used for react project to grant cookies for remembering users
 - [`supertest`](https://github.com/ladjs/supertest) - HTTP request simulator for backend testing.
 - [`docker`](https://www.docker.com/) - Containerization framework for dev and deployment.
+- ['playwright'] (https://www.npmjs.com/package/playwright-testing-library) - used for scripting UI interactivity tests and the resulting changes to the site
 
 ## Useful Docker Commands
 
 - `docker exec <container_name_or_id> <command>` - Runs command in the context of a container.
 - `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker.
+
+## Points of improvement for the next group to inherit this project
+
+- playwright tests that involve adding new information to the app thru the website, this info is retained even after deleting volumes
+-  selecting individual assessments for the individual students, the list of members is based on their unique student_id, not their names
+
