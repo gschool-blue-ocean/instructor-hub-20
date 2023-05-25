@@ -33,7 +33,7 @@ const LoginPage = ({ showReg, userAuth }) => {
         body: JSON.stringify(login),
       });
       const loggedIn = await response.json();
-      console.log(loggedIn);
+      // console.log(loggedIn);
       // console.log(response);
       if (response.status === 404) {
         setErrorLogin('User email not found.');
