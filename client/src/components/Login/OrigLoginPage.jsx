@@ -24,12 +24,15 @@ const LoginPage = ({ showReg, userAuth }) => {
       login.email = email.value;
       login.password = password.value;
       // console.log(login);
-      const response = await fetch("https://blueocean-instructorhub.onrender.com/login", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(login),
-      });
+      const response = await fetch(
+        "https://blueocean-instructorhub.onrender.com/login",
+        {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(login),
+        }
+      );
       const loggedIn = response.json();
       // console.log(response);
       if (response.status === 404) {

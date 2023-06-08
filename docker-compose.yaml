@@ -50,14 +50,12 @@ services:
       PORT: ${TESTING_PORT}
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
-    - database
-    - api
-    - app
+      - database
+      - api
+      - app
     ports:
-    - ${TESTING_PORT}:${TESTING_PORT}
-    volumes: 
-    - ./tests/src:/code/src
+      - ${TESTING_PORT}:${TESTING_PORT}
+    volumes:
+      - ./tests/src:/code/src
 volumes:
   pg-data:
-
-

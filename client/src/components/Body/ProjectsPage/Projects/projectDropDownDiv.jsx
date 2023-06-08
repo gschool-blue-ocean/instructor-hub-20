@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import CohortContext from '../../../Context/CohortContext';
+import React, { useState, useEffect, useContext, useRef } from "react";
+import CohortContext from "../../../Context/CohortContext";
 
 export function ProjectDropDown({ projects }) {
   const { cohort } = useContext(CohortContext);
@@ -9,11 +9,11 @@ export function ProjectDropDown({ projects }) {
 
   useEffect(() => {
     // Add event listener to the document object
-    document.addEventListener('click', handleDocumentClick);
+    document.addEventListener("click", handleDocumentClick);
 
     return () => {
       // Remove event listener when component unmounts
-      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener("click", handleDocumentClick);
     };
   }, []);
 
@@ -40,24 +40,15 @@ export function ProjectDropDown({ projects }) {
 
   return (
     <>
-      <div
-        className='dropdown-container project-dropdown'
-        ref={PdropdownRef}
-      >
-        <div className='dropdown'>
-          <button
-            className='dropdown-header'
-            onClick={toggleDropdown}
-          >
+      <div className="dropdown-container project-dropdown" ref={PdropdownRef}>
+        <div className="dropdown">
+          <button className="dropdown-header" onClick={toggleDropdown}>
             {selectedProject || `Select a Project`}
           </button>
           {isOpen && (
-            <div className='dropdown-list'>
+            <div className="dropdown-list">
               {projects.map((item, key) => (
-                <div
-                  key={key}
-                  onClick={() => handleItemClick(item)}
-                >
+                <div key={key} onClick={() => handleItemClick(item)}>
                   {`${item.project_name}`}
                 </div>
               ))}

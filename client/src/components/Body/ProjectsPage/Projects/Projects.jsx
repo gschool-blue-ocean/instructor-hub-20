@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import CohortContext from '../../../Context/CohortContext';
-import '../../../../styles/Projects.css';
-import { ProjectDropDown } from './projectDropDownDiv.jsx';
-import './dropDown.css';
-import ProjectsTable from './projectsTable.jsx';
+import React, { useState, useEffect, useContext } from "react";
+import CohortContext from "../../../Context/CohortContext";
+import "../../../../styles/Projects.css";
+import { ProjectDropDown } from "./projectDropDownDiv.jsx";
+import "./dropDown.css";
+import ProjectsTable from "./projectsTable.jsx";
 
 const Projects = () => {
   const { cohort } = useContext(CohortContext);
@@ -15,7 +15,9 @@ const Projects = () => {
 
   const fetchProjects = () => {
     if (cohort) {
-      fetch(`https://blueocean-instructorhub.onrender.com/student_project_scores/${cohort}`)
+      fetch(
+        `https://blueocean-instructorhub.onrender.com/student_project_scores/${cohort}`
+      )
         .then((response) => response.json())
         .then((data) => setProjects(data))
         .catch((err) => console.error(err));
@@ -24,7 +26,7 @@ const Projects = () => {
 
   return (
     <div>
-      <div className='building-block'>
+      <div className="building-block">
         <h1>{`MCSP-${cohort} · Projects`}</h1>
         <ProjectDropDown projects={projects} />
         <ProjectsTable projects={projects} />

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import CohortContext from '../../../Context/CohortContext.jsx';
-import '../../../../styles/Students.css';
+import React, { useState, useEffect, useContext } from "react";
+import CohortContext from "../../../Context/CohortContext.jsx";
+import "../../../../styles/Students.css";
 
 const NewStudent = (props) => {
-  const [inputError, setInputError] = useState('');
+  const [inputError, setInputError] = useState("");
   const { cohort } = useContext(CohortContext);
 
   if (!props.showModal) {
@@ -15,20 +15,20 @@ const NewStudent = (props) => {
   }
 
   function handleCancel() {
-    setInputError('');
+    setInputError("");
     props.onClose();
   }
 
   function gatherValues() {
-    let name = document.getElementById('studentName');
-    let email = document.getElementById('email');
-    let gitHub = document.getElementById('gitHub');
+    let name = document.getElementById("studentName");
+    let email = document.getElementById("email");
+    let gitHub = document.getElementById("gitHub");
     const testedEmail = isValidEmail(email.value);
     if (!name.value || !email.value || !gitHub.value) {
-      setInputError('Please fill out all fields!');
+      setInputError("Please fill out all fields!");
       return;
     } else if (!testedEmail) {
-      setInputError('Invalid Email');
+      setInputError("Invalid Email");
       return;
     }
     let allValues = {};
@@ -43,12 +43,12 @@ const NewStudent = (props) => {
     const newStudent = gatherValues();
     if (!newStudent) {
       return;
-    } 
+    }
     console.log(newStudent);
-    fetch('https://blueocean-instructorhub.onrender.com/students', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://blueocean-instructorhub.onrender.com/students", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newStudent),
     })
       .then((response) => response.json())
@@ -58,66 +58,54 @@ const NewStudent = (props) => {
   }
 
   return (
-    <div
-      className='student-modal'
-      onClick={handleCancel}
-    >
-      <div
-        className='student-modal-form'
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className='student-modal-header'>
-          <h3 className='student-modal-title'>
+    <div className="student-modal" onClick={handleCancel}>
+      <div className="student-modal-form" onClick={(e) => e.stopPropagation()}>
+        <div className="student-modal-header">
+          <h3 className="student-modal-title">
             Add a New Student to MCSP-{cohort}
           </h3>
         </div>
-        <div className='student-modal-body'>
+        <div className="student-modal-body">
           <p>{inputError}</p>
           <div>
-            <label htmlFor='name'>First and Last Name: </label>
+            <label htmlFor="name">First and Last Name: </label>
             <input
-              className='input-box'
-              type='text'
-              name='name'
-              id='studentName'
-              placeholder='name...'
+              className="input-box"
+              type="text"
+              name="name"
+              id="studentName"
+              placeholder="name..."
               required
             ></input>
           </div>
           <div>
-            <label htmlFor='email'>Email Address: </label>
+            <label htmlFor="email">Email Address: </label>
             <input
-              className='input-box'
-              type='text'
-              name='email'
-              id='email'
-              placeholder='email...'
+              className="input-box"
+              type="text"
+              name="email"
+              id="email"
+              placeholder="email..."
               required
             ></input>
           </div>
           <div>
-            <label htmlFor='github'>GitHub Account: </label>
+            <label htmlFor="github">GitHub Account: </label>
             <input
-              className='input-box'
-              type='text'
-              name='github'
-              id='gitHub'
-              placeholder='github...'
+              className="input-box"
+              type="text"
+              name="github"
+              id="gitHub"
+              placeholder="github..."
               required
             ></input>
           </div>
         </div>
-        <div className='student-modal-buttons'>
-          <button
-            onClick={handleClick}
-            className='add-student'
-          >
+        <div className="student-modal-buttons">
+          <button onClick={handleClick} className="add-student">
             Add Student
           </button>
-          <button
-            onClick={handleCancel}
-            className='cancel-student'
-          >
+          <button onClick={handleCancel} className="cancel-student">
             Cancel
           </button>
         </div>

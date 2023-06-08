@@ -5,9 +5,6 @@ import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import App from "./App.jsx";
 
-
-
-
 it("base passing test", () => {
   const input = true;
   const expected = true;
@@ -15,4 +12,3 @@ it("base passing test", () => {
 
   expect(result).toEqual(expected);
 });
-
