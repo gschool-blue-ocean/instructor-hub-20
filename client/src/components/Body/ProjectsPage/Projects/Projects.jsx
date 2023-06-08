@@ -16,7 +16,7 @@ const Projects = () => {
   const fetchProjects = () => {
     if (cohort) {
       fetch(
-        `https://blueocean-instructorhub.onrender.com/student_project_scores/${cohort}`
+        `http://localhost:8000/student_project_scores/${cohort}`
       )
         .then((response) => response.json())
         .then((data) => setProjects(data))

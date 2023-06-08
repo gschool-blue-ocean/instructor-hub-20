@@ -9,7 +9,7 @@ function Dropdown() {
 
   useEffect(() => {
     // Make your API call here and update the options state when it's done
-    fetch("https://blueocean-instructorhub.onrender.com/cohorts")
+    fetch("http://localhost:8000/cohorts")
       .then((response) => response.json())
       .then((data) => setCohorts(data))
       .catch((error) => console.log(error));
