@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import "../../styles/Body.css";
+import "./Body.css";
 import DashboardPage from "./DashboardPage/DashboardPage";
 import ProjectsPage from "./ProjectsPage/ProjectsPage";
-import GalvLogo from "../../styles/svgs/galvanize.svg";
+import GalvLogo from "../../img/galvanize.svg";
 import CohortContext from "../Context/CohortContext";
 
 const Body = () => {

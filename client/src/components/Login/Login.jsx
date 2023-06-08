@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useIsAuthenticated } from 'react-auth-kit';
-import LoginPage from './LoginPage.jsx';
-import RegisterPage from './RegisterPage.jsx';
-import '../../styles/Login.css';
+import LoginPage from './LoginPage/LoginPage.jsx';
+import RegisterPage from './RegisterPage/RegisterPage.jsx';
+import './Login.css';
 
 
 const Login = ({ userAuth }) => {

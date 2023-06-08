@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/DashboardPage.css';
+import './DashboardPage.css';
 import DashboardMenu from './DashboardMenu/DashboardMenu';
 import Students from './Students/Students';
 

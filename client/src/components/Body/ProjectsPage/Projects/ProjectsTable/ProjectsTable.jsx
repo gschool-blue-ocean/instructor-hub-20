@@ -1,12 +1,12 @@
-import React from 'react';
-import { ProjectDropDown } from './projectDropDownDiv.jsx';
+import React from "react";
+import { ProjectDropDown } from "../ProjectsDropDown/ProjectDropDown.jsx";
 
 const ProjectsTable = ({ projects }) => {
   return (
-    <div className='student-table'>
+    <div className="student-table">
       <table>
         <thead>
-          <tr className='student-table-header'>
+          <tr className="student-table-header">
             <th>Group name</th>
             <th>Students</th>
             <th>Project</th>
@@ -16,13 +16,10 @@ const ProjectsTable = ({ projects }) => {
         <tbody>
           {projects.map((project, key) => {
             return (
-              <tr
-                key={key}
-                className='table-row'
-              >
+              <tr key={key} className="table-row">
                 <td>{project.group_name}</td>
                 <td>
-                  {project.student1} · {project.student2} · {project.student3} ·{' '}
+                  {project.student1} · {project.student2} · {project.student3} ·{" "}
                   {project.student4} · {project.student5} · {project.student6}
                 </td>
                 <td>{project.project_name}</td>

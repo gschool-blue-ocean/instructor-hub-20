@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/Login.css';
+import '../Login.css';
 
 const RegisterPage = ({ showReg }) => {
   const [errorText, setErrorText] = useState('');

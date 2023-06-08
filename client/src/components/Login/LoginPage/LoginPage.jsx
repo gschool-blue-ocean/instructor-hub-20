@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSignIn } from 'react-auth-kit';
-import '../../styles/Login.css';
+import '../Login.css';
 
 const LoginPage = ({ showReg, userAuth }) => {
   const [errorLogin, setErrorLogin] = useState('');

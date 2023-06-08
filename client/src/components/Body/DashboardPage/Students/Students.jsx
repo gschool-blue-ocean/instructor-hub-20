@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import CohortContext from '../../../Context/CohortContext.jsx';
-import StudentTable from './StudentTable.jsx';
-import NewStudent from './NewStudent.jsx';
-import '../../../../styles/Students.css';
+import React, { useState, useEffect, useContext } from "react";
+import CohortContext from "../../../Context/CohortContext.jsx";
+import StudentTable from "./StudentTable/StudentTable.jsx";
+import NewStudent from "./NewStudent/NewStudent.jsx";
+import "./Students.css";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
@@ -12,10 +12,11 @@ const Students = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`https://blueocean-instructorhub.onrender.com/students/${cohort}`);
+      const response = await fetch(
+        `http://localhost:8000/students/${cohort}`
+      );
       const studs = await response.json();
       setStudents(studs);
-      console.log(studs);
       if (addStudent) {
         setAddStudent(false);
       }
@@ -25,11 +26,8 @@ const Students = () => {
 
   return (
     <div>
-      <div
-        id='Students'
-        className='building-block'
-      >
-        <div className='students-block-header'>
+      <div id="Students" className="building-block">
+        <div className="students-block-header">
           <h1>{`MCSP-${cohort}   ·  Students`}</h1>
           <button onClick={() => setShowModal(true)}>Add Student</button>
         </div>
@@ -38,10 +36,7 @@ const Students = () => {
           showModal={showModal}
           onAdd={() => setAddStudent(true)}
         />
-        <StudentTable
-          stud={students}
-          onAdd={() => setAddStudent(true)}
-        />
+        <StudentTable stud={students} onAdd={() => setAddStudent(true)} />
       </div>
     </div>
   );

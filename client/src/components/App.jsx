@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { AuthProvider } from 'react-auth-kit';
-import Login from '../Login/Login';
-import '../../styles/App.css';
-import NavBar from '../NavBar/NavBar';
-import Body from '../Body/Body';
-import Footer from '../Footer/Footer';
-import { CohortProvider } from '../Context/CohortContext.jsx';
+import Login from './Login/Login';
+import './App.css';
+import NavBar from './NavBar/NavBar';
+import Body from './Body/Body';
+import Footer from './Footer/Footer';
+import { CohortProvider } from './Context/CohortContext.jsx';
 
 const App = () => {
   const [userAuth, setUserAuth] = useState(false);
