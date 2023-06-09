@@ -73,7 +73,7 @@ body {
 .dropdown-container {
   display: flex;
   align-items: center;
-  z-index: 12;
+
  
 }
 
@@ -85,7 +85,7 @@ body {
   position: fixed;
   overflow-x: visible;
   height: fit-content;
-  z-index: 2;
+
 }
 
 .dropdown-list {
@@ -98,7 +98,7 @@ body {
   height: auto;
   padding: 13px 20px;
   margin: -15px;
-
+  z-index: 1;
 }
 
 .dropdown-list > div {
@@ -172,5 +172,23 @@ button:hover {
 }
 
 .dropdown-header {
-  z-index: -1;
+  font-size: 1em;
+  text-align: center;
+  margin: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  /* border: 1px solid red; */
+  background: linear-gradient(
+    30deg,
+    rgba(255, 102, 0, 0.204),
+    rgba(0, 76, 183, 0.21)
+    );
+    /* z-index: 1; */
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 5px 1px black;
+    border: 0.1px solid rgba(255, 255, 255, 0.3);
+    /* transition: all 2s; */
+    z-index: -1;
 }
+

@@ -14,7 +14,7 @@
   border: 2px;
   /* height: 30px; */
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   border-radius: 0 0 50px 50px;
   /* tab back in when finished */
   width: 95.5%;
@@ -22,9 +22,12 @@
 }
 
 .button-cont {
-
+  z-index: -1;
   display: flex;
-  justify-content: space-around;
+ 
+  align-items: center;
   /* tab back in when finished */
-  width: 95.5%;
+  width: 60%;
+  margin: 15px;
+  margin-left: 350px;
 }

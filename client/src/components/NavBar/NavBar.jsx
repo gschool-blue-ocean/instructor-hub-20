@@ -3,7 +3,6 @@ import "./NavBar.css";
 import GalvanizeLogo from "../../img/galvanize.svg";
 import GalvanizeTextLogo from "../../img/galvanize-text-logo.svg";
 import CohortContext from "../Context/CohortContext";
-import Dropdown from "./Dropdown/Dropdown";
 import { useSignOut } from "react-auth-kit";
 
 const NavBar = ({ logout }) => {
@@ -33,7 +32,7 @@ const NavBar = ({ logout }) => {
       <button onClick={() => setBodyDisplay("project")}>Projects</button>
       <button onClick={handleLogout}>Sign out</button>
 
-      <Dropdown />
+  
     </div>
   );
 };
