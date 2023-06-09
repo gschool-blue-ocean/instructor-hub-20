@@ -1,4 +1,5 @@
 #DashboardMenu {
+  z-index: 1;
   /* border: 1px solid red; */
   background: linear-gradient(
     96deg,
@@ -18,4 +19,12 @@
   /* tab back in when finished */
   width: 95.5%;
   /* backdrop-filter: blur(2px); */
+}
+
+.button-cont {
+
+  display: flex;
+  justify-content: space-around;
+  /* tab back in when finished */
+  width: 95.5%;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './Assessments.css'
 import AssessmentDropdown from "./AssessmentsDropDown/AssessmentDropDown";
 
 const Assessments = ({ closeAssessment }) => {
@@ -17,18 +18,18 @@ const Assessments = ({ closeAssessment }) => {
 
   return (
     <div>
-      <div className="student-modal">
-        <div className="student-modal-form">
+      <div className="assessment-modal">
+        <div className="assessment-modal-form">
           <div className="studant-modal-buttons">
             <button onClick={() => closeAssessment(false)}>x</button>
           </div>
-          <div className="student-modal-header">
+          <div className="assessment-modal-header">
             <h1>Assessment</h1>
           </div>
-          <div className="student-modal-body">
+          <div className="assessment-modal-body">
             <AssessmentDropdown></AssessmentDropdown>
           </div>
-          <div className="studant-modal-buttons"></div>
+          <div className="assessment-modal-buttons"></div>
           <button>Next</button>
         </div>
       </div>

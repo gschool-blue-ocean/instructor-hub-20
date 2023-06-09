@@ -20,10 +20,12 @@ const DashboardMenu = () => {
 
   return (
     <div id="DashboardMenu">
+      <div className="button-cont">
       <button onClick={handleAssessmentClick}>Assessments</button>
       <button onClick={handleClick}>Create New Cohort</button>
       <NewCohort showCohort={showCohort} onClose={() => setShowCohort(false)} />
       {showAssessment && <Assessments closeAssessment={setShowAssessment} />}
+      </div>
     </div>
   );
 };

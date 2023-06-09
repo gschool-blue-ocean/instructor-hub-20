@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import CohortContext from "../../../../../Context/CohortContext";
+import './AssessmentDropDown.css'
 
 export function AssessmentDropDown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,9 +33,9 @@ export function AssessmentDropDown() {
   //   }, [cohort]);
 
   const handleDocumentClick = (event) => {
-    // Check if the click event target is inside the dropdown menu or not
+    // Check if the click event target is inside the assessments-dropdown menu or not
     if (AdropdownRef.current && !AdropdownRef.current.contains(event.target)) {
-      setIsOpen(false); // Close the dropdown menu
+      setIsOpen(false); // Close the assessments-dropdown menu
     }
   };
 
@@ -50,13 +51,12 @@ export function AssessmentDropDown() {
 
   return (
     <>
-      <div className="dropdown-container project-dropdown" ref={AdropdownRef}>
-        <div className="dropdown">
-          <button className="dropdown-header" onClick={toggleDropdown}>
-            {currentAssessment || `Select assessment`}
-          </button>
-          {isOpen && (
-            <div className="dropdown-list">
+      <div className="assessments-dropdown-container" ref={AdropdownRef}>
+        <div className="assessments-dropdown">
+          <div className="assessments-dropdown-header" onClick={toggleDropdown}>
+            {currentAssessment || `Selected Assessment`}
+          </div>
+          <div className="assessments-dropdown-list">
               {assessments.map((item, key) => (
                 <div key={key} onClick={() => handleItemClick(item)}>
                   {`${item.assess_name}`}
@@ -64,7 +64,6 @@ export function AssessmentDropDown() {
               ))}
               {/* {console.log(options)} */}
             </div>
-          )}
         </div>
       </div>
     </>
