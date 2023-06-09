@@ -40,12 +40,13 @@ test('sign in', async ({ page }) => {
   // will need to preface with the authentication modal
 await page.goto('http://localhost:3000/');
 await page.getByPlaceholder('Email Address').click();
-await page.getByPlaceholder('Email Address').fill('ortiz123@example.com');
+await page.getByPlaceholder('Email Address').fill('test@test.com');
 await page.getByPlaceholder('Email Address').press('Tab');
-await page.getByPlaceholder('Password').fill('password');
+await page.getByPlaceholder('Password').fill('test');
 await page.getByRole('button', { name: 'Sign In' }).click();
-const signInBox = await page.isVisible('Sign InRegister')
-expect(signInBox).toBe(false)
+await page.waitForLoadState();
+const signInBox = await page.isVisible('#App')
+expect(signInBox).toBe(true)
 
 });
 
@@ -76,6 +77,7 @@ test('invalid sign in attempt', async ({ page }) => {
   await page.getByPlaceholder('Email Address').press('Tab');
   await page.getByPlaceholder('Password').fill('adsfafdsaf');
   await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.waitForSelector('.error-text');
   const invalidlogin = await page.isVisible('.error-text')
   expect(invalidlogin).toBe(true)
 });
