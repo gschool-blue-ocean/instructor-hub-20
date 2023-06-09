@@ -17,6 +17,7 @@ const NavBar = ({ logout }) => {
 
   return (
     <div id="navbar">
+      
       <img id="galvanize-logo" src={GalvanizeLogo} alt="galvanize logo" />
       <img
         id="galvanize-text-logo"

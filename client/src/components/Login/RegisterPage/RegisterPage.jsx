@@ -30,7 +30,7 @@ const RegisterPage = ({ showReg }) => {
       registerVals.password = password.value;
       registerVals.email = email.value;
       registerVals.admin = true;
-      const response = await fetch('https://blueocean-instructorhub.onrender.com/register', {
+      const response = await fetch('http://localhost:8000/register', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },

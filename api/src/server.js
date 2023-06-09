@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 const salt = bcrypt.genSaltSync(10)
 const hash = bcrypt.hashSync('B4c0/\/',salt)
 
-
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
 });
@@ -124,7 +123,7 @@ app.post("/login", async (req, res) => {
     if (!response.rows[0]) {
       res.status(404).send({ message: "User not found" });
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
-      const token = jwt.sign({ email: response.rows[0].email }, process.env.JWT_SECRET, { expiresIn: '2h' })
+      const token = jwt.sign({ email: response.rows[0].email }, "my-32-character-ultra-secure-and-ultra-long-secret", { expiresIn: '2h' })
       console.log(token);
       res.status(200).send({ token, user: { email: response.rows[0].email } });
     } else {
@@ -132,8 +131,8 @@ app.post("/login", async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500);
-  }
+    res.status(500).send({ message: "Internal Server Error" });
+  }  
 });
 
 // --------------------- Students routes ----------------------------- //

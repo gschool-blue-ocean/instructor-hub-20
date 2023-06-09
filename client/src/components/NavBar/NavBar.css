@@ -9,10 +9,12 @@
   );
   box-shadow: 0 0 1px 0.1px rgba(255, 255, 255, 0.5) inset;
   /* border: 1px solid red; */
-  height: 6vh;
+  /* height: 6vh; */
   display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
   /* z-index: 2; */
   /* justify-content: space-evenly; */
   overflow: hidden;
