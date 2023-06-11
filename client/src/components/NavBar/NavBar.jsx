@@ -30,6 +30,7 @@ const NavBar = ({ logout }) => {
 
       <button onClick={() => setBodyDisplay("body")}>Dashboard</button>
       <button onClick={() => setBodyDisplay("project")}>Projects</button>
+      <button onClick={() => setBodyDisplay("assessment")}>Assessments</button>
       <button onClick={handleLogout}>Sign out</button>
 
   
