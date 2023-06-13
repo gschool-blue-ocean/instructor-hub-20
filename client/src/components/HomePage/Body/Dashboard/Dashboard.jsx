@@ -10,7 +10,7 @@ import CohortContext from '../../../Context/CohortContext';
 const Dashboard = () => {
   const { bodyDisplay, setBodyDisplay } = useContext(CohortContext);
 
-  console.log(bodyDisplay)
+  // console.log(bodyDisplay)
 
   useEffect(() => {
     if (!bodyDisplay) {

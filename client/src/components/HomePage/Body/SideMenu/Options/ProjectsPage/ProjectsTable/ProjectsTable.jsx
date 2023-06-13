@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ProjectsTable.module.css";
 
 const ProjectsTable = ({ projects }) => {
+  console.log(projects);
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
@@ -21,46 +22,13 @@ const ProjectsTable = ({ projects }) => {
           {projects && projects.length > 0 ? (
             <tbody>
               {projects.map((project, index) => {
-                const projectMembers = [
-                  project.student1,
-                  project.student2,
-                  project.student3,
-                  project.student4,
-                  project.student5,
-                  project.student6,
-                ];
-                const memberRows = [];
-                for (let i = 0; i < projectMembers.length; i += 3) {
-                  const rowMembers = projectMembers.slice(i, i + 3);
-                  memberRows.push(rowMembers);
-                }
                 return (
                   <tr key={`Project_${index}`}>
                     <td>{project.group_name}</td>
-                    <td className={styles["project-members"]}>
-                      {memberRows.map((rowMembers, rowIndex) => (
-                        <div
-                          className={styles["project-member-row"]}
-                          key={`MemberRow_${rowIndex}`}
-                        >
-                          {rowMembers.map((member, memberIndex) => (
-                            <React.Fragment key={`Member_${memberIndex}`}>
-                              <div className={styles["project-member"]}>
-                                {member}
-                              </div>
-                              {memberIndex !== rowMembers.length - 1 && (
-                                <div className={styles["project-member-dot"]}>
-                                  &middot;
-                                </div>
-                              )}
-                            </React.Fragment>
-                          ))}
-                        </div>
-                      ))}
-                    </td>
+                    <td>{project.stu_name}</td>
                     <td>{project.project_name}</td>
                     <td className={styles["project-score"]}>
-                      {project.project_score}
+                      {project.grade}
                     </td>
                   </tr>
                 );

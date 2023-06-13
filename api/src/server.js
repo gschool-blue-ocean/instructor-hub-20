@@ -153,7 +153,7 @@ app.get("/students/:cohort_id", async (req, res) => {
   const { cohort_id } = req.params;
   try {
     const { rows } = await pool.query(
-      "SELECT students.id AS id, stu_name, email, github, cohort_id, cohort_number, graduation, instructor FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
+      "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
       [cohort_id]
     );
     res.status(201).json(rows);
@@ -163,23 +163,6 @@ app.get("/students/:cohort_id", async (req, res) => {
   }
 });
 
-app.get("/students/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM students WHERE id = $1", [
-      id,
-    ]);
-
-    if (rows.length === 0) {
-      res.sendStatus(404);
-    } else {
-      res.json(rows[0]);
-    }
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
 
 app.post("/students", async (req, res) => {
   try {
@@ -189,6 +172,7 @@ app.post("/students", async (req, res) => {
       [cohort_number]
     );
     const id = response.rows[0].id;
+    console.log(respons.rows)
     const { rows } = await pool.query(
       "INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [stu_name, email, gitHub, id]
@@ -336,14 +320,15 @@ app.get("/groups", async (req, res) => {
 app.get("/groups/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM groups WHERE id = $1", [
-      id,
-    ]);
+    const { rows } = await pool.query(
+      "SELECT s.* FROM students s JOIN groups g ON s.group_id = g.id JOIN cohorts c ON s.cohort_id = c.id WHERE g.id = $1",
+      [id]
+    );
 
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      res.json(rows[0]);
+      res.json(rows);
     }
   } catch (error) {
     console.error(error);
@@ -870,19 +855,22 @@ app.delete("/projects/:id", async (req, res) => {
 // new joint table route for Student, Project name and Project_Score
 //get route that will put the above data
 
-app.get("/student_project_scores", async (req, res) => {
+app.get("/student_project_scores/:id", async (req, res) => {
   try {
+    const cohort_ID = req.params.id;
     const query = `
-      SELECT 
-        students.stu_name AS student_name,
-        projects.project_name AS project_name,
-        project_scores.grade AS project_score
+      SELECT s.stu_name, s.id, p.project_name, sps.grade, c.id, g.group_name       
       FROM 
-        students
+        students s
       JOIN 
-        project_scores ON students.id = project_scores.group_id
+        student_project_scores sps ON s.id = sps.student_id
       JOIN 
-        projects ON project_scores.project_id = projects.id
+        projects p ON sps.project_id = p.id
+      JOIN
+        cohorts c ON s.cohort_id = c.id
+      LEFT JOIN
+        groups g ON sps.group_id = g.id
+      WHERE c.id = ${cohort_ID};
     `;
     const { rows } = await pool.query(query);
     res.json(rows);
@@ -892,34 +880,29 @@ app.get("/student_project_scores", async (req, res) => {
   }
 });
 
-app.get("/student_project_scores/:cohort_id", async (req, res) => {
-  try {
-    const { cohort_id } = req.params;
-    const query = `
-    SELECT groups.group_name AS group_name,
-    groups.student1 AS student1,
-    groups.student2 AS student2,
-    groups.student3 AS student3,
-    groups.student4 AS student4,
-    groups.student5 AS student5,
-    groups.student6 AS student6,
-    projects.project_name AS project_name,
-    project_scores.grade AS project_score,
-    cohorts.cohort_number AS cohort_number
-    FROM groups 
-    JOIN 
-    project_scores ON groups.id = project_scores.group_id
-    JOIN 
-    projects ON project_scores.project_id = projects.id 
-    JOIN 
-    cohorts ON project_scores.cohort_id = cohorts.id WHERE cohorts.cohort_number = $1`;
-    const { rows } = await pool.query(query, [cohort_id]);
-    res.json(rows);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
+// app.get("/student_project_scores/:cohort_id", async (req, res) => {
+//   try {
+//     const { cohort_id } = req.params;
+//     const query = `
+//     SELECT ,
+    
+//     projects.project_name AS project_name,
+//     project_scores.grade AS project_score,
+//     cohorts.cohort_number AS cohort_number
+//     FROM groups 
+//     JOIN 
+//     project_scores ON groups.id = project_scores.group_id
+//     JOIN 
+//     projects ON project_scores.project_id = projects.id 
+//     JOIN 
+//     cohorts ON project_scores.cohort_id = cohorts.id WHERE cohorts.cohort_number = $1`;
+//     const { rows } = await pool.query(query, [cohort_id]);
+//     res.json(rows);
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// });
 
 // app.listen(port, () => {
 //   console.log(`Server is running at http://localhost:${port}`);

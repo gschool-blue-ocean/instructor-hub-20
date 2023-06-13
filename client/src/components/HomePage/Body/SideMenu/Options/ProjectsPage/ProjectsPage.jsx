@@ -10,7 +10,7 @@ const ProjectsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8000/student_project_scores/${cohort}`
+        `http://localhost:8000/student_project_scores/1`
       );
       const proj = await response.json();
       setProjects(proj);

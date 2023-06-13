@@ -22,6 +22,7 @@ const StudentsTable = ({ studs }) => {
         <table>
           <tbody>
             {studs.map((stud, index) => {
+              console.log(stud)
               return (
                 <tr key={`Student_${index}`}>
                   <td>{stud.stu_name}</td>
