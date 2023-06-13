@@ -859,7 +859,7 @@ app.get("/student_project_scores/:id", async (req, res) => {
   try {
     const cohort_ID = req.params.id;
     const query = `
-      SELECT s.stu_name, s.id, p.project_name, sps.grade, c.id, g.group_name       
+      SELECT s.stu_name, s.id, p.project_name, sps.grade, c.id, g.group_name, c.cohort_number      
       FROM 
         students s
       JOIN 
@@ -870,7 +870,7 @@ app.get("/student_project_scores/:id", async (req, res) => {
         cohorts c ON s.cohort_id = c.id
       LEFT JOIN
         groups g ON sps.group_id = g.id
-      WHERE c.id = ${cohort_ID};
+      WHERE c.cohort_number= ${cohort_ID};
     `;
     const { rows } = await pool.query(query);
     res.json(rows);
