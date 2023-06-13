@@ -663,16 +663,16 @@ app.get("/assessment_scores", async (req, res) => {
   try {
     const { rows } = await pool.query(`
       SELECT
-        assessment_scores.id,
+        student_assessment_scores.id,
         students.stu_name AS student_name,
         assessments.assess_name,
-        assessment_scores.grade,
+        student_assessment_scores.grade,
         cohorts.cohort_number
       FROM
-        assessment_scores
-      JOIN students ON assessment_scores.student_id = students.id
-      JOIN assessments ON assessment_scores.assess_id = assessments.id
-      JOIN cohorts ON assessment_scores.cohort_id = cohorts.id
+        student_assessment_scores
+      JOIN students ON student_assessment_scores.student_id = students.id
+      JOIN assessments ON student_assessment_scores.assess_id = assessments.id
+      JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
     res.json(rows);  
@@ -688,18 +688,18 @@ app.get("/assessment_scores/:id", async (req, res) => {
     const { id } = req.params;
     const { rows } = await pool.query(
       `SELECT
-      assessment_scores.id,
+      student_assessment_scores.id,
       students.stu_name AS student_name,
       assessments.assess_name,
-      assessment_scores.grade,
+      student_assessment_scores.grade,
       cohorts.cohort_number
     FROM
       assessment_scores
-    JOIN students ON assessment_scores.student_id = students.id
-    JOIN assessments ON assessment_scores.assess_id = assessments.id
-    JOIN cohorts ON assessment_scores.cohort_id = cohorts.id
+    JOIN students ON student_assessment_scores.student_id = students.id
+    JOIN assessments ON student_assessment_scores.assess_id = assessments.id
+    JOIN cohorts ON student_assessment_scores.cohort_id = cohorts.id
     WHERE
-      assessment_scores.id = $1
+      student_assessment_scores.id = $1
     ORDER BY students.stu_name ASC
     `,
       [id]
@@ -733,10 +733,15 @@ app.post("/assessment_scores", async (req, res) => {
 app.patch("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { student_id, assess_id, grade, cohort_id } = req.body;
+    console.log(id);
+    const { student_id, assess_id, grade} = req.body;
     const { rowCount } = await pool.query(
-      "UPDATE assessment_scores SET student_id = COALESCE($1, student_id), assess_id = COALESCE($2, assess_id), grade = COALESCE($3, grade), cohort_id = COALESCE($4, cohort_id) WHERE id = $5",
-      [student_id, assess_id, grade, cohort_id, id]
+      `UPDATE student_assessment_scores
+      SET student_id = COALESCE($1, student_id),
+          assess_id = COALESCE($2, assess_id),
+          grade = COALESCE($3, grade)
+      WHERE id = $4;`,
+      [student_id, assess_id, grade, id]
     );
 
     if (rowCount === 0) {
@@ -749,6 +754,7 @@ app.patch("/assessment_scores/:id", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 
 
 app.delete("/assessment_scores/:id", async (req, res) => {
