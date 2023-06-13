@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { AuthProvider } from 'react-auth-kit';
 import Login from './Login/Login';
 import './App.css';
-import NavBar from './NavBar/NavBar';
-import Body from './Body/Body';
-import Footer from './Footer/Footer';
+import HomePage from './HomePage/HomePage'
 import { CohortProvider } from './Context/CohortContext.jsx';
 
 const App = () => {
@@ -22,9 +20,7 @@ const App = () => {
           <Login userAuth={() => setUserAuth(true)} />
         ) : (
           <CohortProvider>
-            <NavBar logout={() => setUserAuth(false)}></NavBar>
-            <Body></Body>
-            <Footer></Footer>
+            <HomePage logout={() => setUserAuth(false)}/>
           </CohortProvider>
         )}
       </AuthProvider>

@@ -362,3 +362,4 @@ INSERT INTO student_project_scores (student_id, group_id, project_id, grade) VAL
   (12, 1, 7, 95), -- Front End Capstone
   (12, 1, 8, 92), -- System Design Capstone
   (12, 5, 9, 95); -- Blue Ocean
+

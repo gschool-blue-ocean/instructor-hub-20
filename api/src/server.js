@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import bcrypt from 'bcryptjs';
+import cors from 'cors';
 import pg from "pg";
 import jwt from "jsonwebtoken";
 
@@ -13,6 +14,8 @@ const pool = new pg.Pool({
 });
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -673,19 +676,47 @@ app.delete("/assessments/:id", async (req, res) => {
 // ---------------- Assessment Scores routes --------------------- //
 app.get("/assessment_scores", async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM assessment_scores");
-    res.json(rows);
+    const { rows } = await pool.query(`
+      SELECT
+        assessment_scores.id,
+        students.stu_name AS student_name,
+        assessments.assess_name,
+        assessment_scores.grade,
+        cohorts.cohort_number
+      FROM
+        assessment_scores
+      JOIN students ON assessment_scores.student_id = students.id
+      JOIN assessments ON assessment_scores.assess_id = assessments.id
+      JOIN cohorts ON assessment_scores.cohort_id = cohorts.id
+      ORDER BY students.stu_name ASC
+    `);
+    res.json(rows);  
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
   }
 });
 
+
 app.get("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
-      "SELECT * FROM assessment_scores WHERE id = $1",
+      `SELECT
+      assessment_scores.id,
+      students.stu_name AS student_name,
+      assessments.assess_name,
+      assessment_scores.grade,
+      cohorts.cohort_number
+    FROM
+      assessment_scores
+    JOIN students ON assessment_scores.student_id = students.id
+    JOIN assessments ON assessment_scores.assess_id = assessments.id
+    JOIN cohorts ON assessment_scores.cohort_id = cohorts.id
+    WHERE
+      assessment_scores.id = $1
+    ORDER BY students.stu_name ASC
+    `,
       [id]
     );
 
@@ -714,12 +745,12 @@ app.post("/assessment_scores", async (req, res) => {
   }
 });
 
-app.put("/assessment_scores/:id", async (req, res) => {
+app.patch("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { student_id, assess_id, grade, cohort_id } = req.body;
     const { rowCount } = await pool.query(
-      "UPDATE assessment_scores SET student_id = $1, assess_id = $2, grade = $3, cohort_id = $4, WHERE id = $5",
+      "UPDATE assessment_scores SET student_id = COALESCE($1, student_id), assess_id = COALESCE($2, assess_id), grade = COALESCE($3, grade), cohort_id = COALESCE($4, cohort_id) WHERE id = $5",
       [student_id, assess_id, grade, cohort_id, id]
     );
 
@@ -733,6 +764,7 @@ app.put("/assessment_scores/:id", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 
 app.delete("/assessment_scores/:id", async (req, res) => {
   try {

@@ -1,0 +1,97 @@
+.tableContainer {
+  max-height: 400px;
+  margin: 30px;
+  width: 1200px;
+  overflow-y: auto;
+}
+
+.tableHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  line-height: 3;
+  color: var(--galv-white);
+  background: var(--galv-darkgrey);
+}
+
+.tableHeader table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableBody table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.column1,
+.column2,
+.column3,
+.column4 {
+  display: table-cell;
+  vertical-align: inherit;
+  width: 260px;
+  text-align: center;
+}
+
+.column3 {
+  padding-left: 150px;
+}
+
+.column4 {
+  padding-left: 80px;
+}
+
+tbody tr {
+  font-weight: unset;
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  background-color: #dadada;
+}
+
+tbody tr td {
+  text-align: center;
+  width: 260px;
+  padding-left: 40px;
+  height: 80px; /* Increase this value to make the rows taller */
+}
+
+.no-information {
+  color: var(--galv-white);
+}
+
+.tableBody {
+  background-color: #8e8e8e4e;
+  color: var(--galv-darkgrey);
+  margin-top: -10px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.project-members {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  font-size: 0.8rem;
+  height: 20px;
+  margin-top: 15px;
+  margin-left: 70px;
+}
+
+.project-member-row {
+  display: flex;
+  padding: 5px;
+}
+
+.project-member {
+  width: 100px;
+}
+
+.project-member-dot {
+  display: inline-block;
+  margin: 0 5px; /* Adjust the spacing between members as needed */
+  color: var(--galv-darkgrey); /* Set the color of the dot */
+}
