@@ -1,13 +1,13 @@
-INSERT INTO users(name) VALUES
-('Phil Witkin'),
-('Danny Andrews');
+/* User table inserts */
+INSERT INTO users(name, email, password) VALUES
+('Phil Witkin', 'pwitkins@hotmail.com', 'G3tP@1d'),
+('Danny Andrews', 'dannyphantom@yahoo.com', 'Gh0stinthe$h3ll');
 
 /* Inserts for the Cohort Table */
 INSERT INTO cohorts (cohort_number, start, graduation, user_id) VALUES
 (19, '2023-01-17', '2023-05-26', 1),
 (20, '2023-03-27', '2023-07-21', 2);
 
-/* User table inserts */
 
 /* Inserts for the Student Table */
 INSERT INTO students (stu_name, email, github, cohort_id) VALUES
