@@ -4,7 +4,7 @@ export default {
     proxy: {
       "/api": process.env.API_URL,
     },
-    port: process.env.PORT,
+    port: process.env.CLIENT_PORT,
   },
   test: {
     environment: "jsdom",

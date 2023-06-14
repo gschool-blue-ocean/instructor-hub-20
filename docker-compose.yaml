@@ -49,6 +49,7 @@ services:
     build: ./tests
     environment:
       API_URL: http://api
+      CLIENT_URL: http://app:${CLIENT_PORT}
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
       NODE_ENV: test
       PORT: ${TESTING_PORT}

@@ -1,7 +1,9 @@
-FROM node:16-alpine
+FROM mcr.microsoft.com/playwright
 WORKDIR /code
 COPY package*.json .
-RUN npm install ci
+# RUN npm ci
+# RUN npx playwright install --with-deps
+RUN npm install -D @playwright/test
 COPY . .
 EXPOSE 6000
-CMD echo "Testing suite is up and running"
+CMD ["npx", "playwright", "test"]
