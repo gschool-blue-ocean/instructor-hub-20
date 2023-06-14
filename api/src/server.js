@@ -91,7 +91,7 @@ app.use((req, res, next) => {
 
 app.post("/register", async (req, res) => {
   try {
-    const { name, email, admin, password } = req.body;
+    const { name, email, password } = req.body;
     const hashedPwd = await bcrypt.hash(password, 10);
     const testUsername = await pool.query(
       "SELECT email FROM users WHERE email = $1",
@@ -101,8 +101,8 @@ app.post("/register", async (req, res) => {
       res.status(409).send({ message: "Email already exists" });
     } else {
       const { rows } = await pool.query(
-        "INSERT INTO users (name, email, password, admin) VALUES ($1, $2, $3, $4) RETURNING *",
-        [name, email, hashedPwd, admin]
+        "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
+        [name, email, hashedPwd]
       );
       if (rows[0].email) {
         res.status(201).send({ message: "Account successfully registered!" });
@@ -115,6 +115,20 @@ app.post("/register", async (req, res) => {
     res.status(500).send({ message: error });
   }
 });
+
+app.delete("/users/:name", async (req, res) => {
+  try {
+    const result = await pool.query('DELETE FROM users WHERE name = $1', [req.params.name])
+    if (result.rows[0]) {
+      res.status(201).send({ message: "User successfully removed" });
+    } else {
+      res.status(404).send({ message: "No user with that name" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: error });
+  }
+})
 
 app.post("/login", async (req, res) => {
   try {
