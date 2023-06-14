@@ -122,7 +122,7 @@ app.post("/login", async (req, res) => {
 // --------------------- Students routes ----------------------------- //
 app.get("/students", fetchDataFromRedisOrDatabase, async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM students");
+    const { rows } = await pool.query("SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id");
     await redisClient.set(JSON.stringify(rows));
     console.log("Data retrieved from the database");
     res.status(200).json(rows);
@@ -157,7 +157,7 @@ app.post("/students", async (req, res) => {
       [cohort_number]
     );
     const id = response.rows[0].id;
-    console.log(respons.rows)
+    console.log(response.rows)
     const { rows } = await pool.query(
       "INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [stu_name, email, gitHub, id]
@@ -224,32 +224,32 @@ app.get("/cohorts", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-app.get("/cohorts/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM cohorts WHERE id = $1", [
-      id,
-    ]);
+// app.get("/cohorts/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { rows } = await pool.query("SELECT * FROM cohorts WHERE id = $1", [
+//       id,
+//     ]);
 
-    if (rows.length === 0) {
-      res.sendStatus(404);
-    } else {
-      await redisClient.set(id, JSON.stringify(rows[0]));
-      console.log("Data retrieved from the database");
-      res.json(rows[0]);
-    }
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-  }
-});
+//     if (rows.length === 0) {
+//       res.sendStatus(404);
+//     } else {
+//       await redisClient.set(id, JSON.stringify(rows[0]));
+//       console.log("Data retrieved from the database");
+//       res.json(rows[0]);
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+//   }
+// });
 
 app.post("/cohorts", async (req, res) => {
   try {
-    const { cohort_number, start, graduation, instructor } = req.body;
+    const { cohort_number, start, graduation, user_id } = req.body;
     const { rows } = await pool.query(
-      "INSERT INTO cohorts (cohort_number, start, graduation, instructor) VALUES ($1, $2, $3, $4) RETURNING *",
-      [cohort_number, start, graduation, instructor]
+      "INSERT INTO cohorts (cohort_number, start, graduation, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
+      [cohort_number, start, graduation, user_id]
     );
     res.status(201).json(rows[0]);
   } catch (error) {
@@ -261,10 +261,10 @@ app.post("/cohorts", async (req, res) => {
 app.put("/cohorts/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { cohort_number, start, graduation, instructor } = req.body;
+    const { cohort_number, start, graduation } = req.body;
     const { rowCount } = await pool.query(
-      "UPDATE cohorts SET cohort_number = $1, start = $2, graduation = $3, instructor = $4 WHERE id = $5",
-      [cohort_number, start, graduation, instructor, id]
+      "UPDATE cohorts SET cohort_number = $1, start = $2, graduation = $3 WHERE id = $4",
+      [cohort_number, start, graduation, id]
     );
 
     if (rowCount === 0) {
@@ -329,64 +329,59 @@ app.get("/groups/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-app.post("/groups", async (req, res) => {
-  try {
-    const {
-      group_name,
-      student1,
-      student2,
-      student3,
-      student4,
-      student5,
-      student6,
-    } = req.body;
-    const { rows } = await pool.query(
-      "INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [group_name, student1, student2, student3, student4, student5, student6]
-    );
-    res.status(201).json(rows[0]);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
+// app.post("/groups", async (req, res) => {
+//   try {
+//     const {
+//       group_name,
+      
+//     } = req.body;
+//     const { rows } = await pool.query(
+//       "INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+//       [group_name, student1, student2, student3, student4, student5, student6]
+//     );
+//     res.status(201).json(rows[0]);
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// });
 
-app.put("/groups/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const {
-      group_name,
-      student1,
-      student2,
-      student3,
-      student4,
-      student5,
-      student6,
-    } = req.body;
-    const { rowCount } = await pool.query(
-      "UPDATE groups SET group_name = $1, student1 = $2, student2 = $3, student3 = $4, student4 = $5, student5 = $6, student6 = $7 WHERE id = $3",
-      [
-        group_name,
-        student1,
-        student2,
-        student3,
-        student4,
-        student5,
-        student6,
-        id,
-      ]
-    );
+// app.put("/groups/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const {
+//       group_name,
+//       student1,
+//       student2,
+//       student3,
+//       student4,
+//       student5,
+//       student6,
+//     } = req.body;
+//     const { rowCount } = await pool.query(
+//       "UPDATE groups SET group_name = $1, student1 = $2, student2 = $3, student3 = $4, student4 = $5, student5 = $6, student6 = $7 WHERE id = $3",
+//       [
+//         group_name,
+//         student1,
+//         student2,
+//         student3,
+//         student4,
+//         student5,
+//         student6,
+//         id,
+//       ]
+//     );
 
-    if (rowCount === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(204);
-    }
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
+//     if (rowCount === 0) {
+//       res.sendStatus(404);
+//     } else {
+//       res.sendStatus(204);
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// });
 
 app.delete("/groups/:id", async (req, res) => {
   try {
