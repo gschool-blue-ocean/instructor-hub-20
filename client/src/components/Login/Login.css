@@ -130,6 +130,7 @@ span.or-sign-in-text:after {
   overflow: hidden;
 }
 
+.registered,
 .error-text {
   color: rgb(239, 110, 71);
   margin: 40px 0 0px 0;

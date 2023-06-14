@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import '../Login.css';
 
-const LoginPage = ({ showReg, userAuth }) => {
+const LoginPage = ({ registered, showReg, userAuth }) => {
   const [errorLogin, setErrorLogin] = useState('');
   const signIn = useSignIn();
 
@@ -75,6 +75,7 @@ const LoginPage = ({ showReg, userAuth }) => {
         <div>
           <form className='sign-in-form'>
             <h3 className='error-text'>{errorLogin}</h3>
+            <h3 className='registered'>{registered}</h3>
             <input
               type='email'
               name='username'

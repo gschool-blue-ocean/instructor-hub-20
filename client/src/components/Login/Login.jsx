@@ -7,6 +7,7 @@ import './Login.css';
 
 const Login = ({ userAuth }) => {
   const [ showReg, setShowReg ] = useState(false);
+  const [registered, setRegistered] = useState('');
   const isAuthenticated = useIsAuthenticated();
 
   if (isAuthenticated()) {
@@ -15,7 +16,7 @@ const Login = ({ userAuth }) => {
     
     return (
       <div>
-        {showReg ? <RegisterPage showReg={setShowReg} /> : <LoginPage showReg={setShowReg} userAuth={userAuth} />}
+        {showReg ? <RegisterPage registered={registered} setRegistered={setRegistered} showReg={setShowReg} /> : <LoginPage registered={registered} setRegistered={setRegistered} showReg={setShowReg} userAuth={userAuth} />}
       </div>
     );
   };
