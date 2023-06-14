@@ -91,7 +91,7 @@ app.use((req, res, next) => {
 
 app.post("/register", async (req, res) => {
   try {
-    const { name, email, admin, password } = req.body;
+    const { name, email, password } = req.body;
     const hashedPwd = await bcrypt.hash(password, 10);
     const testUsername = await pool.query(
       "SELECT email FROM users WHERE email = $1",
@@ -101,8 +101,8 @@ app.post("/register", async (req, res) => {
       res.status(409).send({ message: "Email already exists" });
     } else {
       const { rows } = await pool.query(
-        "INSERT INTO users (name, email, password, admin) VALUES ($1, $2, $3, $4) RETURNING *",
-        [name, email, hashedPwd, admin]
+        "INSERT INTO users (name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+        [name, email, hashedPwd]
       );
       if (rows[0].email) {
         res.status(201).send({ message: "Account successfully registered!" });
