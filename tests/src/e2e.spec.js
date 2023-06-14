@@ -32,8 +32,8 @@ test('register', async ({ page }) => {
   await page.fill('[placeholder="Set Password"]', 'test');
   await page.fill('[placeholder="Verify Password"]', 'test');
   await page.getByRole('button', { name: 'Register'}).click();
-  await page.waitForSelector('.registered');
-  const didRegister = await page.isVisible('.registered');
+  await page.waitForSelector('text="Account successfully registered!"');
+  const didRegister = await page.isVisible('text="Account successfully registered!"');
   expect(didRegister).toBe(true);
 })
 
@@ -67,38 +67,6 @@ test('register', async ({ page }) => {
 //   await page.waitForSelector('.error-text');
 //   const invalidlogin = await page.isVisible('.error-text')
 //   expect(invalidlogin).toBe(true)
-// });
-
-// test('student is able to be added to cohort table', async ({ page }) => {
-//   await page.goto('http://localhost:3000/');
-//   //sign in
-//   await page.getByPlaceholder('Email Address').click();
-//   await page.getByPlaceholder('Email Address').fill('ortiz123@example.com');
-//   await page.getByPlaceholder('Email Address').press('Tab');
-//   await page.getByPlaceholder('Password').fill('password');
-//   await page.getByRole('button', { name: 'Sign In' }).click();
-
-//   // create variables here that will represent user input, will be compared to the text in the table
-//   const nameInput = 'rick astley';
-//   const emailInput = 'astleyrick@gmail.com';
-//   const githubInput = 'neverGonnaGitYouUp';
-
-//   await page.getByRole('button', { name: 'Add Student' }).click();
-//   await page.getByPlaceholder('name...').click();
-//   await page.getByPlaceholder('name...').fill(nameInput);
-//   await page.getByPlaceholder('name...').press('Tab');
-//   await page.getByPlaceholder('email...').fill(emailInput);
-//   await page.getByPlaceholder('email...').press('Tab');
-//   await page.getByPlaceholder('github...').fill(githubInput);
-//   await page.locator('div').filter({ hasText: /^Add StudentCancel$/ }).getByRole('button', { name: 'Add Student' }).click();
-
-//   const nameCell = await page.getByText(nameInput);
-//   const emailCell = await page.getByText(emailInput);
-//   const githubCell = await page.getByText(githubInput);
-
-//   expect(nameCell).toBeTruthy();
-//   expect(emailCell).toBeTruthy();
-//   expect(githubCell).toBeTruthy();
 // });
 
 //------------------Projects Button------------------
