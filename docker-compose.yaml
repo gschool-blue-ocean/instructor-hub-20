@@ -76,27 +76,6 @@ services:
     networks:
       mynetwork:
 
-  chromium:
-    build:
-      context: ./tests
-      dockerfile: Dockerfile
-    environment:
-      - BROWSER=chromium
-
-  firefox:
-    build:
-      context: ./tests
-      dockerfile: Dockerfile
-    environment:
-      - BROWSER=firefox
-
-  webkit:
-    build:
-      context: ./tests
-      dockerfile: Dockerfile
-    environment:
-      - BROWSER=webkit
-
 volumes:
   pg-data:
 
