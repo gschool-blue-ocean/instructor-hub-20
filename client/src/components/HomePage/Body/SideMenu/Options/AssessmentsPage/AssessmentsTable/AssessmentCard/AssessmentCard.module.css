@@ -1,15 +1,13 @@
 .card-container {
-  position:relative;
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 104%;
-  transform: translateX(-40px);
-  height: 200px;
+  width: 800px;
+  height: 600px;
   padding: 30px 2px;
   color: var(--galv-white);
-  background-color: var(--galv-darkgrey);
-  z-index: 1;
+  background-color: var(--galv-purple);
 }
 
 .card-container-bar {
@@ -49,7 +47,6 @@
   border-radius: 30px;
 }
 
-
 .add-card-btn {
   background-color: var(--galv-orange);
   color: var(--galv-white);
@@ -58,9 +55,9 @@
   padding: 0px 15px;
   border: none;
   border-radius: 30px;
-  transform: scale(.7);
+  transform: scale(0.7);
   cursor: pointer;
-  transition: .3s ease-in;
+  transition: 0.3s ease-in;
 }
 
 .add-card-btn:hover {
@@ -72,4 +69,13 @@
   padding: 1px 5px;
   margin-left: 7px;
   border-radius: 30px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
 }
