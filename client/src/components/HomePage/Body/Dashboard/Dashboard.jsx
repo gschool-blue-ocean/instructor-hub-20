@@ -4,7 +4,9 @@ import ProjectsPage from '../SideMenu/Options/ProjectsPage/ProjectsPage';
 import AssessmentsPage from '../SideMenu/Options/AssessmentsPage/AssessmentsPage';
 import MainPage from '../SideMenu/Options/MainPage/MainPage';
 import AssessmentCard from '../SideMenu/Options/AssessmentsPage/AssessmentsTable/AssessmentCard/AssessmentCard';
+
 import styles from './Dashboard.module.css';
+
 import CohortContext from '../../../Context/CohortContext';
 
 const Dashboard = () => {

@@ -22,7 +22,9 @@ const AssessmentsPage = () => {
   return (
     <CohortProvider>
     <div className={styles["student-container"]}>
-    <div className={styles["student-title"]}>Assessment Dashboard</div>
+    <div className={styles["student-title"]}>
+        <span className={styles["title"]}>Assessments Dashboard</span>
+      </div>
     <div className={styles["table-container"]}>
       <div className={styles["student-container-bar"]}>
         <div className={styles["page-header"]}>

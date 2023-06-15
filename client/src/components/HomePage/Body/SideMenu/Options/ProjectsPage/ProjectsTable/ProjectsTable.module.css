@@ -1,7 +1,7 @@
 .tableContainer {
   max-height: 400px;
   margin: 30px;
-  width: 1200px;
+  width: 900px;
   overflow-y: auto;
 }
 

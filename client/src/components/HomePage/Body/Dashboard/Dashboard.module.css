@@ -1,7 +1,8 @@
 .dashboard-container {
     position:absolute; 
-    transform: translateX(50px);
-    width: 96%;
+    /* transform: translateX(50px); */
+    width: 70%;
+    margin-left: 280px;
   }
   
   .dashboard-menu {
