@@ -1,51 +1,29 @@
 import * as dotenv from "dotenv";
 import express from "express";
-import bcrypt from 'bcryptjs';
-import cors from 'cors';
+import bcrypt from "bcryptjs";
+import cors from "cors";
 import pg from "pg";
 import jwt from "jsonwebtoken";
-import redis from "redis";
-import cookieParser from "cookie-parser";
+import { createClient } from "redis";
 
 const app = express();
+const pubClient = createClient({ url: "redis://redis:6379" });
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
-// app.use(cors())
 dotenv.config();
 
-const salt = bcrypt.genSaltSync(10)
-const hash = bcrypt.hashSync('B4c0/\/',salt)
+const salt = bcrypt.genSaltSync(10);
+const hash = bcrypt.hashSync("B4c0//", salt);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-let redisClient;
+let redisClient = pubClient;
 
-(async () => {
-  redisClient = redis.createClient();
-
-  redisClient.on("error", (error) => console.error(`Error: ${error}`));
-
-  await redisClient.connect();
-})();
-
-async function fetchDataFromRedisOrDatabase(req, res, next) {
-  const id = req.params.product_id;
-  try {
-    const cacheResults = await redisClient.get(id);
-    if (cacheResults) {
-      console.log("Data retrieved from cache");
-      res.json(JSON.parse(cacheResults));
-    } else {
-      next();
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: `Something went wrong: ${err}` });
-  }
-}
+redisClient.on("connect", () => {
+  console.log("Connected to Redis");
+});
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -61,14 +39,32 @@ app.use((req, res, next) => {
   next();
 });
 
-
+async function fetchDataFromRedisOrDatabase(req, res, next) {
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const cacheResults = await new Promise((resolve, reject) => {
+      redisClient.get(id, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+    });
+    if (cacheResults) {
+      console.log(res);
+      console.log("Data retrieved from cache");
+      res.json(JSON.parse(cacheResults));
+    } else {
+      next();
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: `Something went wrong: ${err}` });
+  }
+}
 
 //-----------------------------------------ROUTES--------------------------------------------------//
 
-
-
-
-// --------------------- Users routes ----------------------------- // 
+// --------------------- Users routes ----------------------------- //
 
 app.post("/register", async (req, res) => {
   try {
@@ -82,7 +78,7 @@ app.post("/register", async (req, res) => {
       res.status(409).send({ message: "Email already exists" });
     } else {
       const { rows } = await pool.query(
-        "INSERT INTO users (name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+        "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
         [name, email, hashedPwd]
       );
       if (rows[0].email) {
@@ -107,7 +103,11 @@ app.post("/login", async (req, res) => {
     if (!response.rows[0]) {
       res.status(404).send({ message: "User not found" });
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
-      const token = jwt.sign({ email: response.rows[0].email }, "my-32-character-ultra-secure-and-ultra-long-secret", { expiresIn: '2h' })
+      const token = jwt.sign(
+        { email: response.rows[0].email },
+        "my-32-character-ultra-secure-and-ultra-long-secret",
+        { expiresIn: "2h" }
+      );
       console.log(token);
       res.status(200).send({ token, user: { email: response.rows[0].email } });
     } else {
@@ -116,13 +116,15 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Internal Server Error" });
-  }  
+  }
 });
 
 // --------------------- Students routes ----------------------------- //
 app.get("/students", fetchDataFromRedisOrDatabase, async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id");
+    const { rows } = await pool.query(
+      "SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id"
+    );
     await redisClient.set(JSON.stringify(rows));
     console.log("Data retrieved from the database");
     res.status(200).json(rows);
@@ -132,22 +134,25 @@ app.get("/students", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-app.get("/students/:cohort_id", fetchDataFromRedisOrDatabase, async (req, res) => {
-  const { cohort_id } = req.params;
-  try {
-    const { rows } = await pool.query(
-      "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
-      [cohort_id]
-    );
-    await redisClient.set(cohort_id, JSON.stringify(rows));
-    console.log("Data retrieved from the database");
-    res.status(201).json(rows);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+app.get(
+  "/students/:cohort_id",
+  fetchDataFromRedisOrDatabase,
+  async (req, res) => {
+    const { cohort_id } = req.params;
+    try {
+      const { rows } = await pool.query(
+        "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
+        [cohort_id]
+      );
+      await redisClient.set(cohort_id, JSON.stringify(rows));
+      console.log("Data retrieved from the database");
+      res.status(201).json(rows);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    }
   }
-});
-
+);
 
 app.post("/students", async (req, res) => {
   try {
@@ -157,7 +162,7 @@ app.post("/students", async (req, res) => {
       [cohort_number]
     );
     const id = response.rows[0].id;
-    console.log(response.rows)
+    console.log(response.rows);
     const { rows } = await pool.query(
       "INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [stu_name, email, gitHub, id]
@@ -333,7 +338,7 @@ app.get("/groups/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
 //   try {
 //     const {
 //       group_name,
-      
+
 //     } = req.body;
 //     const { rows } = await pool.query(
 //       "INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
@@ -657,9 +662,12 @@ app.delete("/assessments/:id", async (req, res) => {
 });
 
 // ---------------- Assessment Scores routes --------------------- //
-app.get("/assessment_scores", fetchDataFromRedisOrDatabase, async (req, res) => {
-  try {
-    const { rows } = await pool.query(`
+app.get(
+  "/assessment_scores",
+  fetchDataFromRedisOrDatabase,
+  async (req, res) => {
+    try {
+      const { rows } = await pool.query(`
       SELECT
         student_assessment_scores.id,
         students.stu_name AS student_name,
@@ -673,50 +681,54 @@ app.get("/assessment_scores", fetchDataFromRedisOrDatabase, async (req, res) => 
       JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
-    res.json(rows);  
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-  }
-});
-
-
-app.get("/assessment_scores/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { rows } = await pool.query(
-      `SELECT
-      student_assessment_scores.id,
-      students.stu_name AS student_name,
-      assessments.assess_name,
-      student_assessment_scores.grade,
-      cohorts.cohort_number
-    FROM
-      assessment_scores
-    JOIN students ON student_assessment_scores.student_id = students.id
-    JOIN assessments ON student_assessment_scores.assess_id = assessments.id
-    JOIN cohorts ON student_assessment_scores.cohort_id = cohorts.id
-    WHERE
-      student_assessment_scores.id = $1
-    ORDER BY students.stu_name ASC
-    `,
-      [id]
-    );
-
-    if (rows.length === 0) {
-      res.sendStatus(404);
-    } else {
-      await redisClient.set(id, JSON.stringify(rows[0]));
+      await redisClient.set(JSON.stringify(rows));
       console.log("Data retrieved from the database");
-      res.json(rows[0]);
+      res.json(rows);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
     }
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
   }
-});
+);
+
+app.get(
+  "/assessment_scores/:id",
+  fetchDataFromRedisOrDatabase,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { rows } = await pool.query(
+        `SELECT
+        student_assessment_scores.id,
+        students.stu_name AS student_name,
+        assessments.assess_name,
+        student_assessment_scores.grade,
+        cohorts.cohort_number
+      FROM
+        student_assessment_scores
+      JOIN students ON student_assessment_scores.student_id = students.id
+      JOIN assessments ON student_assessment_scores.assess_id = assessments.id
+      JOIN cohorts ON students.cohort_id = cohorts.id
+      WHERE
+        cohorts.cohort_number = $1
+      ORDER BY students.stu_name ASC
+    `,
+        [id]
+      );
+
+      if (rows.length === 0) {
+        res.sendStatus(404);
+      } else {
+        await redisClient.set(id, JSON.stringify(rows));
+        console.log("Data retrieved from the database");
+        res.json(rows);
+      }
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    }
+  }
+);
 
 app.post("/assessment_scores", async (req, res) => {
   try {
@@ -736,7 +748,7 @@ app.patch("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
     console.log(id);
-    const { student_id, assess_id, grade} = req.body;
+    const { student_id, assess_id, grade } = req.body;
     const { rowCount } = await pool.query(
       `UPDATE student_assessment_scores
       SET student_id = COALESCE($1, student_id),
@@ -756,8 +768,6 @@ app.patch("/assessment_scores/:id", async (req, res) => {
     res.sendStatus(500);
   }
 });
-
-
 
 app.delete("/assessment_scores/:id", async (req, res) => {
   try {
@@ -867,10 +877,13 @@ app.delete("/projects/:id", async (req, res) => {
 // new joint table route for Student, Project name and Project_Score
 //get route that will put the above data
 
-app.get("/student_project_scores/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
-  try {
-    const cohort_ID = req.params.id;
-    const query = `
+app.get(
+  "/student_project_scores/:id",
+  fetchDataFromRedisOrDatabase,
+  async (req, res) => {
+    try {
+      const cohort_ID = req.params.id;
+      const query = `
       SELECT s.stu_name, s.id, p.project_name, sps.grade, c.id, g.group_name, c.cohort_number      
       FROM 
         students s
@@ -884,16 +897,16 @@ app.get("/student_project_scores/:id", fetchDataFromRedisOrDatabase, async (req,
         groups g ON sps.group_id = g.id
       WHERE c.cohort_number= ${cohort_ID};
     `;
-    const { rows } = await pool.query(query);
-    await redisClient.set(cohort_ID, JSON.stringify(rows));
-    console.log("Data retrieved from the database");
-    res.json(rows);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+      const { rows } = await pool.query(query);
+      await redisClient.set(cohort_ID, JSON.stringify(rows));
+      console.log("Data retrieved from the database");
+      res.json(rows);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    }
   }
-});
-
+);
 
 // app.listen(port, () => {
 //   console.log(`Server is running at http://localhost:${port}`);
