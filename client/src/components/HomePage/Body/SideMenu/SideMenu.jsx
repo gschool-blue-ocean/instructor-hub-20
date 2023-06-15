@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import CohortContext from "../../../Context/CohortContext";
 import { useSignOut } from "react-auth-kit";
 import styles from "./SideMenu.module.css";
@@ -10,6 +10,7 @@ const SideMenu = ({ logout }) => {
   const handleLogout = () => {
     signOut();
     logout();
+    localStorage.removeItem("hasSeenSplash"); // Corrected line
   };
 
   return (
@@ -57,13 +58,12 @@ const SideMenu = ({ logout }) => {
             >
               Assessments
             </li>
-            <li className={styles["cohorts-li"]}>Cohorts</li>
           </ul>
           <span className={styles["sign-out-button-container"]}>
-          <button className={styles["sign-out-btn"]} onClick={handleLogout}>
-            Sign Out
-          </button>
-        </span>
+            <button className={styles["sign-out-btn"]} onClick={handleLogout}>
+              Sign Out
+            </button>
+          </span>
         </div>
       </div>
     </>
