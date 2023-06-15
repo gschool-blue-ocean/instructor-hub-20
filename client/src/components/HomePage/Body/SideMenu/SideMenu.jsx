@@ -13,12 +13,12 @@ const SideMenu = () => {
   };
 
   const handleOptionsClick = () => {
-    setIsVisible(true); 
+    setIsVisible(true);
   };
 
   const handleSelectionClick = () => {
     setIsVisible(false);
-  }
+  };
 
   return (
     <>
@@ -46,7 +46,7 @@ const SideMenu = () => {
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("main");
-                handleSelectionClick(); 
+                handleSelectionClick();
               }}
             >
               Home
@@ -55,7 +55,7 @@ const SideMenu = () => {
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("student");
-                handleSelectionClick(); 
+                handleSelectionClick();
               }}
             >
               Students

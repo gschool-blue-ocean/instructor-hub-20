@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import CohortContext from '../../../../../../../Context/CohortContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import styles from './AssessmentCard.module.css';
+import React, { useContext, useEffect, useState } from "react";
+import CohortContext from "../../../../../../../Context/CohortContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import styles from "./AssessmentCard.module.css";
 
 const AssessmentCard = ({ assessment }) => {
   const { setBodyDisplay } = useContext(CohortContext);
   const [formData, setFormData] = useState({
-    grade: assessment.grade || '',
-    student_id: assessment.student_id || '',
-    assess_id: assessment.assess_id || '',
-    cohort_id: assessment.cohort_id || '',
+    grade: assessment.grade || "",
+    student_id: assessment.student_id || "",
+    assess_id: assessment.assess_id || "",
+    cohort_id: assessment.cohort_id || "",
   });
   const [updatedAssessment, setUpdatedAssessment] = useState(assessment); // New state variable
 
@@ -23,17 +23,20 @@ const AssessmentCard = ({ assessment }) => {
     try {
       // Remove empty values from formData
       const updatedFormData = Object.fromEntries(
-        Object.entries(formData).filter(([key, value]) => value !== '')
+        Object.entries(formData).filter(([key, value]) => value !== "")
       );
-  
-      const response = await fetch(`http://localhost:8000/assessment_scores/${assessment.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedFormData),
-      });
-  
+
+      const response = await fetch(
+        `http://localhost:8000/assessment_scores/${assessment.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        }
+      );
+
       if (response.ok) {
         // Handle successful update
         // You can show a success message or perform any additional actions
@@ -41,22 +44,22 @@ const AssessmentCard = ({ assessment }) => {
           ...updatedAssessment,
           ...updatedFormData,
         });
-        console.log('Assessment updated successfully');
-  
+        console.log("Assessment updated successfully");
+
         window.location.reload(); // Reload the page
       } else {
         // Handle unsuccessful update
         // You can show an error message or perform any additional actions
-        console.log('Error updating assessment');
+        console.log("Error updating assessment");
       }
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   useEffect(() => {
     if (assessment) {
-      setBodyDisplay('assessment');
+      setBodyDisplay("assessment");
     }
   }, [assessment]);
 
@@ -67,20 +70,22 @@ const AssessmentCard = ({ assessment }) => {
   const isComplete = !!assessment.grade;
 
   return (
-    <div className={styles['card-container']}>
-      <div className={styles['card-container-bar']}>
-        <div className={styles['card-content']}>
-          <div className={styles['student-basic']}>
+    <div className={styles["card-container"]}>
+      <div className={styles["card-container-bar"]}>
+        <div className={styles["card-content"]}>
+          <div className={styles["student-basic"]}>
             <div>Student Name: {updatedAssessment.student_name}</div>
             <div>Assessment Name: {updatedAssessment.assess_name}</div>
             <div>Grade: {updatedAssessment.grade}</div>
             <div>Cohort Number: {updatedAssessment.cohort_number}</div>
           </div>
-          <div className={styles['student-other']}>
-            <div className={styles['completion-status']}>
-              Completion Status:{' '}
-              <span className={isComplete ? styles.complete : styles.incomplete}>
-                {isComplete ? 'Complete' : 'Incomplete'}
+          <div className={styles["student-other"]}>
+            <div className={styles["completion-status"]}>
+              Completion Status:{" "}
+              <span
+                className={isComplete ? styles.complete : styles.incomplete}
+              >
+                {isComplete ? "Complete" : "Incomplete"}
               </span>
             </div>
           </div>

@@ -108,7 +108,7 @@ span.or-sign-in-text:after {
   height: 0;
   margin: 10px 10px;
   border-top: 2px solid #e6e6e6;
-  content: '';
+  content: "";
 }
 
 .login-github-container {

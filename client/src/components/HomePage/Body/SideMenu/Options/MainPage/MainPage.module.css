@@ -1,56 +1,56 @@
 .student-title {
-    font-size: 2.5rem;
-    font-weight: var(--bold);
-    height: 100px;
-    padding: 10px 10px 10px 30px;
-    color: var(--galv-white);
-    background-color: var(--galv-purple);
-    margin-bottom: -30px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+  font-size: 2.5rem;
+  font-weight: var(--bold);
+  height: 100px;
+  padding: 10px 10px 10px 30px;
+  color: var(--galv-white);
+  background-color: var(--galv-purple);
+  margin-bottom: -30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .table-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 30px;
-    width: 1300px;
-    height: 550px;
-    padding: 30px 2px;
-    top: 0;
-    background-color: var(--galv-white);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 30px;
+  width: 1300px;
+  height: 550px;
+  padding: 30px 2px;
+  top: 0;
+  background-color: var(--galv-white);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .student-container-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
 }
 
 .page-header {
-    background-color: var(--galv-white);
-    color: var(--galv-darkgrey);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    font-size: 2.6rem;
-    padding: 5px 20px;
-    border-radius: 30px;
+  background-color: var(--galv-white);
+  color: var(--galv-darkgrey);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-size: 2.6rem;
+  padding: 5px 20px;
+  border-radius: 30px;
 }
 
 .add-btn {
-    background-color: var(--galv-orange);
-    color: var(--galv-white);
-    font-size: 1.3rem;
-    padding: 0px 15px;
-    border: none;
-    border-radius: 30px;
-    transform: scale(.7);
-    cursor: pointer;
-    transition: .3s ease-in;
+  background-color: var(--galv-orange);
+  color: var(--galv-white);
+  font-size: 1.3rem;
+  padding: 0px 15px;
+  border: none;
+  border-radius: 30px;
+  transform: scale(0.7);
+  cursor: pointer;
+  transition: 0.3s ease-in;
 }
 
 .add-btn:hover {
-    background-color: var(--galv-purple);
+  background-color: var(--galv-purple);
 }

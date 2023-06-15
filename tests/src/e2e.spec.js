@@ -11,10 +11,9 @@ test("sign in", async ({ page }) => {
   await page.fill('[placeholder="Password"]', "test");
   await page.click('button[class="login-button"]');
   await page.waitForSelector("button", { name: "Sign Out" });
-  const signedIn = await page.isVisible("button", { name: "Sign Out" })
-  expect(signedIn).toBe(true)
-})
-
+  const signedIn = await page.isVisible("button", { name: "Sign Out" });
+  expect(signedIn).toBe(true);
+});
 
 //------------------Register------------------
 

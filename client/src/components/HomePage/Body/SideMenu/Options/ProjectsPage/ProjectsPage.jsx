@@ -29,7 +29,7 @@ const ProjectsPage = () => {
           <div className={styles["add-button-container"]}></div>
           <button className={styles["add-btn"]}>Add Project</button>
         </div>
-        <div className={styles['table-cont']}>
+        <div className={styles["table-cont"]}>
           <ProjectsTable projects={projects} />
         </div>
       </div>

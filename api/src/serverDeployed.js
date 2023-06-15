@@ -1,21 +1,20 @@
 // import * as dotenv from "dotenv";
 // dotenv.config();
 import express from "express";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 import pg from "pg";
 import jwt from "jsonwebtoken";
 
 const PORT = process.env.PORT;
 
-const salt = bcrypt.genSaltSync(10)
+const salt = bcrypt.genSaltSync(10);
 // const hash = bcrypt.hashSync('B4c0/\/',salt)
-
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 const app = express();
@@ -87,10 +86,7 @@ app.use((req, res, next) => {
 
 //-----------------------------------------ROUTES(SINGULAR NON JOINT)--------------------------------------------------//
 
-
-
-
-// --------------------- Users routes ----------------------------- // 
+// --------------------- Users routes ----------------------------- //
 
 app.post("/register", async (req, res) => {
   try {
@@ -129,7 +125,11 @@ app.post("/login", async (req, res) => {
     if (!response.rows[0]) {
       res.status(404).send({ message: "User not found" });
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
-      const token = jwt.sign({ email: response.rows[0].email }, process.env.JWT_SECRET, { expiresIn: '2h' })
+      const token = jwt.sign(
+        { email: response.rows[0].email },
+        process.env.JWT_SECRET,
+        { expiresIn: "2h" }
+      );
       // console.log(token);
       res.status(200).send({ token, user: { email: response.rows[0].email } });
     } else {
@@ -895,12 +895,10 @@ app.get("/student_project_scores/:cohort_id", async (req, res) => {
   }
 });
 
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
 });
-
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

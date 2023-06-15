@@ -1,13 +1,13 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import bcrypt from 'bcryptjs';
-import cors from 'cors';
+import bcrypt from "bcryptjs";
+import cors from "cors";
 import pg from "pg";
 import jwt from "jsonwebtoken";
 
-const salt = bcrypt.genSaltSync(10)
-const hash = bcrypt.hashSync('B4c0/\/',salt)
+const salt = bcrypt.genSaltSync(10);
+const hash = bcrypt.hashSync("B4c0//", salt);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -84,10 +84,7 @@ app.use((req, res, next) => {
 
 //-----------------------------------------ROUTES(SINGULAR NON JOINT)--------------------------------------------------//
 
-
-
-
-// --------------------- Users routes ----------------------------- // 
+// --------------------- Users routes ----------------------------- //
 
 app.post("/register", async (req, res) => {
   try {
@@ -118,7 +115,9 @@ app.post("/register", async (req, res) => {
 
 app.delete("/users/:name", async (req, res) => {
   try {
-    const result = await pool.query('DELETE FROM users WHERE name = $1', [req.params.name])
+    const result = await pool.query("DELETE FROM users WHERE name = $1", [
+      req.params.name,
+    ]);
     if (result.rows[0]) {
       res.status(201).send({ message: "User successfully removed" });
     } else {
@@ -128,7 +127,7 @@ app.delete("/users/:name", async (req, res) => {
     console.error(error);
     res.status(500).send({ message: error });
   }
-})
+});
 
 app.post("/login", async (req, res) => {
   try {
@@ -140,7 +139,11 @@ app.post("/login", async (req, res) => {
     if (!response.rows[0]) {
       res.status(404).send({ message: "User not found" });
     } else if (await bcrypt.compare(password, response.rows[0].password)) {
-      const token = jwt.sign({ email: response.rows[0].email }, "my-32-character-ultra-secure-and-ultra-long-secret", { expiresIn: '2h' })
+      const token = jwt.sign(
+        { email: response.rows[0].email },
+        "my-32-character-ultra-secure-and-ultra-long-secret",
+        { expiresIn: "2h" }
+      );
       console.log(token);
       res.status(200).send({ token, user: { email: response.rows[0].email } });
     } else {
@@ -149,7 +152,7 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Internal Server Error" });
-  }  
+  }
 });
 
 // --------------------- Students routes ----------------------------- //
@@ -177,7 +180,6 @@ app.get("/students/:cohort_id", async (req, res) => {
   }
 });
 
-
 app.post("/students", async (req, res) => {
   try {
     const { stu_name, email, gitHub, cohort_number } = req.body;
@@ -186,7 +188,7 @@ app.post("/students", async (req, res) => {
       [cohort_number]
     );
     const id = response.rows[0].id;
-    console.log(respons.rows)
+    console.log(respons.rows);
     const { rows } = await pool.query(
       "INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [stu_name, email, gitHub, id]
@@ -689,13 +691,12 @@ app.get("/assessment_scores", async (req, res) => {
       JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
-    res.json(rows);  
+    res.json(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
   }
 });
-
 
 app.get("/assessment_scores/:id", async (req, res) => {
   try {
@@ -748,7 +749,7 @@ app.patch("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
     console.log(id);
-    const { student_id, assess_id, grade} = req.body;
+    const { student_id, assess_id, grade } = req.body;
     const { rowCount } = await pool.query(
       `UPDATE student_assessment_scores
       SET student_id = COALESCE($1, student_id),
@@ -768,8 +769,6 @@ app.patch("/assessment_scores/:id", async (req, res) => {
     res.sendStatus(500);
   }
 });
-
-
 
 app.delete("/assessment_scores/:id", async (req, res) => {
   try {
@@ -905,16 +904,16 @@ app.get("/student_project_scores/:id", async (req, res) => {
 //     const { cohort_id } = req.params;
 //     const query = `
 //     SELECT ,
-    
+
 //     projects.project_name AS project_name,
 //     project_scores.grade AS project_score,
 //     cohorts.cohort_number AS cohort_number
-//     FROM groups 
-//     JOIN 
+//     FROM groups
+//     JOIN
 //     project_scores ON groups.id = project_scores.group_id
-//     JOIN 
-//     projects ON project_scores.project_id = projects.id 
-//     JOIN 
+//     JOIN
+//     projects ON project_scores.project_id = projects.id
+//     JOIN
 //     cohorts ON project_scores.cohort_id = cohorts.id WHERE cohorts.cohort_number = $1`;
 //     const { rows } = await pool.query(query, [cohort_id]);
 //     res.json(rows);

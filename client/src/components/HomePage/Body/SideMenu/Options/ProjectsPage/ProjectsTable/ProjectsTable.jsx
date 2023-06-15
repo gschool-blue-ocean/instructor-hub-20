@@ -27,9 +27,7 @@ const ProjectsTable = ({ projects }) => {
                     <td>{project.group_name}</td>
                     <td>{project.stu_name}</td>
                     <td>{project.project_name}</td>
-                    <td className={styles["project-score"]}>
-                      {project.grade}
-                    </td>
+                    <td className={styles["project-score"]}>{project.grade}</td>
                   </tr>
                 );
               })}

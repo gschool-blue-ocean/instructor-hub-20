@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './StudentsTable.module.css';
+import React from "react";
+import styles from "./StudentsTable.module.css";
 
 const StudentsTable = ({ studs }) => {
   return (
@@ -22,7 +22,7 @@ const StudentsTable = ({ studs }) => {
         <table>
           <tbody>
             {studs.map((stud, index) => {
-              console.log(stud)
+              console.log(stud);
               return (
                 <tr key={`Student_${index}`}>
                   <td>{stud.stu_name}</td>
@@ -39,6 +39,6 @@ const StudentsTable = ({ studs }) => {
       </div>
     </div>
   );
-}
+};
 
 export default StudentsTable;

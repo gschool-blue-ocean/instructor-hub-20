@@ -1,5 +1,5 @@
 .card-container {
-  position:relative;
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -49,7 +49,6 @@
   border-radius: 30px;
 }
 
-
 .add-card-btn {
   background-color: var(--galv-orange);
   color: var(--galv-white);
@@ -58,9 +57,9 @@
   padding: 0px 15px;
   border: none;
   border-radius: 30px;
-  transform: scale(.7);
+  transform: scale(0.7);
   cursor: pointer;
-  transition: .3s ease-in;
+  transition: 0.3s ease-in;
 }
 
 .add-card-btn:hover {
