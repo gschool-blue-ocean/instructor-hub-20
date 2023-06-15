@@ -1,5 +1,9 @@
 .body {
     display: flex;
-   flex-direction: row;
-   height: 90vh;
-}
+    flex-direction: column;
+    min-height: 100vh; /* Set minimum height to viewport height */
+  }
+  
+  .content {
+    flex-grow: 1; /* Allow content to grow and occupy remaining space */
+  }

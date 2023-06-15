@@ -1,52 +1,35 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import CohortContext from "../../../Context/CohortContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useSignOut } from "react-auth-kit";
 import styles from "./SideMenu.module.css";
 
-const SideMenu = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const SideMenu = ({ logout }) => {
   const { setBodyDisplay } = useContext(CohortContext);
+  const signOut = useSignOut();
 
-  const handleArrowClick = () => {
-    setIsVisible(!isVisible);
+  const handleLogout = () => {
+    signOut();
+    logout();
+    localStorage.removeItem("hasSeenSplash"); // Corrected line
   };
-
-  const handleOptionsClick = () => {
-    setIsVisible(true); 
-  };
-
-  const handleSelectionClick = () => {
-    setIsVisible(false);
-  }
 
   return (
     <>
-      {isVisible && (
-        <div className={styles.overlay} onClick={handleArrowClick} />
-      )}
-      <div
-        className={`${styles["sidemenu-container"]} ${
-          isVisible ? styles["visible"] : ""
-        }`}
-      >
-        <div className={styles["arrow-container"]}>
-          <span
-            id={styles["arrow"]}
-            className={styles["arrow-icon"]}
-            onClick={handleArrowClick}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </span>
-        </div>
+      <div className={styles["sidemenu-container"]}>
         <div className={styles["menu-container"]}>
-          <h3 className={styles["menu-title"]}>Menu</h3>
+          <span className={styles["logo-and-title"]}>
+            <img
+              className={styles["galv-logo"]}
+              src="https://coursereport-production.imgix.net/uploads/school/logo/10/original/galvanize_logomark_full-color_light-background.png"
+              alt=""
+            />
+            <h3 className={styles["nav-title"]}>Instructor Hub</h3>
+          </span>
           <ul className={styles["select-container"]}>
             <li
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("main");
-                handleSelectionClick(); 
               }}
             >
               Home
@@ -55,7 +38,6 @@ const SideMenu = () => {
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("student");
-                handleSelectionClick(); 
               }}
             >
               Students
@@ -64,7 +46,6 @@ const SideMenu = () => {
               className={styles["projects-li"]}
               onClick={() => {
                 setBodyDisplay("project");
-                handleSelectionClick();
               }}
             >
               Projects
@@ -73,18 +54,16 @@ const SideMenu = () => {
               className={styles["assessments-li"]}
               onClick={() => {
                 setBodyDisplay("assessment");
-                handleSelectionClick();
               }}
             >
               Assessments
             </li>
-            <li className={styles["cohorts-li"]}>Cohorts</li>
           </ul>
-        </div>
-      </div>
-      <div className={styles["options-btn-cont"]}>
-        <div className={styles["options-btn"]} onClick={handleOptionsClick}>
-          Menu
+          <span className={styles["sign-out-button-container"]}>
+            <button className={styles["sign-out-btn"]} onClick={handleLogout}>
+              Sign Out
+            </button>
+          </span>
         </div>
       </div>
     </>

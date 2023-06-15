@@ -4,13 +4,13 @@ import ProjectsPage from '../SideMenu/Options/ProjectsPage/ProjectsPage';
 import AssessmentsPage from '../SideMenu/Options/AssessmentsPage/AssessmentsPage';
 import MainPage from '../SideMenu/Options/MainPage/MainPage';
 import AssessmentCard from '../SideMenu/Options/AssessmentsPage/AssessmentsTable/AssessmentCard/AssessmentCard';
+import AssessmentsTable from '../SideMenu/Options/AssessmentsPage/AssessmentsTable/AssessmentsTable';
 import styles from './Dashboard.module.css';
+
 import CohortContext from '../../../Context/CohortContext';
 
 const Dashboard = () => {
   const { bodyDisplay, setBodyDisplay } = useContext(CohortContext);
-
-  // console.log(bodyDisplay)
 
   useEffect(() => {
     if (!bodyDisplay) {
@@ -25,6 +25,7 @@ const Dashboard = () => {
         {bodyDisplay === 'project' ? <ProjectsPage /> : null}
         {bodyDisplay === 'student' ? <StudentsPage /> : null}
         {bodyDisplay === 'assessment' ? <AssessmentsPage /> : null}
+        {bodyDisplay === 'assessmentTable' ? <AssessmentsTable /> : null}
         {bodyDisplay === 'assessmentCard' ? <AssessmentCard /> : null}
       </div>
     </div>

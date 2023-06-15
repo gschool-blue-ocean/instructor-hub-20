@@ -1,12 +1,11 @@
 .sidemenu-container {
-  position: relative;
+  position: fixed;
   top: 0;
-  left: -400px;
-  width: 300px;
-  height: 95vh;
-  background-color: var(--galv-purple);
-  transition: left 0.3s ease-in;
-  z-index: 999;
+  width: 200px;
+  height: 100vh;
+  background-color: var(--galv-white);
+  border-right: 2px solid #c8c8c8;
+    z-index: 999;
 }
 
 .sidemenu-container.visible {
@@ -25,35 +24,9 @@
   z-index: 998;
 }
 
-.arrow-container {
-  width: 100%;
-  display: flex;
-  justify-content: right;
-}
-
-.arrow-icon {
-  color: var(--galv-white);
-  transform: scale(1.7) rotate(180deg);
-  padding: 20px;
-  align-self: right;
-  cursor: pointer;
-  transition: 0.3s ease-in;
-}
-
-.arrow-icon:hover {
-  transform: scale(1.7) rotate(180deg);
-}
-
-.sidemenu-container.visible .arrow-icon {
-  transform: scale(1.7);
-}
-
-.sidemenu-container.visible .arrow-icon:hover {
-  color: var(--galv-lightorange);
-}
 
 .menu-container {
-  color: var(--galv-white);
+  color: var(--galv-darkgrey);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,19 +43,18 @@
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 }
 
 .select-container li {
-  padding: 25px;
-  font-size: 1.5rem;
-  border-bottom: 2px solid var(--galv-white);
+  padding: 15px;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: 0.3s ease-in;
 }
 
 .select-container li:hover {
-  color: var(--galv-lightorange);
+  color: #989898;
 }
 
 .options-btn-cont {
@@ -120,5 +92,50 @@
 }
 
 .options-btn-cont:hover {
+  background-color: var(--galv-purple);
+}
+
+
+.logo-and-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0px 80px 0px;
+}
+
+.galv-logo{
+  width: 50px;
+  height: 50px;
+  margin: 10px 20px;
+  cursor: pointer;
+  transition: 1s ease-in-out;
+}
+
+.galv-logo:hover {
+  transform: rotate(180deg);
+}
+
+.nav-title {
+  color: var(--galv-darkgrey);
+  font-weight: var(--medium);
+  font-size: 1.2rem;
+}
+
+.sign-out-button-container {
+  margin-top: 170px;
+}
+
+.sign-out-btn {
+  font-size: 1rem;
+  padding: 6px 17px;
+  border: none;
+  color: var(--galv-white);
+  background-color: var(--galv-orange);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.sign-out-btn:hover {
   background-color: var(--galv-purple);
 }

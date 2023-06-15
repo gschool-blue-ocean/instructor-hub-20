@@ -1,17 +1,15 @@
-import React, {useState} from 'react'
-import NavBar from './NavBar/NavBar';
-import Body from './Body/Body';
-import Footer from './Footer/Footer';
+import React, { useState } from "react";
+import NavBar from "./Body/MenuBar/MenuBar";
+import Body from "./Body/Body";
+import Footer from "./Footer/Footer";
 
-const HomePage = ({logout}) => {
-
+const HomePage = ({ logout }) => {
   return (
     <>
-    <NavBar logout={logout}/>
-    <Body />
-    <Footer />
+      <Body logout={logout} />
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
