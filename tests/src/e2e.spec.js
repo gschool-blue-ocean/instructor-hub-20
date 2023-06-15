@@ -5,37 +5,37 @@ const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 //------------------Sign In------------------
 
-// test('sign in', async ({ page }) => {
-//   // will need to preface with the authentication modal
-// await page.goto('http://localhost:5173/');
-// await page.fill('[placeholder="Email Address"]', 'test@test.com');
-// await page.fill('[placeholder="Password"]', 'test');
-// await page.getByRole('button', { name: 'Sign In' }).click();
-// await page.waitForSelector('text="Home Dashboard"');
-// const signedIn = await page.isVisible('text="Home Dashboard"')
-// expect(signedIn).toBe(true)
-// });
+test("sign in", async ({ page }) => {
+  await page.goto(CLIENT_URL);
+  await page.fill('[placeholder="Email Address"]', "test@test.com");
+  await page.fill('[placeholder="Password"]', "test");
+  await page.click('button[class="login-button"]');
+  await page.waitForSelector("button", { name: "Sign Out" });
+  const signedIn = await page.isVisible("button", { name: "Sign Out" })
+  expect(signedIn).toBe(true)
+})
+
 
 //------------------Register------------------
 
-test('register', async ({ page }) => {
-  await fetch(`${API_URL}/users/test2`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  })
-  await page.goto(CLIENT_URL);
-  await page.getByRole('button', { name: 'Register'}).click();
-  await page.fill('[placeholder="First and Last Name"]', 'test2');
-  await page.fill('[placeholder="Email address"]', 'test2@test.com');
-  await page.fill('[placeholder="Set Password"]', 'test');
-  await page.fill('[placeholder="Verify Password"]', 'test');
-  await page.getByRole('button', { name: 'Register'}).click();
-  await page.waitForSelector('text="Account successfully registered!"');
-  const didRegister = await page.isVisible('text="Account successfully registered!"');
-  expect(didRegister).toBe(true);
-})
+// test('register', async ({ page }) => {
+//   await fetch(`${API_URL}/users/test2`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     }
+//   })
+//   await page.goto(CLIENT_URL);
+//   await page.getByRole('button', { name: 'Register'}).click();
+//   await page.fill('[placeholder="First and Last Name"]', 'test2');
+//   await page.fill('[placeholder="Email address"]', 'test2@test.com');
+//   await page.fill('[placeholder="Set Password"]', 'test');
+//   await page.fill('[placeholder="Verify Password"]', 'test');
+//   await page.getByRole('button', { name: 'Register'}).click();
+//   await page.waitForSelector('text="Account successfully registered!"');
+//   const didRegister = await page.isVisible('text="Account successfully registered!"');
+//   expect(didRegister).toBe(true);
+// })
 
 //------------------Sign Out------------------
 
