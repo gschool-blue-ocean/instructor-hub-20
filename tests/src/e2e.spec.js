@@ -2,18 +2,24 @@ import { test, expect } from "@playwright/test";
 
 const API_URL = process.env.API_URL || "http://localhost:8000";
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+const browsers = process.env.BROWSER.split(',');
 
 //------------------Sign In------------------
 
-test("sign in", async ({ page }) => {
-  await page.goto(CLIENT_URL);
-  await page.fill('[placeholder="Email Address"]', "test@test.com");
-  await page.fill('[placeholder="Password"]', "test");
-  await page.click('button[class="login-button"]');
-  await page.waitForSelector("button", { name: "Sign Out" });
-  const signedIn = await page.isVisible("button", { name: "Sign Out" });
-  expect(signedIn).toBe(true);
-});
+for (const browserName of browsers) {
+  test(`sign in - ${browserName}`, async ({ browser }) => {
+    const context = await browser.newContext();
+    const testPage = await context.newPage();
+    await testPage.goto(CLIENT_URL);
+    await testPage.fill('[placeholder="Email Address"]', "test@test.com");
+    await testPage.fill('[placeholder="Password"]', "test");
+    await testPage.click('button[class="login-button"]');
+    await testPage.waitForSelector("button", { name: "Sign Out" });
+    const signedIn = await testPage.isVisible("button", { name: "Sign Out" });
+    expect(signedIn).toBe(true);
+    await context.close();
+  });
+}
 
 //------------------Register------------------
 

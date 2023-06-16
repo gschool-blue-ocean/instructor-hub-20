@@ -57,6 +57,7 @@ services:
       NODE_ENV: test
       PORT: ${TESTING_PORT}
       CHOKIDAR_USEPOLLING: "true"
+      BROWSER: chromium,firefox,webkit # Specify all the browsers you want to run tests in
     depends_on:
       - database
       - api
