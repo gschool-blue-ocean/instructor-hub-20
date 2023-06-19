@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 //     console.error(err);
 //     res.status(500).json({ message: `Something went wrong: ${err}` });
 //   }
-}
+// }
 
 //-----------------------------------------ROUTES--------------------------------------------------//
 
@@ -125,12 +125,12 @@ app.get("/students",  async (req, res) => {
     const { rows } = await pool.query(
       "SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id"
     );
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    // 
+    
     res.status(200).json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -143,8 +143,8 @@ app.get(
         "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
         [cohort_id]
       );
-      await redisClient.set(cohort_id, JSON.stringify(rows));
-      console.log("Data retrieved from the database");
+      
+      
       res.status(201).json(rows);
     } catch (error) {
       console.error(error);
@@ -219,8 +219,8 @@ app.delete("/students/:id", async (req, res) => {
 app.get("/cohorts", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM cohorts");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
+    // 
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -239,7 +239,7 @@ app.get("/cohorts", async (req, res) => {
 //       res.sendStatus(404);
 //     } else {
 //       await redisClient.set(id, JSON.stringify(rows[0]));
-//       console.log("Data retrieved from the database");
+//       
 //       res.json(rows[0]);
 //     }
 //   } catch (err) {
@@ -303,8 +303,8 @@ app.delete("/cohorts/:id", async (req, res) => {
 app.get("/groups", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM groups");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    // 
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -323,8 +323,8 @@ app.get("/groups/:id", async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      await redisClient.set(id, JSON.stringify(rows));
-      console.log("Data retrieved from the database");
+      
+      
       res.json(rows);
     }
   } catch (error) {
@@ -409,8 +409,8 @@ app.delete("/groups/:id", async (req, res) => {
 app.get("/project", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM project");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    // 
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -429,7 +429,7 @@ app.get("/project/:id", async (req, res) => {
       res.sendStatus(404);
     } else {
       await redisClient.set(id, JSON.stringify(rows[0]));
-      console.log("Data retrieved from the database");
+      
       res.json(rows[0]);
     }
   } catch (error) {
@@ -492,8 +492,8 @@ app.delete("/project/:id", async (req, res) => {
 // app.get("/project_scores", async (req, res) => {
 //   try {
 //     const { rows } = await pool.query("SELECT * FROM project_scores");
-//     await redisClient.set(JSON.stringify(rows));
-//     console.log("Data retrieved from the database");
+    
+//     
 //     res.json(rows);
 //   } catch (error) {
 //     console.error(error);
@@ -513,7 +513,7 @@ app.delete("/project/:id", async (req, res) => {
 //       res.sendStatus(404);
 //     } else {
 //       await redisClient.set(id, JSON.stringify(rows[0]));
-//       console.log("Data retrieved from the database");
+//       
 //       res.json(rows[0]);
 //     }
 //   } catch (error) {
@@ -579,8 +579,8 @@ app.delete("/project/:id", async (req, res) => {
 app.get("/assessments", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM assessments");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    // 
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -679,8 +679,8 @@ app.get(
       JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
-      await redisClient.set(JSON.stringify(rows));
-      console.log("Data retrieved from the database");
+      // 
+      
       res.json(rows);
     } catch (error) {
       console.error(error);
@@ -716,8 +716,8 @@ app.get(
       if (rows.length === 0) {
         res.sendStatus(404);
       } else {
-        await redisClient.set(id, JSON.stringify(rows));
-        console.log("Data retrieved from the database");
+        
+        
         res.json(rows);
       }
     } catch (error) {
@@ -789,8 +789,8 @@ app.delete("/assessment_scores/:id", async (req, res) => {
 app.get("/projects", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM projects");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    // 
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -808,8 +808,8 @@ app.get("/projects/:id", async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      await redisClient.set(id, JSON.stringify(rows[0]));
-      console.log("Data retrieved from the database");
+      
+      
       res.json(rows[0]);
     }
   } catch (error) {
@@ -894,8 +894,8 @@ app.get(
       WHERE c.cohort_number= ${cohort_ID};
     `;
       const { rows } = await pool.query(query);
-      await redisClient.set(cohort_ID, JSON.stringify(rows));
-      console.log("Data retrieved from the database");
+      
+      
       res.json(rows);
     } catch (error) {
       console.error(error);
