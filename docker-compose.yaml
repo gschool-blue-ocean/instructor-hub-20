@@ -10,6 +10,8 @@ services:
       - pg-data:/var/lib/postgresql/data
       - ./api/src/db/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./api/src/db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+    networks:
+      - mynetwork
 
   api:
     build: ./api
@@ -28,6 +30,8 @@ services:
       # filesystem to the container's.
       - ./api/src:/code/src
     command: npm run dev
+    networks:
+      - mynetwork
 
   app:
     build: ./client
@@ -68,14 +72,14 @@ services:
     volumes:
       - ./tests/src:/code/src
     networks:
-      mynetwork:
+      - mynetwork
 
   redis: # Add this section to define the Redis container
     image: redis:latest
     ports:
       - 6379:6379
     networks:
-      mynetwork:
+      - mynetwork
 
 volumes:
   pg-data:
