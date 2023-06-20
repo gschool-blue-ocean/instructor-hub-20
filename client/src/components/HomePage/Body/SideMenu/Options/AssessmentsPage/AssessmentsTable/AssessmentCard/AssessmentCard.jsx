@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import CohortContext from '../../../../../../../Context/CohortContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import styles from './AssessmentCard.module.css';
+import React, { useContext, useEffect, useState } from "react";
+import CohortContext from "../../../../../../../Context/CohortContext";
+import styles from "./AssessmentCard.module.css";
 
 const AssessmentCard = ({ assessment, closeModal }) => {
   const { setBodyDisplay } = useContext(CohortContext);
   const [formData, setFormData] = useState({
-    grade: assessment.grade || '',
-    student_id: assessment.student_id || '',
-    assess_id: assessment.assess_id || '',
-    cohort_id: assessment.cohort_id || '',
+    grade: assessment.grade || "",
+    student_id: assessment.student_id || "",
+    assess_id: assessment.assess_id || "",
+    cohort_id: assessment.cohort_id || "",
   });
   const [updatedAssessment, setUpdatedAssessment] = useState(assessment);
   const [shouldUpdate, setShouldUpdate] = useState(false); // State variable to trigger rerender
@@ -23,26 +21,29 @@ const AssessmentCard = ({ assessment, closeModal }) => {
     e.preventDefault();
     try {
       const updatedFormData = Object.fromEntries(
-        Object.entries(formData).filter(([key, value]) => value !== '')
+        Object.entries(formData).filter(([key, value]) => value !== "")
       );
 
-      const response = await fetch(`http://localhost:8000/assessment_scores/${assessment.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedFormData),
-      });
+      const response = await fetch(
+        `http://localhost:8000/assessment_scores/${assessment.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        }
+      );
 
       if (response.ok) {
         setUpdatedAssessment({
           ...updatedAssessment,
           ...updatedFormData,
         });
-        console.log('Assessment updated successfully');
+        console.log("Assessment updated successfully");
         setShouldUpdate(true); // Set the state variable to trigger the rerender
       } else {
-        console.log('Error updating assessment');
+        console.log("Error updating assessment");
       }
     } catch (error) {
       console.error(error);
@@ -51,7 +52,7 @@ const AssessmentCard = ({ assessment, closeModal }) => {
 
   useEffect(() => {
     if (shouldUpdate) {
-      setBodyDisplay('assessmentTable'); // Update the body display to trigger the AssessmentPage component rerender
+      setBodyDisplay("assessmentTable"); // Update the body display to trigger the AssessmentPage component rerender
       setShouldUpdate(false); // Reset the state variable
     }
   }, [shouldUpdate, setBodyDisplay]);
@@ -63,23 +64,25 @@ const AssessmentCard = ({ assessment, closeModal }) => {
   };
 
   return (
-    <div className={styles['card-container']}>
+    <div className={styles["card-container"]}>
       <span className={styles.close} onClick={closeCard}>
         &times;
       </span>
-      <div className={styles['card-container-bar']}>
-        <div className={styles['card-content']}>
-          <div className={styles['student-basic']}>
+      <div className={styles["card-container-bar"]}>
+        <div className={styles["card-content"]}>
+          <div className={styles["student-basic"]}>
             <div>Student Name: {updatedAssessment.student_name}</div>
             <div>Assessment Name: {updatedAssessment.assess_name}</div>
             <div>Grade: {updatedAssessment.grade}</div>
             <div>Cohort Number: {updatedAssessment.cohort_number}</div>
           </div>
-          <div className={styles['student-other']}>
-            <div className={styles['completion-status']}>
-              Completion Status:{' '}
-              <span className={isComplete ? styles.complete : styles.incomplete}>
-                {isComplete ? 'Complete' : 'Incomplete'}
+          <div className={styles["student-other"]}>
+            <div className={styles["completion-status"]}>
+              Completion Status:{" "}
+              <span
+                className={isComplete ? styles.complete : styles.incomplete}
+              >
+                {isComplete ? "Complete" : "Incomplete"}
               </span>
             </div>
           </div>
