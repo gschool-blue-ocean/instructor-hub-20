@@ -13,7 +13,6 @@ const StudentsTable = ({ studs }) => {
               <th className={styles.column3}>Github</th>
               <th className={styles.column4}>Grad Date</th>
               <th className={styles.column5}>Cohort</th>
-              <th className={styles.column6}>Options</th>
             </tr>
           </thead>
         </table>
@@ -30,7 +29,6 @@ const StudentsTable = ({ studs }) => {
                   <td>{stud.github}</td>
                   <td>{stud.graduation}</td>
                   <td>{stud.cohort_number}</td>
-                  <td>options</td>
                 </tr>
               );
             })}

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { AuthProvider } from "react-auth-kit";
-import Login from "./Login/Login";
-import "./App.css";
-import HomePage from "./HomePage/HomePage";
-import { CohortProvider } from "./Context/CohortContext.jsx";
+import React, { useState } from 'react';
+import { AuthProvider } from 'react-auth-kit';
+import Login from './Login/Login';
+import './App.css';
+import HomePage from './HomePage/HomePage';
+import SplashScreen from './SplashScreen/SplashScreen';
+import { CohortProvider } from './Context/CohortContext.jsx';
 
 const App = () => {
   const [userAuth, setUserAuth] = useState(false);
@@ -11,8 +12,8 @@ const App = () => {
   return (
     <div id="App">
       <AuthProvider
-        authType={"cookie"}
-        authName={"_auth"}
+        authType="cookie"
+        authName="_auth"
         cookieDomain={window.location.hostname}
         cookieSecure={false}
       >
@@ -20,7 +21,7 @@ const App = () => {
           <Login userAuth={() => setUserAuth(true)} />
         ) : (
           <CohortProvider>
-            <HomePage logout={() => setUserAuth(false)} />
+            {userAuth ? <SplashScreen logout={() => setUserAuth(false)} /> : <HomePage logout={() => setUserAuth(false)} />}
           </CohortProvider>
         )}
       </AuthProvider>

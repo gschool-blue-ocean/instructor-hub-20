@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import NavBar from "./NavBar/NavBar";
+import NavBar from "./Body/MenuBar/MenuBar";
 import Body from "./Body/Body";
 import Footer from "./Footer/Footer";
 
 const HomePage = ({ logout }) => {
   return (
     <>
-      <NavBar logout={logout} />
-      <Body />
+      <Body logout={logout} />
       <Footer />
     </>
   );

@@ -18,7 +18,9 @@ const StudentsPage = () => {
 
   return (
     <div className={styles["student-container"]}>
-      <div className={styles["student-title"]}>Student Dashboard</div>
+      <div className={styles["student-title"]}>
+        <span className={styles["title"]}>Students Dashboard</span>
+      </div>
       <div className={styles["table-container"]}>
         <div className={styles["student-container-bar"]}>
           <div className={styles["page-header"]}>
