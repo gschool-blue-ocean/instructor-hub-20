@@ -21,9 +21,9 @@ const pool = new pg.Pool({
 
 let redisClient = pubClient;
 
-redisClient.on("connect", () => {
-  console.log("Connected to Redis");
-});
+// redisClient.on("connect", () => {
+//   console.log("Connected to Redis");
+// });
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -39,28 +39,28 @@ app.use((req, res, next) => {
   next();
 });
 
-async function fetchDataFromRedisOrDatabase(req, res, next) {
-  const id = req.params.id;
-  console.log(id);
-  try {
-    const cacheResults = await new Promise((resolve, reject) => {
-      redisClient.get(id, (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      });
-    });
-    if (cacheResults) {
-      console.log(res);
-      console.log("Data retrieved from cache");
-      res.json(JSON.parse(cacheResults));
-    } else {
-      next();
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: `Something went wrong: ${err}` });
-  }
-}
+// async function fetchDataFromRedisOrDatabase(req, res, next) {
+//   const id = req.params.id;
+//   console.log(id);
+//   try {
+//     const cacheResults = await new Promise((resolve, reject) => {
+//       redisClient.get(id, (error, result) => {
+//         if (error) reject(error);
+//         else resolve(result);
+//       });
+//     });
+//     if (cacheResults) {
+//       console.log(res);
+//       console.log("Data retrieved from cache");
+//       res.json(JSON.parse(cacheResults));
+//     } else {
+//       next();
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: `Something went wrong: ${err}` });
+//   }
+// }
 
 //-----------------------------------------ROUTES--------------------------------------------------//
 
@@ -120,13 +120,12 @@ app.post("/login", async (req, res) => {
 });
 
 // --------------------- Students routes ----------------------------- //
-app.get("/students", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/students", async (req, res) => {
   try {
     const { rows } = await pool.query(
       "SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id"
     );
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
     res.status(200).json(rows);
   } catch (error) {
     console.error(error);
@@ -136,7 +135,7 @@ app.get("/students", fetchDataFromRedisOrDatabase, async (req, res) => {
 
 app.get(
   "/students/:cohort_id",
-  fetchDataFromRedisOrDatabase,
+  
   async (req, res) => {
     const { cohort_id } = req.params;
     try {
@@ -144,8 +143,6 @@ app.get(
         "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
         [cohort_id]
       );
-      await redisClient.set(cohort_id, JSON.stringify(rows));
-      console.log("Data retrieved from the database");
       res.status(201).json(rows);
     } catch (error) {
       console.error(error);
@@ -217,11 +214,10 @@ app.delete("/students/:id", async (req, res) => {
 });
 
 // --------------------------- Cohorts routes -------------------------------------//
-app.get("/cohorts", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/cohorts",  async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM cohorts");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -229,7 +225,7 @@ app.get("/cohorts", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-// app.get("/cohorts/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
+// app.get("/cohorts/:id",  async (req, res) => {
 //   try {
 //     const { id } = req.params;
 //     const { rows } = await pool.query("SELECT * FROM cohorts WHERE id = $1", [
@@ -301,11 +297,10 @@ app.delete("/cohorts/:id", async (req, res) => {
 });
 
 //----------------- Groups routes -----------------------//
-app.get("/groups", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/groups",  async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM groups");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -313,7 +308,7 @@ app.get("/groups", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-app.get("/groups/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/groups/:id",  async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
@@ -407,11 +402,10 @@ app.delete("/groups/:id", async (req, res) => {
 });
 
 // ----------------- Project routes ----------------------//
-app.get("/project", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/project",  async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM project");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -419,7 +413,7 @@ app.get("/project", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-app.get("/project/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/project/:id",  async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query("SELECT * FROM project WHERE id = $1", [
@@ -429,8 +423,7 @@ app.get("/project/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      await redisClient.set(id, JSON.stringify(rows[0]));
-      console.log("Data retrieved from the database");
+      
       res.json(rows[0]);
     }
   } catch (error) {
@@ -490,7 +483,7 @@ app.delete("/project/:id", async (req, res) => {
   }
 });
 // ----------------- Project Scores routes ----------------------//
-// app.get("/project_scores", fetchDataFromRedisOrDatabase, async (req, res) => {
+// app.get("/project_scores",  async (req, res) => {
 //   try {
 //     const { rows } = await pool.query("SELECT * FROM project_scores");
 //     await redisClient.set(JSON.stringify(rows));
@@ -502,7 +495,7 @@ app.delete("/project/:id", async (req, res) => {
 //   }
 // });
 
-// app.get("/project_scores/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
+// app.get("/project_scores/:id",  async (req, res) => {
 //   try {
 //     const { id } = req.params;
 //     const { rows } = await pool.query(
@@ -577,11 +570,10 @@ app.delete("/project/:id", async (req, res) => {
 // });
 
 // ----------------- Assessments routes --------------------- //
-app.get("/assessments", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/assessments",  async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM assessments");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -664,7 +656,7 @@ app.delete("/assessments/:id", async (req, res) => {
 // ---------------- Assessment Scores routes --------------------- //
 app.get(
   "/assessment_scores",
-  fetchDataFromRedisOrDatabase,
+  
   async (req, res) => {
     try {
       const { rows } = await pool.query(`
@@ -681,8 +673,7 @@ app.get(
       JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
-      await redisClient.set(JSON.stringify(rows));
-      console.log("Data retrieved from the database");
+      
       res.json(rows);
     } catch (error) {
       console.error(error);
@@ -693,7 +684,7 @@ app.get(
 
 app.get(
   "/assessment_scores/:id",
-  fetchDataFromRedisOrDatabase,
+  
   async (req, res) => {
     try {
       const { id } = req.params;
@@ -719,8 +710,6 @@ app.get(
       if (rows.length === 0) {
         res.sendStatus(404);
       } else {
-        await redisClient.set(id, JSON.stringify(rows));
-        console.log("Data retrieved from the database");
         res.json(rows);
       }
     } catch (error) {
@@ -789,11 +778,10 @@ app.delete("/assessment_scores/:id", async (req, res) => {
 });
 
 // ---------------- Projects routes ----------------------//
-app.get("/projects", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/projects", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM projects");
-    await redisClient.set(JSON.stringify(rows));
-    console.log("Data retrieved from the database");
+    
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -801,7 +789,7 @@ app.get("/projects", fetchDataFromRedisOrDatabase, async (req, res) => {
   }
 });
 
-app.get("/projects/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
+app.get("/projects/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query("SELECT * FROM projects WHERE id = $1", [
@@ -811,8 +799,7 @@ app.get("/projects/:id", fetchDataFromRedisOrDatabase, async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      await redisClient.set(id, JSON.stringify(rows[0]));
-      console.log("Data retrieved from the database");
+      
       res.json(rows[0]);
     }
   } catch (error) {
@@ -879,7 +866,7 @@ app.delete("/projects/:id", async (req, res) => {
 
 app.get(
   "/student_project_scores/:id",
-  fetchDataFromRedisOrDatabase,
+  
   async (req, res) => {
     try {
       const cohort_ID = req.params.id;
@@ -898,8 +885,6 @@ app.get(
       WHERE c.cohort_number= ${cohort_ID};
     `;
       const { rows } = await pool.query(query);
-      await redisClient.set(cohort_ID, JSON.stringify(rows));
-      console.log("Data retrieved from the database");
       res.json(rows);
     } catch (error) {
       console.error(error);
