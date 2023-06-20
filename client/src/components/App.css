@@ -1,0 +1,31 @@
+:root {
+  --galv-white: #eeeeee;
+  --galv-orange: #EC9981;
+  --galv-lightorange: #ffbdab;
+  --galv-purple: #80809D;
+  --galv-lightpurp: #bdbdda;
+  --galv-grey: #757575;
+  --galv-darkgrey: #555555;
+  --galv-lightgrey: #bfbfbf82;
+  --thin: 100;
+  --extralight: 200;
+  --light: 300;
+  --regular: 400;
+  --medium: 500;
+  --semibold: 600;
+  --bold: 700;
+  --extrabold: 800;
+  --black: 900;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--galv-white);
+  font-family: 'Inter', sans-serif;
+  font-weight: var(--regular);
+}

@@ -2,3 +2,4 @@
 /client/dist
 .env
 docker-compose.yaml
+redisServerExample.js
