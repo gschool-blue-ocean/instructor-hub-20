@@ -5,4 +5,3 @@ const NewCohorts = () => {
 };
 
 export default NewCohorts;
-

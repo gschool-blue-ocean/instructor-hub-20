@@ -5,7 +5,7 @@
   height: 100vh;
   background-color: var(--galv-white);
   border-right: 2px solid #c8c8c8;
-    z-index: 999;
+  z-index: 999;
 }
 
 .sidemenu-container.visible {
@@ -23,7 +23,6 @@
   background-color: rgba(94, 94, 94, 0.5);
   z-index: 998;
 }
-
 
 .menu-container {
   color: var(--galv-darkgrey);
@@ -95,7 +94,6 @@
   background-color: var(--galv-purple);
 }
 
-
 .logo-and-title {
   display: flex;
   flex-direction: column;
@@ -103,7 +101,7 @@
   margin: 20px 0px 80px 0px;
 }
 
-.galv-logo{
+.galv-logo {
   width: 50px;
   height: 50px;
   margin: 10px 20px;
@@ -133,7 +131,7 @@
   background-color: var(--galv-orange);
   border-radius: 30px;
   cursor: pointer;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .sign-out-btn:hover {

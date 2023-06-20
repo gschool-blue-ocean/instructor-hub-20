@@ -10,11 +10,11 @@ for (const browserName of browsers) {
   test(`Sign In - ${browserName}`, async () => {
     test.setTimeout(60000);
     let browser;
-    if (browserName === 'chromium') {
+    if (browserName === "chromium") {
       browser = await chromium.launch();
-    } else if (browserName === 'firefox') {
+    } else if (browserName === "firefox") {
       browser = await firefox.launch();
-    } else if (browserName === 'webkit') {
+    } else if (browserName === "webkit") {
       browser = await webkit.launch();
     } else {
       throw new Error(`Unsupported browser: ${browserName}`);
@@ -57,7 +57,7 @@ for (const browserName of browsers) {
     await page.fill('[placeholder="Email address"]', "test2@test.com");
     await page.fill('[placeholder="Set Password"]', "test");
     await page.fill('[placeholder="Verify Password"]', "test");
-    const pageVisible = await page.isVisible('[placeholder="Verify Password"]')
+    const pageVisible = await page.isVisible('[placeholder="Verify Password"]');
     await page.getByRole("button", { name: "Register" }).click();
     await page.waitForSelector("button", { name: "Sign In" });
     const didRegister = await page.isVisible("button", { name: "Sign In" });
@@ -100,10 +100,10 @@ for (const browserName of browsers) {
     }
     const page = await browser.newPage();
     await page.goto(CLIENT_URL);
-    await page.getByRole('button', { name: 'Sign In' }).click();
-    await page.waitForSelector('.error-text');
-    const invalidlogin = await page.isVisible('.error-text')
-    expect(invalidlogin).toBe(true)
+    await page.getByRole("button", { name: "Sign In" }).click();
+    await page.waitForSelector(".error-text");
+    const invalidlogin = await page.isVisible(".error-text");
+    expect(invalidlogin).toBe(true);
     await browser.close();
   });
 

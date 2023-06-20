@@ -1,5 +1,5 @@
 .dashboard-container {
-  position:absolute; 
+  position: absolute;
   /* transform: translateX(50px); */
   width: 70%;
   margin-left: 280px;
@@ -11,5 +11,5 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }

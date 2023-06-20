@@ -20,18 +20,17 @@ const ProjectsTable = ({ projects }) => {
   const sortedProjects = [...projects].sort((a, b) => {
     const key = sortConfig.key;
     const direction = sortConfig.direction === "ascending" ? 1 : -1;
-  
+
     if (key === "group_name" || key === "project_name") {
-      const valueA = a[key] || ""; 
-      const valueB = b[key] || ""; 
+      const valueA = a[key] || "";
+      const valueB = b[key] || "";
       return valueA.localeCompare(valueB) * direction;
     } else if (key === "grade") {
       return (a[key] - b[key]) * direction;
     }
-  
+
     return 0;
   });
-  
 
   return (
     <div className={styles.tableContainer}>

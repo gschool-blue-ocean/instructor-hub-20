@@ -141,7 +141,7 @@ app.get("/students", async (req, res) => {
     const { rows } = await pool.query(
       "SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id"
     );
-    
+
     res.status(200).json(rows);
   } catch (error) {
     console.error(error);
@@ -151,7 +151,7 @@ app.get("/students", async (req, res) => {
 
 app.get(
   "/students/:cohort_id",
-  
+
   async (req, res) => {
     const { cohort_id } = req.params;
     try {
@@ -230,10 +230,10 @@ app.delete("/students/:id", async (req, res) => {
 });
 
 // --------------------------- Cohorts routes -------------------------------------//
-app.get("/cohorts",  async (req, res) => {
+app.get("/cohorts", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM cohorts");
-    
+
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -313,10 +313,10 @@ app.delete("/cohorts/:id", async (req, res) => {
 });
 
 //----------------- Groups routes -----------------------//
-app.get("/groups",  async (req, res) => {
+app.get("/groups", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM groups");
-    
+
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -324,7 +324,7 @@ app.get("/groups",  async (req, res) => {
   }
 });
 
-app.get("/groups/:id",  async (req, res) => {
+app.get("/groups/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
@@ -418,10 +418,10 @@ app.delete("/groups/:id", async (req, res) => {
 });
 
 // ----------------- Project routes ----------------------//
-app.get("/project",  async (req, res) => {
+app.get("/project", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM project");
-    
+
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -429,7 +429,7 @@ app.get("/project",  async (req, res) => {
   }
 });
 
-app.get("/project/:id",  async (req, res) => {
+app.get("/project/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query("SELECT * FROM project WHERE id = $1", [
@@ -439,7 +439,6 @@ app.get("/project/:id",  async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      
       res.json(rows[0]);
     }
   } catch (error) {
@@ -586,10 +585,10 @@ app.delete("/project/:id", async (req, res) => {
 // });
 
 // ----------------- Assessments routes --------------------- //
-app.get("/assessments",  async (req, res) => {
+app.get("/assessments", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM assessments");
-    
+
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -672,7 +671,7 @@ app.delete("/assessments/:id", async (req, res) => {
 // ---------------- Assessment Scores routes --------------------- //
 app.get(
   "/assessment_scores",
-  
+
   async (req, res) => {
     try {
       const { rows } = await pool.query(`
@@ -689,7 +688,7 @@ app.get(
       JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
-      
+
       res.json(rows);
     } catch (error) {
       console.error(error);
@@ -700,7 +699,7 @@ app.get(
 
 app.get(
   "/assessment_scores/:id",
-  
+
   async (req, res) => {
     try {
       const { id } = req.params;
@@ -797,7 +796,7 @@ app.delete("/assessment_scores/:id", async (req, res) => {
 app.get("/projects", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM projects");
-    
+
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -815,7 +814,6 @@ app.get("/projects/:id", async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      
       res.json(rows[0]);
     }
   } catch (error) {
@@ -882,7 +880,7 @@ app.delete("/projects/:id", async (req, res) => {
 
 app.get(
   "/student_project_scores/:id",
-  
+
   async (req, res) => {
     try {
       const cohort_ID = req.params.id;

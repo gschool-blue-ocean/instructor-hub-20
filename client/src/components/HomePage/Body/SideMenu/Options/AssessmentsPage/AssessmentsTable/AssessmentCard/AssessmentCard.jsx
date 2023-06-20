@@ -26,23 +26,26 @@ const AssessmentCard = ({ assessment, closeModal }) => {
         Object.entries(formData).filter(([key, value]) => value !== "")
       );
 
-      const response = await fetch(`http://localhost:8000/assessment_scores/${assessment.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedFormData),
-      });
+      const response = await fetch(
+        `http://localhost:8000/assessment_scores/${assessment.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        }
+      );
 
       if (response.ok) {
         setUpdatedAssessment({
           ...updatedAssessment,
           ...updatedFormData,
         });
-        console.log('Assessment updated successfully');
+        console.log("Assessment updated successfully");
         setShouldUpdate(true); // Set the state variable to trigger the rerender
       } else {
-        console.log('Error updating assessment');
+        console.log("Error updating assessment");
       }
     } catch (error) {
       console.error(error);
@@ -51,7 +54,7 @@ const AssessmentCard = ({ assessment, closeModal }) => {
 
   useEffect(() => {
     if (shouldUpdate) {
-      setBodyDisplay('assessmentTable'); // Update the body display to trigger the AssessmentPage component rerender
+      setBodyDisplay("assessmentTable"); // Update the body display to trigger the AssessmentPage component rerender
       setShouldUpdate(false); // Reset the state variable
     }
   }, [shouldUpdate, setBodyDisplay]);
@@ -63,13 +66,13 @@ const AssessmentCard = ({ assessment, closeModal }) => {
   };
 
   return (
-    <div className={styles['card-container']}>
+    <div className={styles["card-container"]}>
       <span className={styles.close} onClick={closeCard}>
         &times;
       </span>
-      <div className={styles['card-container-bar']}>
-        <div className={styles['card-content']}>
-          <div className={styles['student-basic']}>
+      <div className={styles["card-container-bar"]}>
+        <div className={styles["card-content"]}>
+          <div className={styles["student-basic"]}>
             <div>Student Name: {updatedAssessment.student_name}</div>
             <div>Assessment Name: {updatedAssessment.assess_name}</div>
             <div>Grade: {updatedAssessment.grade}</div>
