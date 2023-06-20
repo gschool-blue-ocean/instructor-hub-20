@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import AssessmentCard from "./AssessmentCard/AssessmentCard";
 import styles from "./AssessmentsTable.module.css";
 import CohortContext from "../../../../../../Context/CohortContext";
