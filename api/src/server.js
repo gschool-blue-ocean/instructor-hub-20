@@ -216,11 +216,10 @@ app.get("/cohorts", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM cohorts");
 
-    //
-    res.json(rows);
+    res.status(200).json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
+    res.status(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -312,17 +311,19 @@ app.get("/groups/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
-      `SELECT s.* FROM students s 
-      JOIN student_project_scores sps ON s.id = sps.student_id
+      `SELECT s.stu_name, g.group_name, c.cohort_number, sps.grade
+      FROM students s 
+      JOIN student_project_scores sps ON sps.student_id = s.id
       JOIN groups g ON sps.group_id = g.id
+      JOIN cohorts c ON s.cohort_id = c.id
       WHERE g.id = $1`,
       [id]
     );
-
+    console.log(rows);
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      res.sendStatus(200).json(rows);
+      res.status(200).json(rows);
     }
   } catch (error) {
     console.error(error);
@@ -621,7 +622,7 @@ app.put("/assessments/:id", async (req, res) => {
     const { id } = req.params;
     const { assess_name, type } = req.body;
     const { rowCount } = await pool.query(
-      "UPDATE assessments SET assess_name = $1, type = $2 WHERE id = $4",
+      "UPDATE assessments SET assess_name = $1, type = $2 WHERE id = $3",
       [assess_name, type, id]
     );
 
@@ -674,7 +675,7 @@ app.get("/assessment_scores", async (req, res) => {
     `);
     //
 
-    res.json(rows);
+    res.status(204).json(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
@@ -702,24 +703,24 @@ app.get("/assessment_scores/:id", async (req, res) => {
     `,
       [id]
     );
-
+      // console.log(rows)
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      res.json(rows);
+      res.status(204).json(rows);
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
+    res.status(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
 app.post("/assessment_scores", async (req, res) => {
   try {
-    const { student_id, assess_id, grade, cohort_id } = req.body;
+    const { student_id, assess_id, grade} = req.body;
     const { rows } = await pool.query(
-      "INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES ($1, $2, $3) RETURNING *",
-      [student_id, assess_id, grade, cohort_id]
+      "INSERT INTO student_assessment_scores (student_id, assess_id, grade) VALUES ($1, $2, $3) RETURNING *",
+      [student_id, assess_id, grade]
     );
     res.status(201).json(rows[0]);
   } catch (error) {
@@ -731,7 +732,7 @@ app.post("/assessment_scores", async (req, res) => {
 app.patch("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     const { student_id, assess_id, grade } = req.body;
     const { rowCount } = await pool.query(
       `UPDATE student_assessment_scores
@@ -757,7 +758,7 @@ app.delete("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rowCount } = await pool.query(
-      "DELETE FROM assessment_scores WHERE id = $1",
+      "DELETE FROM student_assessment_scores WHERE id = $1",
       [id]
     );
 

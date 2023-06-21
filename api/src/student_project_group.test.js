@@ -118,9 +118,9 @@ describe("GET /groups", () => {
   });
 });
 
-describe("GET /groups/1", () => {
+describe("GET /groups/3", () => {
   it("Should return a 200 status code when successfuly retrieved", async () => {
-    const res = await axios.get("http://localhost:8000/groups/1");
+    const res = await axios.get("http://localhost:8000/groups/6");
     expect(res.status).toBe(200);
   });
 });
