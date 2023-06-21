@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CohortContext from "../../../../../../../Context/CohortContext";
 import styles from "./AssessmentCard.module.css";
 
-const AssessmentCard = ({ assessment, closeModal }) => {
-  const { setBodyDisplay } = useContext(CohortContext);
+const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow }) => {
   const [formData, setFormData] = useState({
     grade: assessment.grade || "",
     student_id: assessment.student_id || "",
@@ -11,7 +10,6 @@ const AssessmentCard = ({ assessment, closeModal }) => {
     cohort_id: assessment.cohort_id || "",
   });
   const [updatedAssessment, setUpdatedAssessment] = useState(assessment);
-  const [shouldUpdate, setShouldUpdate] = useState(false); // State variable to trigger rerender
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,6 +21,9 @@ const AssessmentCard = ({ assessment, closeModal }) => {
       const updatedFormData = Object.fromEntries(
         Object.entries(formData).filter(([key, value]) => value !== "")
       );
+
+      updatedFormData.student_id = parseInt(updatedFormData.student_id);
+      updatedFormData.assess_id = parseInt(updatedFormData.assess_id);
 
       const response = await fetch(
         `http://localhost:8000/assessment_scores/${assessment.id}`,
@@ -36,26 +37,22 @@ const AssessmentCard = ({ assessment, closeModal }) => {
       );
 
       if (response.ok) {
-        setUpdatedAssessment({
+        const updatedAssessmentData = {
           ...updatedAssessment,
           ...updatedFormData,
-        });
+        };
+        setUpdatedAssessment(updatedAssessmentData);
         console.log("Assessment updated successfully");
-        setShouldUpdate(true); // Set the state variable to trigger the rerender
+         updateAssessment(selectedRow, updatedAssessmentData)
+
       } else {
         console.log("Error updating assessment");
       }
     } catch (error) {
       console.error(error);
     }
+    closeCard();
   };
-
-  useEffect(() => {
-    if (shouldUpdate) {
-      setBodyDisplay("assessmentTable"); // Update the body display to trigger the AssessmentPage component rerender
-      setShouldUpdate(false); // Reset the state variable
-    }
-  }, [shouldUpdate, setBodyDisplay]);
 
   const isComplete = !!assessment.grade;
 

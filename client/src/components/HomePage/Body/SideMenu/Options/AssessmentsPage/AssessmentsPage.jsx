@@ -5,6 +5,7 @@ import CohortContext, { CohortProvider } from '../../../../../Context/CohortCont
 
 const AssessmentsPage = () => {
   const [assessments, setAssessments] = useState([]);
+  const [shouldUpdate, setShouldUpdate] = useState(false);
   const { cohort } = useContext(CohortContext);
 
   useEffect(() => {
@@ -15,7 +16,17 @@ const AssessmentsPage = () => {
       setAssessments(assess);
     })();
     return () => {};
-  }, [cohort]);
+  }, [cohort, assessments]);
+
+  
+  const handleUpdateAssessment = (index, updatedAssessment) => {
+    setAssessments(prevAssessments => {
+      const updatedAssessments = [...prevAssessments];
+      updatedAssessments[index] = updatedAssessment;
+      return updatedAssessments;
+    });
+  };
+  
 
   return (
     <div className={styles['student-container']}>
@@ -30,7 +41,10 @@ const AssessmentsPage = () => {
         </div>
         <div className={styles['table-cont']}>
           <CohortProvider>
-            <AssessmentsTable assessments={assessments} />
+            <AssessmentsTable
+              assessments={assessments}
+              updateAssessment={handleUpdateAssessment}
+            />
           </CohortProvider>
         </div>
       </div>
