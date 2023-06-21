@@ -11,9 +11,7 @@ const AssessmentsPage = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(
-        `http://localhost:8000/assessment_scores/${cohort}`
-      );
+      const response = await fetch(`/api/assessment_scores/${cohort}`);
 
       const assess = await response.json();
       setAssessments(assess);

@@ -8,7 +8,7 @@ const CohortModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     // Make your API call here and update the options state when it's done
-    fetch("http://localhost:8000/cohorts")
+    fetch("/api/cohorts")
       .then((response) => response.json())
       .then((data) => setCurrentCohorts(data))
       .catch((error) => console.log(error));

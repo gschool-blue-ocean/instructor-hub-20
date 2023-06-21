@@ -9,7 +9,7 @@ const StudentsPage = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`http://localhost:8000/students/${cohort}`);
+      const response = await fetch(`/api/students/${cohort}`);
       const studs = await response.json();
       setStudents(studs);
     })();

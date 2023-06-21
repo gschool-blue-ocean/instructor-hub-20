@@ -26,16 +26,13 @@ const AssessmentCard = ({ assessment, closeModal }) => {
         Object.entries(formData).filter(([key, value]) => value !== "")
       );
 
-      const response = await fetch(
-        `http://localhost:8000/assessment_scores/${assessment.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedFormData),
-        }
-      );
+      const response = await fetch(`/api/assessment_scores/${assessment.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedFormData),
+      });
 
       if (response.ok) {
         setUpdatedAssessment({
