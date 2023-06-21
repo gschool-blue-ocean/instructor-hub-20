@@ -10,7 +10,7 @@ const ProjectsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8000/student_project_scores/${cohort}`
+        `https://blueoceanapi.onrender.com/student_project_scores/${cohort}`
       );
       const proj = await response.json();
       setProjects(proj);
@@ -20,7 +20,7 @@ const ProjectsPage = () => {
 
   return (
     <div className={styles["student-container"]}>
-     <div className={styles["student-title"]}>
+      <div className={styles["student-title"]}>
         <span className={styles["title"]}>Projects Dashboard</span>
       </div>
       <div className={styles["table-container"]}>
@@ -31,7 +31,7 @@ const ProjectsPage = () => {
           <div className={styles["add-button-container"]}></div>
           <button className={styles["add-btn"]}>Add Project</button>
         </div>
-        <div className={styles['table-cont']}>
+        <div className={styles["table-cont"]}>
           <ProjectsTable projects={projects} />
         </div>
       </div>
