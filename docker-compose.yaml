@@ -37,7 +37,7 @@ services:
   app:
     build: ./client
     environment:
-      API_URL: http://api:${API_PORT}
+      API_URL: http://api:80
       PORT: ${CLIENT_PORT}
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
