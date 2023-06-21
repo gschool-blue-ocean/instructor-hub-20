@@ -35,6 +35,7 @@ const SideMenu = ({ logout }) => {
               Home
             </li>
             <li
+              id="students"
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("student");

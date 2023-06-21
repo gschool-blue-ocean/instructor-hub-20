@@ -31,12 +31,13 @@ services:
       - ./api/src:/code/src
     command: npm run dev
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 10.0.0.4
 
   app:
     build: ./client
     environment:
-      API_URL: http://api
+      API_URL: http://api:${API_PORT}
       PORT: ${CLIENT_PORT}
       CHOKIDAR_USEPOLLING: "true"
     depends_on:

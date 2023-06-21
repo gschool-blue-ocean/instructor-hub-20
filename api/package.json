@@ -11,8 +11,8 @@
     "redis": "^4.6.7"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/serverDeployed.js",
+    "dev": "nodemon src/index.js --host",
+    "start": "node src/serverDeployed.js --host",
     "test": "echo 'add tests'",
     "migrate": "node src/db/migration.js",
     "seed": "node src/db/seed.js"

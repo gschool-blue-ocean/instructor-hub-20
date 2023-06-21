@@ -26,7 +26,7 @@ const LoginPage = ({ registered, setRegistered, showReg, userAuth }) => {
       login.email = email.value;
       login.password = password.value;
       // console.log(login);
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
