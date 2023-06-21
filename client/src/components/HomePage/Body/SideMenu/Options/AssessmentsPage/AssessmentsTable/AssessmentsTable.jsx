@@ -50,33 +50,33 @@ const AssessmentsTable = ({ assessments }) => {
             <tr>
               <th className={styles.column1}>
                 Name{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
                   className={styles["name-arrow"]}
                   onClick={() => handleSort("student_name")}
                 />
               </th>
               <th className={styles.column5}>
                 Assessment{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
-                  className={styles["assessment-arrow"]}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
+                  className={styles["name-arrow"]}
                   onClick={() => handleSort("assess_name")}
                 />
               </th>
               <th className={styles.column6}>
                 Grade{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
-                  className={styles["grade-arrow"]}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
+                  className={styles["name-arrow"]}
                   onClick={() => handleSort("grade")}
                 />
               </th>
               <th className={styles.column6}>
                 Cohort{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
-                  className={styles["cohort-arrow"]}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
+                  className={styles["name-arrow"]}
                   onClick={() => handleSort("cohort_number")}
                 />
               </th>

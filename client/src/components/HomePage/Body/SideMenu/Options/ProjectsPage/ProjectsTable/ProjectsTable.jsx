@@ -38,33 +38,33 @@ const ProjectsTable = ({ projects }) => {
             <tr>
               <th className={styles.column1}>
                 Group name{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
                   className={styles["group-name-arrow"]}
                   onClick={() => handleSort("group_name")}
                 />
               </th>
               <th className={styles.column2}>
                 Student{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
                   className={styles["group-name-arrow"]}
                   onClick={() => handleSort("group_name")}
                 />
               </th>
               <th className={styles.column3}>
                 Project{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
-                  className={styles["project-arrow"]}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
+                  className={styles["group-name-arrow"]}
                   onClick={() => handleSort("project_name")}
                 />
               </th>
               <th className={styles.column4}>
                 Score{" "}
-                <FontAwesomeIcon
-                  icon={faCaretUp}
-                  className={styles["score-arrow"]}
+                <img
+                  src="../../../../../../../img/arrow-up.png"
+                  className={styles["group-name-arrow"]}
                   onClick={() => handleSort("grade")}
                 />
               </th>
