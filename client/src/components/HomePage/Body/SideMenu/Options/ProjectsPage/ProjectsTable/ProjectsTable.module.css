@@ -1,3 +1,4 @@
+
 .tableContainer {
   max-height: 400px;
   margin: 30px;
@@ -94,4 +95,9 @@ tbody tr td {
   display: inline-block;
   margin: 0 5px; /* Adjust the spacing between members as needed */
   color: var(--galv-darkgrey); /* Set the color of the dot */
+}
+
+.group-name-arrow {
+  transform: scale(.7);
+  padding: -10px;
 }
