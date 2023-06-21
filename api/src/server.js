@@ -120,13 +120,13 @@ app.post("/login", async (req, res) => {
 });
 
 // --------------------- Students routes ----------------------------- //
-app.get("/students",  async (req, res) => {
+app.get("/students", async (req, res) => {
   try {
     const { rows } = await pool.query(
       "SELECT s.*, c.id, c.cohort_number, c.graduation FROM students s JOIN cohorts c ON s.cohort_id=c.id"
     );
-    // 
-    
+    //
+
     res.status(200).json(rows);
   } catch (error) {
     console.error(error);
@@ -134,24 +134,20 @@ app.get("/students",  async (req, res) => {
   }
 });
 
-app.get(
-  "/students/:cohort_id",
-  async (req, res) => {
-    const { cohort_id } = req.params;
-    try {
-      const { rows } = await pool.query(
-        "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
-        [cohort_id]
-      );
-      
-      
-      res.status(201).json(rows);
-    } catch (error) {
-      console.error(error);
-      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-    }
+app.get("/students/:cohort_id", async (req, res) => {
+  const { cohort_id } = req.params;
+  try {
+    const { rows } = await pool.query(
+      "SELECT students.id AS id, stu_name, email, github, cohort_id, cohorts.graduation, cohorts.cohort_number FROM students INNER JOIN cohorts ON (students.cohort_id = cohorts.id) WHERE cohorts.cohort_number = $1",
+      [cohort_id]
+    );
+
+    res.status(201).json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
-);
+});
 
 app.post("/students", async (req, res) => {
   try {
@@ -160,7 +156,7 @@ app.post("/students", async (req, res) => {
       "SELECT id FROM cohorts WHERE cohort_number = $1",
       [cohort_number]
     );
-    const id = response.rows[0].id;
+    const id = response.rows[0];
     console.log(response.rows);
     const { rows } = await pool.query(
       "INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *",
@@ -181,7 +177,7 @@ app.put("/students/:id", async (req, res) => {
       "SELECT id FROM cohorts WHERE cohort_number = $1",
       [cohort_number]
     );
-    const id = response.rows[0].id;
+    const id = response.rows[0];
     const { rowCount } = await pool.query(
       "UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5",
       [stu_name, email, gitHub, id, stuID]
@@ -219,12 +215,12 @@ app.delete("/students/:id", async (req, res) => {
 app.get("/cohorts", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM cohorts");
-    
-    // 
+
+    //
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -239,7 +235,7 @@ app.get("/cohorts", async (req, res) => {
 //       res.sendStatus(404);
 //     } else {
 //       await redisClient.set(id, JSON.stringify(rows[0]));
-//       
+//
 //       res.json(rows[0]);
 //     }
 //   } catch (err) {
@@ -303,12 +299,12 @@ app.delete("/cohorts/:id", async (req, res) => {
 app.get("/groups", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM groups");
-    // 
-    
+    //
+
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -316,20 +312,21 @@ app.get("/groups/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
-      "SELECT s.* FROM students s JOIN groups g ON s.group_id = g.id JOIN cohorts c ON s.cohort_id = c.id WHERE g.id = $1",
+      `SELECT s.* FROM students s 
+      JOIN student_project_scores sps ON s.id = sps.student_id
+      JOIN groups g ON sps.group_id = g.id
+      WHERE g.id = $1`,
       [id]
     );
 
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      
-      
-      res.json(rows);
+      res.sendStatus(200).json(rows);
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -406,43 +403,40 @@ app.delete("/groups/:id", async (req, res) => {
 });
 
 // ----------------- Project routes ----------------------//
-app.get("/project", async (req, res) => {
+app.get("/projects", async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM project");
-    // 
-    
+    const { rows } = await pool.query("SELECT * FROM projects");
+    //
+
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
-app.get("/project/:id", async (req, res) => {
+app.get("/projects/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM project WHERE id = $1", [
+    const { rows } = await pool.query("SELECT * FROM projects WHERE id = $1", [
       id,
     ]);
-
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      await redisClient.set(id, JSON.stringify(rows[0]));
-      
-      res.json(rows[0]);
+      res.status(200).json(rows[0]);
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
-app.post("/project", async (req, res) => {
+app.post("/projects", async (req, res) => {
   try {
     const { project_name, type } = req.body;
     const { rows } = await pool.query(
-      "INSERT INTO project (project_name, type) VALUES ($1, $2) RETURNING *",
+      "INSERT INTO projects (project_name, type) VALUES ($1, $2) RETURNING *",
       [project_name, type]
     );
     res.status(201).json(rows[0]);
@@ -452,12 +446,12 @@ app.post("/project", async (req, res) => {
   }
 });
 
-app.put("/project/:id", async (req, res) => {
+app.put("/projects/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { project_name, type } = req.body;
     const { rowCount } = await pool.query(
-      "UPDATE project SET project_name = $1, type = $2 WHERE id = $3",
+      "UPDATE projects SET project_name = $1, type = $2 WHERE id = $3",
       [project_name, type, id]
     );
 
@@ -472,12 +466,13 @@ app.put("/project/:id", async (req, res) => {
   }
 });
 
-app.delete("/project/:id", async (req, res) => {
+app.delete("/projects/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { rowCount } = await pool.query("DELETE FROM project WHERE id = $1", [
-      id,
-    ]);
+    const { rowCount } = await pool.query(
+      "DELETE FROM projects WHERE id = $1",
+      [id]
+    );
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {
@@ -492,8 +487,8 @@ app.delete("/project/:id", async (req, res) => {
 // app.get("/project_scores", async (req, res) => {
 //   try {
 //     const { rows } = await pool.query("SELECT * FROM project_scores");
-    
-//     
+
+//
 //     res.json(rows);
 //   } catch (error) {
 //     console.error(error);
@@ -513,7 +508,7 @@ app.delete("/project/:id", async (req, res) => {
 //       res.sendStatus(404);
 //     } else {
 //       await redisClient.set(id, JSON.stringify(rows[0]));
-//       
+//
 //       res.json(rows[0]);
 //     }
 //   } catch (error) {
@@ -579,12 +574,12 @@ app.delete("/project/:id", async (req, res) => {
 app.get("/assessments", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM assessments");
-    // 
-    
+    //
+
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -661,11 +656,9 @@ app.delete("/assessments/:id", async (req, res) => {
 });
 
 // ---------------- Assessment Scores routes --------------------- //
-app.get(
-  "/assessment_scores",
-  async (req, res) => {
-    try {
-      const { rows } = await pool.query(`
+app.get("/assessment_scores", async (req, res) => {
+  try {
+    const { rows } = await pool.query(`
       SELECT
         student_assessment_scores.id,
         students.stu_name AS student_name,
@@ -679,23 +672,20 @@ app.get(
       JOIN cohorts ON students.cohort_id = cohorts.id
       ORDER BY students.stu_name ASC
     `);
-      // 
-      
-      res.json(rows);
-    } catch (error) {
-      console.error(error);
-      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-    }
-  }
-);
+    //
 
-app.get(
-  "/assessment_scores/:id",
-  async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { rows } = await pool.query(
-        `SELECT
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
+  }
+});
+
+app.get("/assessment_scores/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rows } = await pool.query(
+      `SELECT
         student_assessment_scores.id,
         students.stu_name AS student_name,
         assessments.assess_name,
@@ -710,22 +700,19 @@ app.get(
         cohorts.cohort_number = $1
       ORDER BY students.stu_name ASC
     `,
-        [id]
-      );
+      [id]
+    );
 
-      if (rows.length === 0) {
-        res.sendStatus(404);
-      } else {
-        
-        
-        res.json(rows);
-      }
-    } catch (error) {
-      console.error(error);
-      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    if (rows.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.json(rows);
     }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
-);
+});
 
 app.post("/assessment_scores", async (req, res) => {
   try {
@@ -789,12 +776,12 @@ app.delete("/assessment_scores/:id", async (req, res) => {
 app.get("/projects", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM projects");
-    // 
-    
+    //
+
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -808,13 +795,11 @@ app.get("/projects/:id", async (req, res) => {
     if (rows.length === 0) {
       res.sendStatus(404);
     } else {
-      
-      
       res.json(rows[0]);
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -874,12 +859,10 @@ app.delete("/projects/:id", async (req, res) => {
 // new joint table route for Student, Project name and Project_Score
 //get route that will put the above data
 
-app.get(
-  "/student_project_scores/:id",
-  async (req, res) => {
-    try {
-      const cohort_ID = req.params.id;
-      const query = `
+app.get("/student_project_scores/:id", async (req, res) => {
+  try {
+    const cohort_ID = req.params.id;
+    const query = `
       SELECT s.stu_name, s.id, p.project_name, sps.grade, c.id, g.group_name, c.cohort_number      
       FROM 
         students s
@@ -893,16 +876,14 @@ app.get(
         groups g ON sps.group_id = g.id
       WHERE c.cohort_number= ${cohort_ID};
     `;
-      const { rows } = await pool.query(query);
-      
-      
-      res.json(rows);
-    } catch (error) {
-      console.error(error);
-      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-    }
+    const { rows } = await pool.query(query);
+
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
-);
+});
 
 // app.listen(port, () => {
 //   console.log(`Server is running at http://localhost:${port}`);
