@@ -27,6 +27,7 @@ const SideMenu = ({ logout }) => {
           </span>
           <ul className={styles["select-container"]}>
             <li
+              id="home"
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("main");
@@ -44,6 +45,7 @@ const SideMenu = ({ logout }) => {
               Students
             </li>
             <li
+              id="projects"
               className={styles["projects-li"]}
               onClick={() => {
                 setBodyDisplay("project");
@@ -52,6 +54,7 @@ const SideMenu = ({ logout }) => {
               Projects
             </li>
             <li
+              id="assessments"
               className={styles["assessments-li"]}
               onClick={() => {
                 setBodyDisplay("assessment");
