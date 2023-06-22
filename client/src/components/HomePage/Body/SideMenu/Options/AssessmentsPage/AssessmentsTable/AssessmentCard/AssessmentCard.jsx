@@ -2,7 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import CohortContext from "../../../../../../../Context/CohortContext";
 import styles from "./AssessmentCard.module.css";
 
-const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow }) => {
+const AssessmentCard = ({
+  assessment,
+  closeModal,
+  updateAssessment,
+  selectedRow,
+  students,
+  assess,
+}) => {
   const [formData, setFormData] = useState({
     grade: assessment.grade || "",
     student_id: assessment.student_id || "",
@@ -10,6 +17,7 @@ const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow 
     cohort_id: assessment.cohort_id || "",
   });
   const [updatedAssessment, setUpdatedAssessment] = useState(assessment);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,8 +51,8 @@ const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow 
         };
         setUpdatedAssessment(updatedAssessmentData);
         console.log("Assessment updated successfully");
-         updateAssessment(selectedRow, updatedAssessmentData)
-
+        updateAssessment(selectedRow, updatedAssessmentData);
+        window.alert("Assessment Successfully Updated");
       } else {
         console.log("Error updating assessment");
       }
@@ -52,6 +60,31 @@ const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow 
       console.error(error);
     }
     closeCard();
+  };
+
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+
+      const response = await fetch(
+        `http://localhost:8000/assessment_scores/${assessment.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        console.log("Assessment deleted successfully");
+        window.alert("Assessment Succesfully Deleted")
+      } else {
+        console.log("Error deleting assessment");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
+      closeCard();
+    }
   };
 
   const isComplete = !!assessment.grade;
@@ -84,7 +117,8 @@ const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow 
             </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className={styles["card-modal"]} onSubmit={handleSubmit}>
+          <h3>Edit Assessment</h3>
           <div>
             <label>Grade:</label>
             <input
@@ -95,33 +129,45 @@ const AssessmentCard = ({ assessment, closeModal, updateAssessment, selectedRow 
             />
           </div>
           <div>
-            <label>Student ID:</label>
-            <input
-              type="text"
-              name="student_id"
-              value={formData.student_id}
-              onChange={handleInputChange}
-            />
+            <label>
+              Student:
+              <select
+                name="student_id"
+                value={formData.student_id || ""}
+                onChange={handleInputChange}
+              >
+                <option value="">Select a student</option>
+                {students.map((student) => (
+                  <option key={student.id} value={student.id}>
+                    {student.stu_name}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
           <div>
-            <label>Assessment ID:</label>
-            <input
-              type="text"
-              name="assess_id"
-              value={formData.assess_id}
-              onChange={handleInputChange}
-            />
+            <label>
+              Assessment:
+              <select
+                name="assess_id"
+                value={formData.assess_id || ""}
+                onChange={handleInputChange}
+              >
+                <option value="">Select an assessment</option>
+                {assess.map((ass) => (
+                  <option key={ass.id} value={ass.id}>
+                    {ass.assess_name}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
-          <div>
-            <label>Cohort ID:</label>
-            <input
-              type="text"
-              name="cohort_id"
-              value={formData.cohort_id}
-              onChange={handleInputChange}
-            />
+          <div className={styles['button-cont']}>
+          <button className={styles['update-button']} type="submit">Update Assessment</button>
+          <button className={styles["delete-button"]} onClick={handleDelete} disabled={isDeleting}>
+            {isDeleting ? "Deleting..." : "Delete Assessment"}
+          </button>
           </div>
-          <button type="submit">Update Assessment</button>
         </form>
       </div>
     </div>
