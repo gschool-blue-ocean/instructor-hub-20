@@ -12,7 +12,7 @@ const AssessmentsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `https://blueoceanapi.onrender.com/student_assessment_scores/${cohort}`
+        `https://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${cohort}`
       );
 
       const assess = await response.json();

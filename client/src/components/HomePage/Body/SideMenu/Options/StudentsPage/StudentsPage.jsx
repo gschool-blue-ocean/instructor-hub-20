@@ -10,7 +10,7 @@ const StudentsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `https://blueoceanapi.onrender.com/students/${cohort}`
+        `https://blueoceanapi-ucyq.onrender.com/students/${cohort}`
       );
       const studs = await response.json();
       setStudents(studs);

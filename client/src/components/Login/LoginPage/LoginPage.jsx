@@ -26,12 +26,15 @@ const LoginPage = ({ showReg, userAuth }) => {
       login.email = email.value;
       login.password = password.value;
       // console.log(login);
-      const response = await fetch("https://blueoceanapi.onrender.com/login", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(login),
-      });
+      const response = await fetch(
+        "https://blueoceanapi-ucyq.onrender.com/login",
+        {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(login),
+        }
+      );
       const loggedIn = await response.json();
       // console.log(loggedIn);
       // console.log(response);
