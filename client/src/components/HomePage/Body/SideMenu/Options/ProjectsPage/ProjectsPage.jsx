@@ -6,6 +6,15 @@ import CohortContext from "../../../../../Context/CohortContext";
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const { cohort } = useContext(CohortContext);
+  const [showModal, setShowModal] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [currentProj, setCurrentProj] = useState([]);
+  const [newProject, setNewProject] = useState({
+    student_id: "",
+    project_name: "",
+    grade: "",
+    cohort_id: cohort,
+  });
 
   useEffect(() => {
     (async () => {
@@ -18,21 +27,164 @@ const ProjectsPage = () => {
     return () => {};
   }, [cohort]);
 
+  const handleAddProject = () => {
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      const response = await fetch(`http://localhost:8000/students/${cohort}`);
+      const studentsData = await response.json();
+      setStudents(studentsData);
+    };
+
+    fetchStudents();
+
+    const fetchProj = async () => {
+      const response = await fetch(`http://localhost:8000/project`);
+      const projData = await response.json();
+      setCurrentProj(projData);
+    };
+
+    fetchProj();
+  }, [cohort]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewProject((prevProject) => ({
+      ...prevProject,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { student_id, project_name, grade } = newProject;
+
+    const response = await fetch(
+      "http://localhost:8000/student_project_scores",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          student_id,
+          project_name,
+          grade,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const responseData = await response.json();
+      setProjects((prevProjects) => [...prevProjects, responseData]);
+      setShowModal(false);
+      setNewProject({
+        student_id: "",
+        project_name: "",
+        grade: "",
+        cohort_id: cohort,
+      });
+      window.alert("Project Successfully Added");
+    } else {
+      console.error("Failed to add project.");
+    }
+  };
+
+  const handleUpdateProject = (index, updatedProject) => {
+    setProjects((prevProject) => {
+      const updatedProject = [...prevProject];
+      updatedProject[index] = updatedProject;
+      return updatedProject;
+    });
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className={styles["student-container"]}>
-     <div className={styles["student-title"]}>
+      <div className={styles["student-title"]}>
         <span className={styles["title"]}>Projects Dashboard</span>
       </div>
       <div className={styles["table-container"]}>
         <div className={styles["student-container-bar"]}>
-          <div className={styles["page-header"]}>
-            {`MCSP-${cohort} Projects`}
+          <div className={styles["add-button-container"]}>
+            <button className={styles["add-btn"]} onClick={handleAddProject}>
+              Add Project
+            </button>
+            {showModal && (
+              <>
+                <div className={styles["page-overlay"]} />
+                <div className={styles["page-modal"]}>
+                  <span className={styles.close} onClick={closeModal}>
+                    &times;
+                  </span>
+                  <div className={styles["page-modal-content"]}>
+                    <form onSubmit={handleSubmit}>
+                      <h3>Add a Project</h3>
+                      <label>
+                        Student:
+                        <select
+                          name="student_id"
+                          value={newProject.student_id || ""}
+                          onChange={handleInputChange}
+                        >
+                          <option value="">Select a student</option>
+                          {students.map((student) => (
+                            <option key={student.id} value={student.id}>
+                              {student.stu_name}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label>
+                        Project:
+                        <select
+                          name="project_name"
+                          value={newProject.project_name || ""}
+                          onChange={handleInputChange}
+                        >
+                          <option value="">Select a project</option>
+                          {currentProj.map((curproj) => (
+                            <option key={curproj.id} value={curproj.id}>
+                              {curproj.project_name}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label>
+                        Grade:
+                        <input
+                          type="text"
+                          name="grade"
+                          value={newProject.grade || ""}
+                          onChange={handleInputChange}
+                        />
+                      </label>
+                      <button
+                        className={styles["page-submit-button"]}
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-          <div className={styles["add-button-container"]}></div>
-          <button className={styles["add-btn"]}>Add Project</button>
         </div>
-        <div className={styles['table-cont']}>
-          <ProjectsTable projects={projects} />
+        <div className={styles["table-cont"]}>
+          <ProjectsTable
+            projects={projects}
+            students={students}
+            currentProj={currentProj}
+            updateProject={handleUpdateProject}
+          />
         </div>
       </div>
     </div>

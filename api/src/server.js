@@ -404,12 +404,12 @@ app.delete("/groups/:id", async (req, res) => {
 // ----------------- Project routes ----------------------//
 app.get("/project",  async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM project");
+    const { rows } = await pool.query("SELECT * FROM projects");
     
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -436,7 +436,7 @@ app.post("/project", async (req, res) => {
   try {
     const { project_name, type } = req.body;
     const { rows } = await pool.query(
-      "INSERT INTO project (project_name, type) VALUES ($1, $2) RETURNING *",
+      "INSERT INTO projects (project_name, type) VALUES ($1, $2) RETURNING *",
       [project_name, type]
     );
     res.status(201).json(rows[0]);
@@ -451,7 +451,7 @@ app.put("/project/:id", async (req, res) => {
     const { id } = req.params;
     const { project_name, type } = req.body;
     const { rowCount } = await pool.query(
-      "UPDATE project SET project_name = $1, type = $2 WHERE id = $3",
+      "UPDATE projects SET project_name = $1, type = $2 WHERE id = $3",
       [project_name, type, id]
     );
 
@@ -469,7 +469,7 @@ app.put("/project/:id", async (req, res) => {
 app.delete("/project/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { rowCount } = await pool.query("DELETE FROM project WHERE id = $1", [
+    const { rowCount } = await pool.query("DELETE FROM projects WHERE id = $1", [
       id,
     ]);
     if (rowCount === 0) {
@@ -577,7 +577,7 @@ app.get("/assessments",  async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 

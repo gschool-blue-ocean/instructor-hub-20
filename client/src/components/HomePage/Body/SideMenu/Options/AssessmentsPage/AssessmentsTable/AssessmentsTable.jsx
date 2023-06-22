@@ -50,13 +50,13 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
   };
 
   return (
-    <div className={styles.tableContainer}>
-      <div className={styles.tableHeader}>
+    <div className={styles["assessment-table-container"]}>
+      <div className={styles["assessment-table-header"]}>
         <table>
           <thead>
             <tr>
               <th className={styles.column1}>
-                Name{" "}
+                Student{" "}
                 <img
                   src="../../../../../../../img/arrow-up.png"
                   className={`${styles["name-arrow1"]} ${
@@ -140,7 +140,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
           </thead>
         </table>
       </div>
-      <div className={styles.tableBody}>
+      <div className={styles["assessment-table-body"]}>
         <table>
           <tbody>
             {sortedAssessments.map((assessment, index) => (
@@ -150,7 +150,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
                   onClick={() => handleRowClick(index)}
                 >
                   <td>{assessment.student_name}</td>
-                  <td>{assessment.assess_name}</td>
+                  <td className={styles['assess-name']}>{assessment.assess_name}</td>
                   <td>{assessment.grade}</td>
                   <td>{assessment.cohort_number}</td>
                   <td><img className={styles['arrow-down']} src="../../../../../../../img/arrow-down.png" alt="" /></td>

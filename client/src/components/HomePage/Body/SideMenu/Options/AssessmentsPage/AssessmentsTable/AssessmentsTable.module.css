@@ -1,10 +1,11 @@
-.tableContainer {
+.assessment-table-container {
   max-height: 400px;
   margin: 30px;
+  width: 800px;
   overflow-y: auto;
 }
 
-.tableHeader {
+.assessment-table-header {
   position: sticky;
   top: 0;
   z-index: 2;
@@ -13,31 +14,33 @@
   background: var(--galv-darkgrey);
 }
 
-.tableHeader table {
+.assessment-table-header table {
   border-collapse: collapse;
   width: 100%;
 }
 
-.tableBody table {
-  border-collapse: collapse;
-  width: 100%;
+.assessment-table-body tr td {
+  text-align: center;
+  height: 80px;
+  width: calc(100% / 5); /* Divide the width equally among 5 columns */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  padding: 10px; /* Adjust the padding as needed */
 }
 
 .column1,
 .column2,
 .column3,
 .column4,
-.column5
- {
+.column5 {
   display: table-cell;
   vertical-align: inherit;
-  /* width: 240px; */
   text-align: center;
+  width: calc(100% / 5); /* Divide the width equally among 5 columns */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  padding: 10px; /* Adjust the padding as needed */
 }
 
-.column1 {
-  transform: translateX(40px);
-}
+
 
 .column2 {
   transform: translateX(30px);
@@ -46,16 +49,21 @@
   transform: translateX(40px);
 }
 
-tbody tr {
+.assess-name {
+    padding: 0px;
+    margin: -1000px;
+}
+
+.assessment-table-body tr {
   font-weight: unset;
 }
 
-tbody tr:hover {
+.assessment-table-body tr:hover {
   cursor: pointer;
   background-color: #dadada;
 }
 
-tbody tr td {
+.assessment-table-body tr td {
   text-align: center;
   height: 80px;
 }
@@ -64,7 +72,7 @@ tbody tr td {
   color: var(--galv-white);
 }
 
-.tableBody {
+.assessment-table-body {
   background-color: #8e8e8e4e;
   color: var(--galv-darkgrey);
   margin-top: -10px;
@@ -100,4 +108,3 @@ tbody tr td {
 .arrow-down {
   transform: scale(.6);
 }
-
