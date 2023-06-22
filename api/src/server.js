@@ -221,7 +221,7 @@ app.get("/cohorts",  async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
 
@@ -721,10 +721,10 @@ app.get(
 
 app.post("/assessment_scores", async (req, res) => {
   try {
-    const { student_id, assess_id, grade, cohort_id } = req.body;
+    const { student_id, assess_id, grade} = req.body;
     const { rows } = await pool.query(
-      "INSERT INTO assessment_scores (student_id, assess_id, grade, cohort_id) VALUES ($1, $2, $3) RETURNING *",
-      [student_id, assess_id, grade, cohort_id]
+      "INSERT INTO student_assessment_scores (student_id, assess_id, grade) VALUES ($1, $2, $3 ) RETURNING *",
+      [student_id, assess_id, grade ]
     );
     res.status(201).json(rows[0]);
   } catch (error) {
@@ -762,7 +762,7 @@ app.delete("/assessment_scores/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { rowCount } = await pool.query(
-      "DELETE FROM assessment_scores WHERE id = $1",
+      "DELETE FROM student_assessment_scores WHERE id = $1",
       [id]
     );
 
