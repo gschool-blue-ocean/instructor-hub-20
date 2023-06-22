@@ -25,7 +25,7 @@ const AssessmentCard = ({ assessment, closeModal }) => {
       );
 
       const response = await fetch(
-        `https://blueoceanapi.onrender.com/assessment_scores/${assessment.id}`,
+        `https://blueoceanapi.onrender.com/student_assessment_scores/${assessment.id}`,
         {
           method: "PATCH",
           headers: {
