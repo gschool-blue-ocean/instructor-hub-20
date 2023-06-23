@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "./StudentCard.module.css";
-import CohortContext from "../../../../../../../Context/CohortContext";
+import CohortContext from "//Context/CohortContext";
 
 const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
   const { cohort } = useContext(CohortContext);
@@ -27,7 +27,7 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
         );
     
         const response = await fetch(
-          `http://localhost:8000/students/${student.id}`,
+          `/api/students/${student.id}`,
           {
             method: "PATCH",
             headers: {
@@ -60,7 +60,7 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
         setIsDeleting(true);
   
         const response = await fetch(
-          `http://localhost:8000/students/${student.id}`,
+          `/api/students/${student.id}`,
           {
             method: "DELETE",
           }

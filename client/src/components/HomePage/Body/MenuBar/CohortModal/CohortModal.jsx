@@ -7,7 +7,7 @@ const CohortModal = ({ isOpen, onClose }) => {
   const [currentCohorts, setCurrentCohorts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/cohorts")
+    fetch("/api/cohorts")
       .then((response) => response.json())
       .then((data) => setCurrentCohorts(data))
       .catch((error) => console.log(error));

@@ -31,7 +31,7 @@ const RegisterPage = ({ showReg }) => {
       registerVals.email = email.value;
       registerVals.admin = true;
       const response = await fetch(
-        "https://localhost:8000/register",
+        "/api/register",
         {
           method: "POST",
           credentials: "same-origin",
