@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
-import styles from './SplashScreen.module.css';
-import HomePage from '../HomePage/HomePage';
-import CohortContext from '../Context/CohortContext';
+import React, { useContext, useState, useEffect } from "react";
+import styles from "./SplashScreen.module.css";
+import HomePage from "../HomePage/HomePage";
+import CohortContext from "../Context/CohortContext";
 
 const SplashScreen = ({ logout }) => {
   const { cohort, setCohort, setBodyDisplay } = useContext(CohortContext);
@@ -10,17 +10,17 @@ const SplashScreen = ({ logout }) => {
   const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
-    fetch('http://localhost:8000/cohorts')
+    fetch("https://blueoceanapi-ucyq.onrender.com/cohorts")
       .then((response) => response.json())
       .then((data) => setCurrentCohorts(data))
       .catch((error) => console.log(error));
 
-    const hasSeenSplash = localStorage.getItem('hasSeenSplash');
+    const hasSeenSplash = localStorage.getItem("hasSeenSplash");
     setShowSplash(!hasSeenSplash);
 
     const timeout = setTimeout(() => {
       setShowSplash(false);
-      localStorage.setItem('hasSeenSplash', true);
+      localStorage.setItem("hasSeenSplash", true);
     }, 3000);
 
     const interval = setInterval(() => {
@@ -35,35 +35,45 @@ const SplashScreen = ({ logout }) => {
 
   const handleItemClick = (item) => {
     setCohort(item.cohort_number);
-    setBodyDisplay('main');
+    setBodyDisplay("main");
     setShowSplash(false);
-    localStorage.setItem('hasSeenSplash', true);
+    localStorage.setItem("hasSeenSplash", true);
   };
 
   const handleExitClick = () => {
     setShowSplash(false);
-    localStorage.setItem('hasSeenSplash', true);
+    localStorage.setItem("hasSeenSplash", true);
   };
 
   return (
     <>
       {showSplash && (
         <div className={`${styles.overlay} ${styles.open}`}>
-          <div className={`${styles['modal-cont']} ${styles.active}`} onClick={(e) => e.stopPropagation()}>
-            <div className={styles['current-view-cont']}>
-              <span>You are currently viewing <b>{`MCSP-${cohort}`}</b></span>
+          <div
+            className={`${styles["modal-cont"]} ${styles.active}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles["current-view-cont"]}>
+              <span>
+                You are currently viewing <b>{`MCSP-${cohort}`}</b>
+              </span>
             </div>
-            <div className={styles['dropdown-cont']}>
+            <div className={styles["dropdown-cont"]}>
               <h5>Change to a different cohort</h5>
               <ul>
                 {currentCohorts.map((item) => (
-                  <li key={item.cohort_number} onClick={() => handleItemClick(item)}>
+                  <li
+                    key={item.cohort_number}
+                    onClick={() => handleItemClick(item)}
+                  >
                     {`MCSP - ${item.cohort_number}`}
                   </li>
                 ))}
               </ul>
-              <div className={styles['warning-cont']}>
-                <span>You will be redirected to the Home Page in {countdown} seconds</span>
+              <div className={styles["warning-cont"]}>
+                <span>
+                  You will be redirected to the Home Page in {countdown} seconds
+                </span>
               </div>
             </div>
           </div>

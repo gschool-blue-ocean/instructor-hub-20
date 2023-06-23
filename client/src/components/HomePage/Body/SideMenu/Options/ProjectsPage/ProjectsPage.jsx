@@ -18,7 +18,7 @@ const ProjectsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8000/student_project_scores/${cohort}`
+        `https://blueoceanapi-ucyq.onrender.com/student_project_scores/${cohort}`
       );
       const proj = await response.json();
       setProjects(proj);
@@ -183,6 +183,7 @@ const ProjectsPage = () => {
             currentProj={currentProj}
             updateProject={handleUpdateProject}
           />
+
         </div>
       </div>
     </div>
