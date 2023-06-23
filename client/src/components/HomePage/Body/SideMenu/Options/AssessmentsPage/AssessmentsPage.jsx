@@ -23,7 +23,7 @@ const AssessmentsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8000/assessment_scores/${cohort}`
+        `http://localhost:8000/student_assessment_scores/${cohort}`
       );
 
       const assess = await response.json();
@@ -77,7 +77,7 @@ const AssessmentsPage = () => {
 
     const { student_id, assess_id, grade } = newAssessment;
 
-    const response = await fetch("http://localhost:8000/assessment_scores", {
+    const response = await fetch("http://localhost:8000/student_assessment_scores", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

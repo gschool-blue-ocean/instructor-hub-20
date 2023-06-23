@@ -3,7 +3,6 @@ import styles from "./StudentsTable.module.css";
 import StudentCard from "./StudentCard/StudentCard";
 
 const StudentsTable = ({ studs, updateStudent }) => {
-  console.log(studs);
   const [selectedRow, setSelectedRow] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [sortConfig, setSortConfig] = useState({ key: "", direction: "" });

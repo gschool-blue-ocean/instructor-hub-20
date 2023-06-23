@@ -7,8 +7,7 @@ const CohortModal = ({ isOpen, onClose }) => {
   const [currentCohorts, setCurrentCohorts] = useState([]);
 
   useEffect(() => {
-    // Make your API call here and update the options state when it's done
-    fetch("https://blueoceanapi-ucyq.onrender.com/cohorts")
+    fetch("http://localhost:8000/cohorts")
       .then((response) => response.json())
       .then((data) => setCurrentCohorts(data))
       .catch((error) => console.log(error));
