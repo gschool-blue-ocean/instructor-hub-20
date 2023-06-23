@@ -34,7 +34,7 @@ const AssessmentCard = ({
       updatedFormData.assess_id = parseInt(updatedFormData.assess_id);
 
       const response = await fetch(
-        `http://https://blueoceanapi-ucyq.onrender.com//student_assessment_scores/${assessment.id}`,
+        `http://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${assessment.id}`,
         {
           method: "PATCH",
           headers: {
@@ -67,7 +67,7 @@ const AssessmentCard = ({
       setIsDeleting(true);
 
       const response = await fetch(
-        `http://https://blueoceanapi-ucyq.onrender.com//student_assessment_scores/${assessment.id}`,
+        `http://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${assessment.id}`,
         {
           method: "DELETE",
         }

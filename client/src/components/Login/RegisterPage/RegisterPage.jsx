@@ -31,7 +31,7 @@ const RegisterPage = ({ showReg }) => {
       registerVals.email = email.value;
       registerVals.admin = true;
       const response = await fetch(
-        "https://https://blueoceanapi-ucyq.onrender.com//register",
+        "https://blueoceanapi-ucyq.onrender.com/register",
         {
           method: "POST",
           credentials: "same-origin",

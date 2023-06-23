@@ -18,7 +18,7 @@ const ProjectsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://https://blueoceanapi-ucyq.onrender.com//student_project_scores/${cohort}`
+        `http://blueoceanapi-ucyq.onrender.com/student_project_scores/${cohort}`
       );
       const proj = await response.json();
       setProjects(proj);
@@ -32,7 +32,7 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const response = await fetch(`http://https://blueoceanapi-ucyq.onrender.com//students/${cohort}`);
+      const response = await fetch(`http://blueoceanapi-ucyq.onrender.com/students/${cohort}`);
       const studentsData = await response.json();
       setStudents(studentsData);
     };
@@ -40,7 +40,7 @@ const ProjectsPage = () => {
     fetchStudents();
 
     const fetchProj = async () => {
-      const response = await fetch(`http://https://blueoceanapi-ucyq.onrender.com//project`);
+      const response = await fetch(`http://blueoceanapi-ucyq.onrender.com/project`);
       const projData = await response.json();
       setCurrentProj(projData);
     };
@@ -62,7 +62,7 @@ const ProjectsPage = () => {
     const { student_id, project_id, grade } = newProject;
 
     const response = await fetch(
-      "http://https://blueoceanapi-ucyq.onrender.com//student_project_scores",
+      "http://blueoceanapi-ucyq.onrender.com/student_project_scores",
       {
         method: "POST",
         headers: {
