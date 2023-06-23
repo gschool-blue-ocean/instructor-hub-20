@@ -27,7 +27,7 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
         );
     
         const response = await fetch(
-          `http://blueoceanapi-ucyq.onrender.com/students/${student.id}`,
+          `https://blueoceanapi-ucyq.onrender.com/students/${student.id}`,
           {
             method: "PATCH",
             headers: {
@@ -60,7 +60,7 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
         setIsDeleting(true);
   
         const response = await fetch(
-          `http://blueoceanapi-ucyq.onrender.com/students/${student.id}`,
+          `https://blueoceanapi-ucyq.onrender.com/students/${student.id}`,
           {
             method: "DELETE",
           }

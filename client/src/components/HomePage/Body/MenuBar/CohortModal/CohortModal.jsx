@@ -7,7 +7,7 @@ const CohortModal = ({ isOpen, onClose }) => {
   const [currentCohorts, setCurrentCohorts] = useState([]);
 
   useEffect(() => {
-    fetch("http://blueoceanapi-ucyq.onrender.com/cohorts")
+    fetch("https://blueoceanapi-ucyq.onrender.com/cohorts")
       .then((response) => response.json())
       .then((data) => setCurrentCohorts(data))
       .catch((error) => console.log(error));
