@@ -21,7 +21,7 @@
 This project is the culmination of months of hard work growing our skills within the Galvanize course. We came together as a team to rework an existing project from a previous cohort in order to meet the demands of a client.
 
 - Project Manager: Tailon Dow
-- UI Manager: Jacob Philips and Israr Ali
+- UI Manager: Jacob Phillips and Israr Ali
 - Architecture Manager: Alex Peterec, Kendall Boone, and Weson Hilgenfeld
 
 Working together as an Agile group, we worked hard to redesign this application visually and functionally per our client's needs. We've reworked the authentication system that correctly stores hashed passwords in the database and keeps the user logged in, reworked the whole UI to fit the clients needs, and cleaned up the entire database for seamless expereince.
@@ -97,4 +97,4 @@ Working together as an Agile group, we worked hard to redesign this application 
 - Based On:
   - Galvanize Inc. Admissions Hub assignment
 - Contributors:
-  - Jacob Philips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weson Hilgenfeld
+  - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weson Hilgenfeld
