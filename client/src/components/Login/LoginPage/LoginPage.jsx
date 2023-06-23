@@ -98,10 +98,10 @@ const LoginPage = ({ registered, setRegistered, showReg, userAuth }) => {
           </form>
         </div>
         <div className="login-button-container">
-          <button className="login-button" onClick={handleLogin}>
+          <button id="login-button" className="login-button" onClick={handleLogin}>
             Sign In
           </button>
-          <button className="login-button" onClick={handleReg}>
+          <button id="loginPage-register-button" className="login-button" onClick={handleReg}>
             Register
           </button>
           <span className="forgetYourPW">Forgot your password?</span>

@@ -108,7 +108,7 @@ const RegisterPage = ({ setRegistered, showReg }) => {
           </form>
         </div>
         <div className="login-button-container">
-          <button className="login-button" onClick={handleRegister}>
+          <button id="registerPage-register-button" className="login-button" onClick={handleRegister}>
             Register
           </button>
           <button className="login-button" onClick={handleCancel}>

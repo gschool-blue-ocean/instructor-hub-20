@@ -27,7 +27,7 @@ const ProjectsPage = () => {
             {`MCSP-${cohort} Projects`}
           </div>
           <div className={styles["add-button-container"]}></div>
-          <button className={styles["add-btn"]}>Add Project</button>
+          <button id="add-project-btn" className={styles["add-btn"]}>Add Project</button>
         </div>
         <div className={styles["table-cont"]}>
           <ProjectsTable projects={projects} />

@@ -64,7 +64,7 @@ const SideMenu = ({ logout }) => {
             </li>
           </ul>
           <span className={styles["sign-out-button-container"]}>
-            <button className={styles["sign-out-btn"]} onClick={handleLogout}>
+            <button id="sign-out-btn" className={styles["sign-out-btn"]} onClick={handleLogout}>
               Sign Out
             </button>
           </span>

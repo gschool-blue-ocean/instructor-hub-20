@@ -28,7 +28,7 @@ const AssessmentsPage = () => {
         <div className={styles["student-container-bar"]}>
           <div className={styles["page-header"]}>{`MCSP Assessments`}</div>
           <div className={styles["add-button-container"]}></div>
-          <button className={styles["add-btn"]}>Add Assessment</button>
+          <button id="add-assessment-btn" className={styles["add-btn"]}>Add Assessment</button>
         </div>
         <div className={styles["table-cont"]}>
           <CohortProvider>

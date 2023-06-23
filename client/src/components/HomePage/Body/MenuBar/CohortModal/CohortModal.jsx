@@ -37,6 +37,7 @@ const CohortModal = ({ isOpen, onClose }) => {
           <ul>
             {currentCohorts.map((item) => (
               <li
+                id={"modal"+item.cohort_number}
                 key={item.cohort_number}
                 onClick={() => handleItemClick(item)}
               >
@@ -45,7 +46,7 @@ const CohortModal = ({ isOpen, onClose }) => {
             ))}
           </ul>
           <div className={styles["exit-btn-cont"]}>
-            <button onClick={onClose} className={styles["exit-btn"]}>
+            <button id="exit-btn" onClick={onClose} className={styles["exit-btn"]}>
               Exit
             </button>
           </div>
