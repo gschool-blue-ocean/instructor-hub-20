@@ -1,104 +1,108 @@
-.tableContainer {
-    max-height: 400px;
-    margin: 30px;
-    overflow-y: auto;
-  }
-  
-  .tableHeader {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    line-height: 3;
-    color: var(--galv-white);
-    background: var(--galv-darkgrey);
-  }
-  
-  .tableHeader table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .tableBody table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .column1,
-  .column2,
-  .column3,
-  .column4,
-  .column5,
-  .column6 {
-    display: table-cell;
-    vertical-align: inherit;
-    width: 260px;
-    text-align: center; 
-  }
-  
-  .column1 {
-    padding-left: 40px;
-  }
-  
-  .column2 {
-    padding-left: 120px;
-  }
-  
-  .column3 {
-    padding-left: 200px;
-  }
-  
-  .column4 {
-    width: 500px;
-    padding-left: 80px;
-  }
-  
-  
-  tbody tr {
-    font-weight: unset;
-  }
-  
-  tbody tr:hover {
-    cursor: pointer;
-    background-color: #dadada;
-  }
-  
-  tbody tr td {
-    text-align: center; 
-    height: 80px; 
-  }
-  
-  .no-information {
-    color: var(--galv-white);
-  }
-  
-  .tableBody {
-    background-color: #8e8e8e4e;
-    color: var(--galv-darkgrey);
-    margin-top: -10px;
-    width: 100%;
-    border-collapse: collapse;
-  }
+.assessment-table-container {
+  max-height: 400px;
+  margin: 30px;
+  width: 800px;
+  overflow-y: auto;
+}
 
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  
-  .modalContent {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    width: 800px;
-    height: 600px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    position: relative;
-  }
+.assessment-table-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  line-height: 3;
+  color: var(--galv-white);
+  background: var(--galv-darkgrey);
+}
+
+.assessment-table-header table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.assessment-table-body tr td {
+  text-align: center;
+  height: 80px;
+  width: calc(100% / 5); /* Divide the width equally among 5 columns */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  padding: 10px; /* Adjust the padding as needed */
+}
+
+.column1,
+.column2,
+.column3,
+.column4,
+.column5 {
+  display: table-cell;
+  vertical-align: inherit;
+  text-align: center;
+  width: calc(100% / 5); /* Divide the width equally among 5 columns */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  padding: 10px; /* Adjust the padding as needed */
+}
+
+.column2 {
+  transform: translateX(30px);
+}
+.column1 {
+  transform: translateX(40px);
+}
+
+.assess-name {
+    padding: 0px;
+    margin: -1000px;
+}
+
+.assessment-table-body tr {
+  font-weight: unset;
+}
+
+.assessment-table-body tr:hover {
+  cursor: pointer;
+  background-color: #dadada;
+}
+
+.assessment-table-body tr td {
+  text-align: center;
+  height: 80px;
+}
+
+.no-information {
+  color: var(--galv-white);
+}
+
+.assessment-table-body {
+  background-color: #8e8e8e4e;
+  color: var(--galv-darkgrey);
+  margin-top: -10px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 800px;
+  height: 600px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.arrow-down {
+  transform: scale(.6);
+}

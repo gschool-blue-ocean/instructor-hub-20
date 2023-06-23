@@ -1,4 +1,10 @@
-import React, { useEffect, createRef, useState, useRef, useContext } from "react";
+import React, {
+  useEffect,
+  createRef,
+  useState,
+  useRef,
+  useContext,
+} from "react";
 import styles from "./MainPage.module.css";
 import Chart from "chart.js/auto";
 import CohortContext from "../../../../../Context/CohortContext";
@@ -10,7 +16,7 @@ const MainPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8000/assessment_scores/${cohort}`
+        `https://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${cohort}`
       );
       const assess = await response.json();
       setAssessments(assess);
@@ -28,12 +34,12 @@ const MainPage = () => {
 
   const createChart = () => {
     const myChartRef = chartRef.current.getContext("2d");
-  
+
     if (chartInstanceRef.current) {
       // Destroy existing chart if it exists
       chartInstanceRef.current.destroy();
     }
-  
+
     // Group students based on their grades
     const groupedData = assessments.reduce((acc, assess) => {
       const { grade } = assess;
@@ -44,10 +50,10 @@ const MainPage = () => {
       }
       return acc;
     }, {});
-  
+
     const grades = Object.keys(groupedData);
     const studentCounts = Object.values(groupedData);
-  
+
     // Define an array of colors
     const colors = [
       "rgba(255, 71, 71, 1)",
@@ -59,9 +65,9 @@ const MainPage = () => {
       "rgba(255, 117, 117, 1)",
       "rgba(255, 117, 208, 1)",
       "rgba(117, 156, 255, 1)",
-      "rgba(117, 255, 247, 1)"
+      "rgba(117, 255, 247, 1)",
     ];
-  
+
     chartInstanceRef.current = new Chart(myChartRef, {
       type: "doughnut",
       data: {
@@ -78,7 +84,7 @@ const MainPage = () => {
       },
     });
   };
-  
+
   useEffect(() => {
     createChart();
   }, [assessments]);

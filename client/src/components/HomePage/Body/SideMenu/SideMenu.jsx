@@ -10,7 +10,7 @@ const SideMenu = ({ logout }) => {
   const handleLogout = () => {
     signOut();
     logout();
-    localStorage.removeItem("hasSeenSplash"); // Corrected line
+    localStorage.removeItem("hasSeenSplash");
   };
 
   return (
