@@ -58,7 +58,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
               <th className={styles.column1}>
                 Student{" "}
                 <img
-                  src="/dist/public/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["name-arrow1"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -79,7 +79,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
               <th className={styles.column2}>
                 Assessment{" "}
                 <img
-                  src="/dist/public/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={styles["name-arrow2"]}
                   style={{
                     transform:
@@ -98,7 +98,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
               <th className={styles.column3}>
                 Grade{" "}
                 <img
-                  src="/dist/public/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={styles["name-arrow3"]}
                   style={{
                     transform:
@@ -117,7 +117,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
               {/* <th className={styles.column4}>
                 Cohort{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={styles["name-arrow4"]}
                   style={{
                     transform:
@@ -153,7 +153,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
                   <td className={styles['assess-name']}>{assessment.assess_name}</td>
                   <td>{assessment.grade}</td>
                   {/* <td>{assessment.cohort_number}</td> */}
-                  <td><img className={styles['arrow-down']} src="/dist/public/arrow-down.png" alt="" /></td>
+                  <td><img className={styles['arrow-down']} src="/img/arrow-down.png" alt="" /></td>
                 </tr>
               </React.Fragment>
             ))}

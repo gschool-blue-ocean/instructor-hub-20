@@ -2,7 +2,11 @@ export default {
   root: "src",
   server: {
     proxy: {
-      "/api": process.env.API_URL,
+      "/api": {
+        target: process.env.API_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
     port: process.env.PORT,
   },

@@ -10,6 +10,8 @@ services:
       - pg-data:/var/lib/postgresql/data
       - ./api/src/db/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./api/src/db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+    networks:
+      - mynetwork
 
   api:
     build: ./api
@@ -20,6 +22,7 @@ services:
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
       - database
+      - redis # Add this line to specify the dependency on Redis container
     ports:
       - ${API_PORT}:80
     volumes:
@@ -27,11 +30,14 @@ services:
       # filesystem to the container's.
       - ./api/src:/code/src
     command: npm run dev
+    networks:
+      mynetwork:
+        ipv4_address: 10.0.0.4
 
   app:
     build: ./client
     environment:
-      API_URL: http://api
+      API_URL: http://api:80
       PORT: ${CLIENT_PORT}
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
@@ -43,11 +49,15 @@ services:
       # filesystem to the container's.
       - ./client/src:/code/src
     command: npm run dev
+    networks:
+      mynetwork:
+        ipv4_address: 10.0.0.10
 
   tests:
     build: ./tests
     environment:
       API_URL: http://api
+      CLIENT_URL: http://10.0.0.10:${CLIENT_PORT}
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
       NODE_ENV: test
       PORT: ${TESTING_PORT}
@@ -56,10 +66,26 @@ services:
       - database
       - api
       - app
+      - redis # Add this line to specify the dependency on Redis container
     ports:
       - ${TESTING_PORT}:${TESTING_PORT}
     volumes:
       - ./tests/src:/code/src
+    networks:
+      - mynetwork
+
+  redis: # Add this section to define the Redis container
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - mynetwork
 
 volumes:
   pg-data:
+
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: 10.0.0.0/8

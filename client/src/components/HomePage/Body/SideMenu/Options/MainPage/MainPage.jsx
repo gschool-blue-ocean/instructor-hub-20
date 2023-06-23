@@ -16,7 +16,7 @@ const MainPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `blueoceanapi-ucyq.onrender.comstudent_assessment_scores/${cohort}`
+        `https://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${cohort}`
       );
       const assess = await response.json();
       setAssessments(assess);

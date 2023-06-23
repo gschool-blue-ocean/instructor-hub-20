@@ -16,7 +16,7 @@ const StudentsPage = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const response = await fetch(`https://blueoceanapi-ucyq.onrender.com/students/${cohort}`);
+      const response = await fetch(`/api/students/${cohort}`);
       const studentsData = await response.json();
       setStudents(studentsData);
     };
@@ -43,7 +43,7 @@ const StudentsPage = () => {
 
     const { stu_name, email, github } = newStudent;
 
-    const response = await fetch("https://blueoceanapi-ucyq.onrender.com/students", {
+    const response = await fetch("/api/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
