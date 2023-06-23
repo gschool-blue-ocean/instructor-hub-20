@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import CohortContext from "../../../../../../../Context/CohortContext";
 import styles from "./AssessmentCard.module.css";
 
 const AssessmentCard = ({
@@ -34,7 +33,7 @@ const AssessmentCard = ({
       updatedFormData.assess_id = parseInt(updatedFormData.assess_id);
 
       const response = await fetch(
-        `https://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${assessment.id}`,
+        `/api/student_assessment_scores/${assessment.id}`,
         {
           method: "PATCH",
           headers: {
@@ -67,7 +66,7 @@ const AssessmentCard = ({
       setIsDeleting(true);
 
       const response = await fetch(
-        `https://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${assessment.id}`,
+        `/api/student_assessment_scores/${assessment.id}`,
         {
           method: "DELETE",
         }

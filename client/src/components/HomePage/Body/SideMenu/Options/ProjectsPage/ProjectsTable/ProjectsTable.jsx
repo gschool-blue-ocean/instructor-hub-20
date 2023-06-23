@@ -59,7 +59,7 @@ useEffect(() => {
               <th className={styles.column1}>
                 Group name{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["group-name-arrow1"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -80,7 +80,7 @@ useEffect(() => {
               <th className={styles.column2}>
                 Student{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={styles["group-name-arrow2"]}
                   style={{
                     transform:
@@ -99,7 +99,7 @@ useEffect(() => {
               <th className={styles.column3}>
                 Project{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={styles["group-name-arrow3"]}
                   style={{
                     transform:
@@ -118,7 +118,7 @@ useEffect(() => {
               <th className={styles.column4}>
                 Score{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={styles["group-name-arrow4"]}
                   style={{
                     transform:
@@ -158,7 +158,7 @@ useEffect(() => {
                     <td>
                       <img
                         className={styles["arrow-down"]}
-                        src="../../../../../../../img/arrow-down.png"
+                        src="/img/arrow-down.png"
                         alt=""
                       />
                     </td>

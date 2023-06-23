@@ -56,7 +56,7 @@ const StudentsTable = ({ studs, updateStudent }) => {
               <th className={styles.column1}>
                 Student{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["name-arrow1"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -77,7 +77,7 @@ const StudentsTable = ({ studs, updateStudent }) => {
               <th className={styles.column2}>
                 Email{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["name-arrow2"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -98,7 +98,7 @@ const StudentsTable = ({ studs, updateStudent }) => {
               <th className={styles.column3}>
                 GitHub{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["name-arrow3"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -119,7 +119,7 @@ const StudentsTable = ({ studs, updateStudent }) => {
               {/* <th className={styles.column4}>
                 Grad Date{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["name-arrow4"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -140,7 +140,7 @@ const StudentsTable = ({ studs, updateStudent }) => {
               {/* <th className={styles.column5}>
                 Cohort{" "}
                 <img
-                  src="../../../../../../../img/arrow-up.png"
+                  src="/img/arrow-up.png"
                   className={`${styles["name-arrow5"]} ${
                     sortClicked && styles.clicked
                   }`}
@@ -180,7 +180,7 @@ const StudentsTable = ({ studs, updateStudent }) => {
                   <td>
                     <img
                       className={styles["arrow-down"]}
-                      src="../../../../../../../img/arrow-down.png"
+                      src="/img/arrow-down.png"
                       alt=""
                     />
                   </td>
