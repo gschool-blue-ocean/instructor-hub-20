@@ -16,12 +16,13 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/serverDeployed.js",
-    "test": "vitest",
+    "test": "jest --coverage",
     "migrate": "node src/db/migration.js",
     "seed": "node src/db/seed.js"
   },
   "devDependencies": {
     "jest": "^29.5.0",
+    "msw": "^1.2.2",
     "nodemon": "^2.0.12",
     "supertest": "^6.3.3",
     "vitest": "^0.29.2"
