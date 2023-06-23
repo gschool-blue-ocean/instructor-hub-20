@@ -6,7 +6,6 @@ const ProjectCard = ({ project, onClose, students, currentProj, updateProject, s
     grade: project.grade || "",
     student_id: project.student_id || "",
     project_id: project.project_id || "",
-    cohort_id: project.cohort_id || "",
   });
 
   const [updatedProject, setUpdatedProject] = useState(project);

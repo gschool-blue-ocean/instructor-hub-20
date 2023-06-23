@@ -11,9 +11,8 @@ const ProjectsPage = () => {
   const [currentProj, setCurrentProj] = useState([]);
   const [newProject, setNewProject] = useState({
     student_id: "",
-    project_name: "",
+    project_id: "",
     grade: "",
-    cohort_id: cohort,
   });
 
   useEffect(() => {
@@ -25,7 +24,7 @@ const ProjectsPage = () => {
       setProjects(proj);
     })();
     return () => {};
-  }, [cohort]);
+  }, [projects, cohort]);
 
   const handleAddProject = () => {
     setShowModal(!showModal);
@@ -47,7 +46,7 @@ const ProjectsPage = () => {
     };
 
     fetchProj();
-  }, [cohort]);
+  }, [projects, cohort]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -60,7 +59,7 @@ const ProjectsPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { student_id, project_name, grade } = newProject;
+    const { student_id, project_id, grade } = newProject;
 
     const response = await fetch(
       "http://localhost:8000/student_project_scores",
@@ -71,21 +70,20 @@ const ProjectsPage = () => {
         },
         body: JSON.stringify({
           student_id,
-          project_name,
+          project_id,
           grade,
         }),
       }
     );
-
     if (response.ok) {
       const responseData = await response.json();
+      console.log(responseData)
       setProjects((prevProjects) => [...prevProjects, responseData]);
       setShowModal(false);
       setNewProject({
         student_id: "",
-        project_name: "",
+        project_id: "",
         grade: "",
-        cohort_id: cohort,
       });
       window.alert("Project Successfully Added");
     } else {
@@ -144,8 +142,8 @@ const ProjectsPage = () => {
                       <label>
                         Project:
                         <select
-                          name="project_name"
-                          value={newProject.project_name || ""}
+                          name="project_id"
+                          value={newProject.project_id || ""}
                           onChange={handleInputChange}
                         >
                           <option value="">Select a project</option>
