@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "./StudentCard.module.css";
-import CohortContext from "//Context/CohortContext";
+
 
 const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
   const { cohort } = useContext(CohortContext);

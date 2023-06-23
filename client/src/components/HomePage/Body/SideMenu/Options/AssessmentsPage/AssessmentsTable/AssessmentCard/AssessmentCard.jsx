@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import CohortContext from "//Context/CohortContext";
 import styles from "./AssessmentCard.module.css";
 
 const AssessmentCard = ({
