@@ -4,7 +4,6 @@ import CohortContext from "../../../../../../../Context/CohortContext";
 
 const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
   const { cohort } = useContext(CohortContext);
-  console.log(student);
   const [formData, setFormData] = useState({
     stu_name: student.stu_name || "",
     email: student.email || "",

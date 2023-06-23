@@ -27,7 +27,7 @@ const LoginPage = ({ showReg, userAuth }) => {
       login.password = password.value;
       // console.log(login);
       const response = await fetch(
-        "https://blueoceanapi-ucyq.onrender.com/login",
+        "https://localhost:8000/login",
         {
           method: "POST",
           credentials: "same-origin",
