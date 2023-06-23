@@ -23,7 +23,7 @@ const AssessmentsPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8000/student_assessment_scores/${cohort}`
+        `http://https://blueoceanapi-ucyq.onrender.com//student_assessment_scores/${cohort}`
       );
 
       const assess = await response.json();
@@ -42,7 +42,7 @@ const AssessmentsPage = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const response = await fetch(`http://localhost:8000/students/${cohort}`);
+      const response = await fetch(`http://https://blueoceanapi-ucyq.onrender.com//students/${cohort}`);
       const studentsData = await response.json();
       setStudents(studentsData);
     };
@@ -50,7 +50,7 @@ const AssessmentsPage = () => {
     fetchStudents();
 
     const fetchAssessments = async () => {
-      const response = await fetch(`http://localhost:8000/assessments`);
+      const response = await fetch(`http://https://blueoceanapi-ucyq.onrender.com//assessments`);
       const assess = await response.json();
       setAssess(assess);
     };
@@ -77,7 +77,7 @@ const AssessmentsPage = () => {
 
     const { student_id, assess_id, grade } = newAssessment;
 
-    const response = await fetch("http://localhost:8000/student_assessment_scores", {
+    const response = await fetch("http://https://blueoceanapi-ucyq.onrender.com//student_assessment_scores", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

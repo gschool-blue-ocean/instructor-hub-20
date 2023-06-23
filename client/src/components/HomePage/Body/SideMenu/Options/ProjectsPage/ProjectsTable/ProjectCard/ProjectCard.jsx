@@ -25,7 +25,7 @@ const ProjectCard = ({ project, onClose, students, currentProj, updateProject, s
       updatedFormData.project_id = parseInt(updatedFormData.project_id);
 
       const response = await fetch(
-        `http://localhost:8000/student_project_scores/${project.id}`,
+        `http://https://blueoceanapi-ucyq.onrender.com//student_project_scores/${project.id}`,
         {
           method: "PATCH",
           headers: {
