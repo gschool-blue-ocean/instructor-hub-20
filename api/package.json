@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/serverDeployed.js",
-    "test": "jest --coverage",
+    "test": "jest --collectCoverage",
     "migrate": "node src/db/migration.js",
     "seed": "node src/db/seed.js"
   },

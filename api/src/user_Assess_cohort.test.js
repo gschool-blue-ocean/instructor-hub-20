@@ -1,6 +1,4 @@
 const axios = require("axios");
-
-
 jest.mock("axios")
 
 /*-------------------User Tests-------------------*/
