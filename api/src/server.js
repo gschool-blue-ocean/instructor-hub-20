@@ -153,17 +153,29 @@ app.get(
 
 app.post("/students", async (req, res) => {
   try {
-    const { stu_name, email, gitHub, cohort_number } = req.body;
-    const response = await pool.query(
-      "SELECT id FROM cohorts WHERE cohort_number = $1",
+    const { stu_name, email, github, cohort_number } = req.body;
+    const { rows: cohortRows } = await pool.query(
+      `
+      SELECT id FROM cohorts WHERE cohort_number = $1
+      `,
       [cohort_number]
     );
-    const id = response.rows[0].id;
-    console.log(response.rows);
+
+    if (cohortRows.length === 0) {
+      return res.status(404).json({ error: "Cohort not found" });
+    }
+
+    const cohort_id = cohortRows[0].id;
+
     const { rows } = await pool.query(
-      "INSERT INTO students (stu_name, email, github, cohort_id) VALUES ($1, $2, $3, $4) RETURNING *",
-      [stu_name, email, gitHub, id]
+      `
+      INSERT INTO students (stu_name, email, github, cohort_id)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *
+      `,
+      [stu_name, email, github, cohort_id]
     );
+    
     res.status(201).json(rows[0]);
   } catch (error) {
     console.error(error);
@@ -171,19 +183,26 @@ app.post("/students", async (req, res) => {
   }
 });
 
-app.put("/students/:id", async (req, res) => {
+
+
+app.patch("/students/:id", async (req, res) => {
   try {
     const stuID = req.params.id;
     const { stu_name, email, gitHub, cohort_number } = req.body;
-    const response = await pool.query(
-      "SELECT id FROM cohorts WHERE cohort_number = $1",
-      [cohort_number]
-    );
-    const id = response.rows[0].id;
+    
     const { rowCount } = await pool.query(
-      "UPDATE students SET stu_name = $1, email = $2, github = $3, cohort_id = $4 WHERE id = $5",
-      [stu_name, email, gitHub, id, stuID]
+      `UPDATE students 
+       SET stu_name = COALESCE($1, stu_name), 
+           email = COALESCE($2, email), 
+           github = COALESCE($3, github), 
+           cohort_id = COALESCE(
+             (SELECT id FROM cohorts WHERE cohort_number = $4),
+             cohort_id
+           )
+       WHERE id = $5`,
+      [stu_name, email, gitHub, cohort_number, stuID]
     );
+
     if (rowCount === 0) {
       res.sendStatus(404);
     } else {
@@ -194,6 +213,7 @@ app.put("/students/:id", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 
 app.delete("/students/:id", async (req, res) => {
   try {

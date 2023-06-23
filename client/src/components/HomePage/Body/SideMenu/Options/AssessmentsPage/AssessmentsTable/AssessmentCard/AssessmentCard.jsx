@@ -104,7 +104,7 @@ const AssessmentCard = ({
             <div>Student Name: {updatedAssessment.student_name}</div>
             <div>Assessment Name: {updatedAssessment.assess_name}</div>
             <div>Grade: {updatedAssessment.grade}</div>
-            <div>Cohort Number: {updatedAssessment.cohort_number}</div>
+            {/* <div>Cohort Number: {updatedAssessment.cohort_number}</div> */}
           </div>
           <div className={styles["student-other"]}>
             <div className={styles["completion-status"]}>

@@ -114,7 +114,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
                   onClick={() => handleSort("grade")}
                 />
               </th>
-              <th className={styles.column4}>
+              {/* <th className={styles.column4}>
                 Cohort{" "}
                 <img
                   src="../../../../../../../img/arrow-up.png"
@@ -132,7 +132,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
                   }}
                   onClick={() => handleSort("cohort_number")}
                 />
-              </th>
+              </th> */}
               <th className={styles.column5}>
                     Options{" "}
               </th>
@@ -152,7 +152,7 @@ const AssessmentsTable = ({ assessments, updateAssessment, students, assess }) =
                   <td>{assessment.student_name}</td>
                   <td className={styles['assess-name']}>{assessment.assess_name}</td>
                   <td>{assessment.grade}</td>
-                  <td>{assessment.cohort_number}</td>
+                  {/* <td>{assessment.cohort_number}</td> */}
                   <td><img className={styles['arrow-down']} src="../../../../../../../img/arrow-down.png" alt="" /></td>
                 </tr>
               </React.Fragment>

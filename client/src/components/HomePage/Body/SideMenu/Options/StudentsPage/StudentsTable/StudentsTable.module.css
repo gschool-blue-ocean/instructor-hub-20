@@ -1,26 +1,30 @@
-.tableContainer {
+.student-table-container {
   max-height: 400px;
   margin: 30px;
+  width: 1000px;
   overflow-y: auto;
 }
 
-.tableHeader {
+.student-table-header {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   line-height: 3;
   color: var(--galv-white);
   background: var(--galv-darkgrey);
 }
 
-.tableHeader table {
+.student-table-header table {
   border-collapse: collapse;
   width: 100%;
 }
 
-.tableBody table {
-  border-collapse: collapse;
-  width: 100%;
+.student-table-body tr td {
+  text-align: center;
+  height: 80px;
+  width: calc(100% / 6); 
+  box-sizing: border-box; 
+  padding: 10px;
 }
 
 .column1,
@@ -31,50 +35,68 @@
 .column6 {
   display: table-cell;
   vertical-align: inherit;
-  width: 260px;
-  text-align: center; /* Updated: Center align the content */
+  text-align: center;
+  width: calc(100% / 6); 
+  box-sizing: border-box; 
+  padding: 10px; 
 }
 
-.column1 {
-  padding-left: 40px;
+.column2, .column3, .column4, .column5 {
+  transform: translateX(40px);
 }
 
-.column2 {
-  padding-left: 120px;
-}
-
-.column3 {
-  padding-left: 200px;
-}
-
-.column4 {
-  width: 500px;
-  padding-left: 80px;
-}
-
-
-tbody tr {
+.student-table-body tr {
   font-weight: unset;
 }
 
-tbody tr:hover {
+.student-table-body tr:hover {
   cursor: pointer;
   background-color: #dadada;
 }
 
-tbody tr td {
-  text-align: center; /* Updated: Center align the content */
-  height: 80px; /* Increase this value to make the rows taller */
+.student-table-body tr td {
+  text-align: center;
+  height: 80px;
 }
 
 .no-information {
   color: var(--galv-white);
 }
 
-.tableBody {
+.student-table-body {
   background-color: #8e8e8e4e;
   color: var(--galv-darkgrey);
   margin-top: -10px;
   width: 100%;
   border-collapse: collapse;
 }
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 800px;
+  height: 600px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.arrow-down {
+  transform: scale(.6);
+}
+
