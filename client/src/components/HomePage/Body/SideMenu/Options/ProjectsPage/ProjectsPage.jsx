@@ -40,7 +40,7 @@ const ProjectsPage = () => {
     fetchStudents();
 
     const fetchProj = async () => {
-      const response = await fetch(`/api/project`);
+      const response = await fetch(`/api/projects`);
       const projData = await response.json();
       setCurrentProj(projData);
     };

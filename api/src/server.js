@@ -421,87 +421,6 @@ app.delete("/groups/:id", async (req, res) => {
   }
 });
 
-// ----------------- Project routes ----------------------//
-app.get('/project', async (req, res) => {
-  try {
-    const { rows } = await pool.query('SELECT * FROM projects');
-    res.json(rows);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: `Something went wrong: ${error}` });
-  }
-});
-
-
-app.get("/project/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM project WHERE id = $1", [
-      id,
-    ]);
-
-    if (rows.length === 0) {
-      res.sendStatus(404);
-    } else {
-      res.json(rows[0]);
-    }
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-  }
-});
-
-app.post("/project", async (req, res) => {
-  try {
-    const { project_name, type } = req.body;
-    const { rows } = await pool.query(
-      "INSERT INTO projects (project_name, type) VALUES ($1, $2) RETURNING *",
-      [project_name, type]
-    );
-    res.status(201).json(rows[0]);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
-
-app.put("/project/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { project_name, type } = req.body;
-    const { rowCount } = await pool.query(
-      "UPDATE projects SET project_name = $1, type = $2 WHERE id = $3",
-      [project_name, type, id]
-    );
-
-    if (rowCount === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(204);
-    }
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
-
-app.delete("/project/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { rowCount } = await pool.query("DELETE FROM projects WHERE id = $1", [
-      id,
-    ]);
-    if (rowCount === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(204);
-    }
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
-
 // ----------------- Assessments routes --------------------- //
 app.get("/assessments", async (req, res) => {
   try {
@@ -703,6 +622,7 @@ app.get("/projects", async (req, res) => {
   }
 });
 
+
 app.get("/projects/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -717,9 +637,10 @@ app.get("/projects/:id", async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
+    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
   }
 });
+
 
 app.post("/projects", async (req, res) => {
   try {
