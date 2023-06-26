@@ -9,7 +9,6 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
     stu_name: student.stu_name || "",
     email: student.email || "",
     github: student.github || "",
-    graduation: student.graduation || "",
     cohort: cohort,
   });
 
