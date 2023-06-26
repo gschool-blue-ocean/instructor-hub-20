@@ -204,13 +204,13 @@ app.patch("/students/:id", async (req, res) => {
     );
 
     if (rowCount === 0) {
-      res.sendStatus(404);
+      res.status(404);
     } else {
-      res.sendStatus(204);
+      res.status(204);
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500);
+    res.status(500);
   }
 });
 
