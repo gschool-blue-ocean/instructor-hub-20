@@ -38,6 +38,7 @@ const CohortModal = ({ isOpen, onClose }) => {
             {currentCohorts.map((item) => (
               <li
                 id={"modal"+item.cohort_number}
+
                 key={item.cohort_number}
                 onClick={() => handleItemClick(item)}
               >

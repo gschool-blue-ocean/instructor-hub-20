@@ -4,7 +4,7 @@
     "@redis/client": "^1.5.8",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.17.3",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
@@ -14,8 +14,8 @@
     "dev": "nodemon src/index.js --host",
     "start": "node src/serverDeployed.js --host",
     "test": "echo 'add tests'",
-    "migrate": "node src/db/migration.js",
-    "seed": "node src/db/seed.js"
+    "migrate": "node ./src/db/migration.js",
+    "seed": "node ./src/db/seed.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.12",
