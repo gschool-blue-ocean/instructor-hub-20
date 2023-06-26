@@ -188,7 +188,7 @@ app.post("/students", async (req, res) => {
 app.patch("/students/:id", async (req, res) => {
   try {
     const stuID = req.params.id;
-    const { stu_name, email, gitHub, cohort_number } = req.body;
+    const { stu_name, email, github, cohort_number } = req.body;
     
     const { rowCount } = await pool.query(
       `UPDATE students 
@@ -200,7 +200,7 @@ app.patch("/students/:id", async (req, res) => {
              cohort_id
            )
        WHERE id = $5`,
-      [stu_name, email, gitHub, cohort_number, stuID]
+      [stu_name, email, github, cohort_number, stuID]
     );
 
     if (rowCount === 0) {
@@ -731,15 +731,16 @@ app.patch("/student_project_scores/:id", async (req, res) => {
     try {
       const { id } = req.params;
       console.log(id);
-      const { student_id, project_id, grade } = req.body;
+      const { student_id, group_id, project_id, grade } = req.body;
       console.log(student_id, project_id, grade);
         const { rowCount } = await pool.query(
             `UPDATE student_project_scores
       SET student_id = COALESCE($1, student_id),
-          project_id = COALESCE($2, project_id),
-          grade = COALESCE($3, grade)
-      WHERE id = $4;`,
-            [student_id, project_id, grade, id]
+      group_id = COALESCE($2, group_id),
+          project_id = COALESCE($3, project_id),
+          grade = COALESCE($4, grade)
+      WHERE id = $5;`,
+            [student_id, group_id, project_id, grade, id]
         );
 
         if (rowCount === 0) {

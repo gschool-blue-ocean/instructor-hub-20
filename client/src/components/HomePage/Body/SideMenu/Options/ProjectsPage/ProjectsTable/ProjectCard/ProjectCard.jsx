@@ -3,9 +3,10 @@ import styles from "./ProjectCard.module.css";
 
 const ProjectCard = ({ project, onClose, students, currentProj, updateProject, selectedRow }) => {
   const [formData, setFormData] = useState({
-    grade: project.grade || "",
+    group_id: project.group_id || "",
     student_id: project.student_id || "",
     project_id: project.project_id || "",
+    grade: project.grade || "",
   });
 
   const [updatedProject, setUpdatedProject] = useState(project);
