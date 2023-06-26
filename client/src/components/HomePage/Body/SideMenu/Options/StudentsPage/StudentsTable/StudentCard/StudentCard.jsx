@@ -9,7 +9,7 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
     stu_name: student.stu_name || "",
     email: student.email || "",
     github: student.github || "",
-    cohort: cohort,
+    cohort_number: cohort,
   });
 
   const [updatedStudent, setUpdatedStudent] = useState(student);
