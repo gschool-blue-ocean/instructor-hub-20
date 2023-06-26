@@ -457,10 +457,6 @@ app.get(
         res.json(rows);
       }
     } catch (error) {
-      console.error(error);
-      res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-    }
-  } catch (error) {
     console.error(error);
     res.status(500).json({ message: `Something went wrong: ${error}` });
   }
