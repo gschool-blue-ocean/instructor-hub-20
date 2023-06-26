@@ -422,16 +422,16 @@ app.delete("/groups/:id", async (req, res) => {
 });
 
 // ----------------- Project routes ----------------------//
-app.get("/project", async (req, res) => {
+app.get('/project', async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM projects");
-
+    const { rows } = await pool.query('SELECT * FROM projects');
     res.json(rows);
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).json({ message: `Something went wrong: ${error}` });
+    res.status(500).json({ message: `Something went wrong: ${error}` });
   }
 });
+
 
 app.get("/project/:id", async (req, res) => {
   try {
