@@ -77,7 +77,6 @@ const ProjectsPage = () => {
     );
     if (response.ok) {
       const responseData = await response.json();
-      console.log(responseData)
       setProjects((prevProjects) => [...prevProjects, responseData]);
       setShowModal(false);
       setNewProject({
