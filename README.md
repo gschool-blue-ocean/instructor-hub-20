@@ -1,65 +1,110 @@
 # Full-Stack React Example
 
-This repo contains an example of a full-stack application with an express backend, a React frontend, and a postgres database. It's designed to be a starting point for a blue ocean project, or a reference for those wanting to get testing, CI, or docker working in their respective projects.
+# Instructor Hub
 
-## Deployed setup
-As of 5/26/2023 the website is deployed on https://instructor-hubmcsp19.onrender.com/ . This will stop being the case in about 2 months, as render's free services will expire
+> Agile group project to rework an instructor hub to track incoming students and their progress into the Galvanize program.
 
-## Development Setup
+## Table of Contents
 
-The app can be started with two steps:
+- [General Information](#general-information)
+  - [Technologies Used](#technologies-used)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+  - [Setup](#setup)
+  - [Usage](#usage)
+  - [Current Status](#current-status)
+- [Room For Improvement](#room-for-improvement)
+- [Acknowledgements](#acknowledgements)
 
-1. `cp .env.example .env` - Copy over required environment variables.
-1. `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
-1. `docker-compose up` - Run Project.
+## General Information
 
-> **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
+This project is the culmination of months of hard work growing our skills within the Galvanize course. We came together as a team to rework an existing project from a previous cohort in order to meet the demands of a client.
 
-## npm Scripts
+- Project Manager: Tailon Dow
+- UI Manager: Jacob Philips and Israr Ali
+- Architecture Manager: Alex Peterec, Kendall Boone, and Weson Hilgenfeld
 
-**`root`**
+Working together as an Agile group, we worked hard to redesign this application visually and functionally per our client's needs. We've reworked the authentication system that correctly stores hashed passwords in the database and keeps the user logged in, reworked the whole UI to fit the clients needs, and cleaned up the entire database for seamless expereince.
 
-- `lint` - Checks code for style issues.
-- `test` - Runs `test:client` and `test:api`.
-- `ci` - Runs `lint` and `test`.
-- `test:client` - Runs frontend tests.
-- `test:api` - Runs backend tests.
+## Technologies Used
 
-**`/client`**
+- HTML5, CSS3, JavaScript, express.js, node.js,
+- React, react-router, react-auth,
+- jest, Vitest, Playwright,
+- Docker, PostgreSQL, Git, NPM,
+- Visual Studio Code, Github Projects,
+- Discord, Slack, Zoom
 
-- `dev` - Hosts your assets (executed by docker-compose).
-- `build` - Builds your assets for production.
-- `test` - Runs tests.
+## Features
 
-**`/server`**
+- Login Authentication with hashed passwords stored in the database
+- Central hub to view and manage all students and cohorts/classes
+- Incorporate dynamic charts to measure metrics
+- Ability to update and manage individualized assessment data
 
-- `dev` - Runs the server in watch mode (executed by docker-compose).
-- `start` - Starts the production server.
-- `test` - Runs tests.
+## Screenshot(s)
 
-## Tech used
+### Login
 
-- [`vite`](https://vitejs.dev/) - Module bundler, transpiler and dev server.
-- [`vitest`](https://vitest.dev/) - Test runner.
-- [`prettier`](https://prettier.io/) - Code formatter/checker.
-- [`react-testing-library`](https://testing-library.com/docs/react-testing-library/api/) - React component test helper.
-- [`msw`](https://testing-library.com/docs/react-testing-library/api/) - Request mocking library for writing frontend tests.
-- ['react-auth-kit] (https://authkit.arkadip.dev/) - Authentication kit used for react project to grant cookies for remembering users
-- [`supertest`](https://github.com/ladjs/supertest) - HTTP request simulator for backend testing.
-- [`docker`](https://www.docker.com/) - Containerization framework for dev and deployment.
-- ['playwright'] (https://www.npmjs.com/package/playwright-testing-library) - used for scripting UI interactivity tests and the resulting changes to the site
-- https://render.com/ - used for deploying the website production build
+![Login](/documentation/images/mcsp-20/login.png)
+![Create_Account](/documentation/images/mcsp-20/create_account.png)
 
-## Useful Docker Commands
+### Dashboard
 
-- `docker exec <container_name_or_id> <command>` - Runs command in the context of a container.
-- `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker.
+![Dashboard](/documentation/images/mcsp-20/dashboard.png)
 
-## Points of improvement for the next group to inherit this project
+### Interview
 
-- playwright tests that involve adding new information thru interacting with the website should be made to have this info deleted upon deleting the volume
--  selecting individual assessments for the individual students, the list of members is based on their unique student_id, not their names. This should be rectified to displaying their names instead of number_ids 
-- separate testing environment including a different ports for server, react site, database, so as to not influence the main project
-- Assesments button needs to figure out routes that allow for selection of a student and a specfiic assessment, after assesment and student selected, the next button should take you to modal for grading 
+![Interview](/documentation/images/mcsp-20/interview.png)
 
+## Setup
+
+- Fork and clone this repository
+- From the root directory of the cloned repository
+  - npm install
+  - npm install --prefix api
+  - npm install --prefix client
+  - `cp .env.example .env` - Copy over required environment variables.
+  - `docker-compose up` - Run Project.
+    > **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
+- Point your browser to
+  - [https://instructor-hub-20.onrender.com/](https://instructor-hub-20.onrender.com/)
+- Run Playwright tests
+	- The tests automatically run when running `docker-compose up -d`
+  - You can run just `docker-compose up` to run the containers and see the logs in the terminal
+	- The tests results can be viewed in the instructor-hub-20_tests_1 container log
+	- To run the test again:
+    - Make sure that all the other containers are running first
+		- Start up the test container from Docker Desktop
+		- Or `run docker start instructor-hub-20_tests_1` in the terminal
+
+
+[Project Demonstration](deployment_link_will_go_here_when_complete)
+
+## Usage
+
+- Click on Register button
+- Type in all your info and provide a valid password
+- Click Submit
+- Type in your email and password and Click Login to explore the dashboard
+
+## Current Status
+
+> Sprint 1 of 2 Complete
+
+## Room For Improvement
+
+- Ideas:
+  - Adding a scalable option
+- Todo:
+  - deployment
+
+## Acknowledgements
+
+- Inspired By:
+  - Our instructors, all of our hard work, and the hard work of previous cohorts
+- Based On:
+  - Galvanize Inc. Admissions Hub assignment
+- Contributors:
+  - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weson Hilgenfeld
 

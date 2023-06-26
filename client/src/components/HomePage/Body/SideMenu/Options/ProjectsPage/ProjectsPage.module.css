@@ -1,64 +1,136 @@
 .student-container {
-    width:  100%;
+    width:  1100;
     margin-left: 80px;
 }
 
 .student-title {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding-top: 20px;
-    font-size: 1.7rem;
-    font-weight: var(--bold);
-    transform: translateX(40px);
-    height: 80px;
-    width: 300px;
-    color: var(--galv-white);
-    background-color: var(--galv-purple);
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 20px;
+  font-size: 1.7rem;
+  font-weight: var(--bold);
+  transform: translateX(40px);
+  height: 80px;
+  width: 300px;
+  color: var(--galv-white);
+  background-color: var(--galv-purple);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .table-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 30px;
-    height: 550px;
-    padding: 30px 2px;
-    top: 0;
-    background-color: var(--galv-white);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 30px;
+  height: 550px;
+  padding: 30px 2px;
+  top: 0;
+  background-color: var(--galv-white);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .student-container-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
 }
 
 .page-header {
-    background-color: var(--galv-white);
-    color: var(--galv-darkgrey);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    font-size: 2.6rem;
-    padding: 5px 20px;
-    border-radius: 30px;
+  background-color: var(--galv-white);
+  color: var(--galv-darkgrey);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-size: 2.6rem;
+  padding: 5px 20px;
+  border-radius: 30px;
 }
+
+.add-button-container {
+    display: flex;
+    justify-content: right;
+    align-content: right;
+    width: 100%;
+  }
 
 .add-btn {
     background-color: var(--galv-orange);
     color: var(--galv-white);
     font-size: 1.3rem;
-    padding: 0px 15px;
+    padding: 10px 15px;
     border: none;
     border-radius: 30px;
-    transform: scale(.7);
+    transform: scale(0.7);
     cursor: pointer;
-    transition: .3s ease-in;
-}
+    transition: 0.3s ease-in;
+  }
+
 
 .add-btn:hover {
-    background-color: var(--galv-purple);
+  background-color: var(--galv-purple);
 }
+
+
+.page-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 500px;
+    color: var(--galv-white);
+    background-color: var(--galv-purple);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .page-modal-content {
+    transform: scale(1.3);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+  }
+  
+  .page-modal-content form {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+  }
+  
+  .page-modal-content form label {
+    margin: 20px;
+  }
+  
+  .page-submit-button {
+    width: 70px;
+    margin-top: 20px;
+    transform: translateX(20px);
+    border-radius: 30px;
+    background-color: #62d864;
+    cursor: pointer;
+  }

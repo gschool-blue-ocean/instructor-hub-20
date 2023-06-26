@@ -6,8 +6,7 @@
     "test": "concurrently \"npm:test:*\"",
     "ci": "npm run lint && npm run test",
     "test:client": "npm run test --prefix=client",
-    "test:api": "npm run test --prefix=api",
-    "seed": "node /api/src/db/seed.js"
+    "test:api": "npm run test --prefix=api"
   },
   "devDependencies": {
     "concurrently": "^7.1.0",

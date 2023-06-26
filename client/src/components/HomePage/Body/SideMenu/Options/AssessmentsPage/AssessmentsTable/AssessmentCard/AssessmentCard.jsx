@@ -1,19 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
-import CohortContext from '../../../../../../../Context/CohortContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import styles from './AssessmentCard.module.css';
+import React, { useContext, useEffect, useState } from "react";
+import styles from "./AssessmentCard.module.css";
 
-const AssessmentCard = ({ assessment, closeModal }) => {
-  const { setBodyDisplay } = useContext(CohortContext);
+const AssessmentCard = ({
+  assessment,
+  closeModal,
+  updateAssessment,
+  selectedRow,
+  students,
+  assess,
+}) => {
   const [formData, setFormData] = useState({
-    grade: assessment.grade || '',
-    student_id: assessment.student_id || '',
-    assess_id: assessment.assess_id || '',
-    cohort_id: assessment.cohort_id || '',
+    grade: assessment.grade || "",
+    student_id: assessment.student_id || "",
+    assess_id: assessment.assess_id || "",
+    cohort_id: assessment.cohort_id || "",
   });
   const [updatedAssessment, setUpdatedAssessment] = useState(assessment);
-  const [shouldUpdate, setShouldUpdate] = useState(false); // State variable to trigger rerender
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,38 +26,65 @@ const AssessmentCard = ({ assessment, closeModal }) => {
     e.preventDefault();
     try {
       const updatedFormData = Object.fromEntries(
-        Object.entries(formData).filter(([key, value]) => value !== '')
+        Object.entries(formData).filter(([key, value]) => value !== "")
+      );
+      
+      updatedFormData.student_id = parseInt(updatedFormData.student_id);
+      updatedFormData.assess_id = parseInt(updatedFormData.assess_id);
+
+      const response = await fetch(
+        `/api/student_assessment_scores/${assessment.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        }
       );
 
-      const response = await fetch(`http://localhost:8000/assessment_scores/${assessment.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedFormData),
-      });
-
       if (response.ok) {
-        setUpdatedAssessment({
+        const updatedAssessmentData = {
           ...updatedAssessment,
           ...updatedFormData,
-        });
-        console.log('Assessment updated successfully');
-        setShouldUpdate(true); // Set the state variable to trigger the rerender
+        };
+        setUpdatedAssessment(updatedAssessmentData);
+        console.log("Assessment updated successfully");
+        updateAssessment(selectedRow, updatedAssessmentData);
+        window.alert("Assessment Successfully Updated");
       } else {
-        console.log('Error updating assessment');
+        console.log("Error updating assessment");
       }
     } catch (error) {
       console.error(error);
     }
+    closeCard();
   };
+  
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
 
-  useEffect(() => {
-    if (shouldUpdate) {
-      setBodyDisplay('assessmentTable'); // Update the body display to trigger the AssessmentPage component rerender
-      setShouldUpdate(false); // Reset the state variable
+      const response = await fetch(
+        `/api/student_assessment_scores/${assessment.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        console.log("Assessment deleted successfully");
+        window.alert("Assessment Succesfully Deleted")
+      } else {
+        console.log("Error deleting assessment");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
+      closeCard();
     }
-  }, [shouldUpdate, setBodyDisplay]);
+  };
 
   const isComplete = !!assessment.grade;
 
@@ -63,28 +93,31 @@ const AssessmentCard = ({ assessment, closeModal }) => {
   };
 
   return (
-    <div className={styles['card-container']}>
+    <div className={styles["card-container"]}>
       <span className={styles.close} onClick={closeCard}>
         &times;
       </span>
-      <div className={styles['card-container-bar']}>
-        <div className={styles['card-content']}>
-          <div className={styles['student-basic']}>
+      <div className={styles["card-container-bar"]}>
+        <div className={styles["card-content"]}>
+          <div className={styles["student-basic"]}>
             <div>Student Name: {updatedAssessment.student_name}</div>
             <div>Assessment Name: {updatedAssessment.assess_name}</div>
             <div>Grade: {updatedAssessment.grade}</div>
-            <div>Cohort Number: {updatedAssessment.cohort_number}</div>
+            {/* <div>Cohort Number: {updatedAssessment.cohort_number}</div> */}
           </div>
-          <div className={styles['student-other']}>
-            <div className={styles['completion-status']}>
-              Completion Status:{' '}
-              <span className={isComplete ? styles.complete : styles.incomplete}>
-                {isComplete ? 'Complete' : 'Incomplete'}
+          <div className={styles["student-other"]}>
+            <div className={styles["completion-status"]}>
+              Completion Status:{" "}
+              <span
+                className={isComplete ? styles.complete : styles.incomplete}
+              >
+                {isComplete ? "Complete" : "Incomplete"}
               </span>
             </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className={styles["card-modal"]} onSubmit={handleSubmit}>
+          <h3>Edit Assessment</h3>
           <div>
             <label>Grade:</label>
             <input
@@ -95,33 +128,45 @@ const AssessmentCard = ({ assessment, closeModal }) => {
             />
           </div>
           <div>
-            <label>Student ID:</label>
-            <input
-              type="text"
-              name="student_id"
-              value={formData.student_id}
-              onChange={handleInputChange}
-            />
+            <label>
+              Student:
+              <select
+                name="student_id"
+                value={formData.student_id || ""}
+                onChange={handleInputChange}
+              >
+                <option value="">Select a student</option>
+                {students.map((student) => (
+                  <option key={student.id} value={student.id}>
+                    {student.stu_name}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
           <div>
-            <label>Assessment ID:</label>
-            <input
-              type="text"
-              name="assess_id"
-              value={formData.assess_id}
-              onChange={handleInputChange}
-            />
+            <label>
+              Assessment:
+              <select
+                name="assess_id"
+                value={formData.assess_id || ""}
+                onChange={handleInputChange}
+              >
+                <option value="">Select an assessment</option>
+                {assess.map((ass) => (
+                  <option key={ass.id} value={ass.id}>
+                    {ass.assess_name}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
-          <div>
-            <label>Cohort ID:</label>
-            <input
-              type="text"
-              name="cohort_id"
-              value={formData.cohort_id}
-              onChange={handleInputChange}
-            />
+          <div className={styles['button-cont']}>
+          <button className={styles['update-button']} type="submit">Update Assessment</button>
+          <button className={styles["delete-button"]} onClick={handleDelete} disabled={isDeleting}>
+            {isDeleting ? "Deleting..." : "Delete Assessment"}
+          </button>
           </div>
-          <button type="submit">Update Assessment</button>
         </form>
       </div>
     </div>

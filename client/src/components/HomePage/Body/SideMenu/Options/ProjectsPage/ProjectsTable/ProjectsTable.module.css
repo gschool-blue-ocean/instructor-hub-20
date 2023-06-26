@@ -1,45 +1,55 @@
-.tableContainer {
+.projects-table-container {
   max-height: 400px;
   margin: 30px;
-  width: 900px;
+  width: 1000px;
   overflow-y: auto;
 }
 
-.tableHeader {
+.projects-table-header {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   line-height: 3;
   color: var(--galv-white);
   background: var(--galv-darkgrey);
 }
 
-.tableHeader table {
+.projects-table-header table {
   border-collapse: collapse;
   width: 100%;
 }
 
-.tableBody table {
-  border-collapse: collapse;
-  width: 100%;
+.projects-table-body tr td {
+  text-align: center;
+  height: 80px;
+  width: calc(100% / 5); 
+  box-sizing: border-box; 
+  padding: 10px; 
 }
 
 .column1,
 .column2,
 .column3,
-.column4 {
+.column4,
+.column5 {
   display: table-cell;
   vertical-align: inherit;
-  width: 260px;
   text-align: center;
+  width: calc(100% / 5); 
+  box-sizing: border-box; 
+  padding: 10px; 
 }
 
-.column3 {
-  padding-left: 150px;
+
+.column1 {
+  transform: translateX(40px);
 }
 
-.column4 {
-  padding-left: 80px;
+.column2 {
+  transform: translateX(30px);
+}
+.column1 {
+  transform: translateX(40px);
 }
 
 tbody tr {
@@ -53,16 +63,14 @@ tbody tr:hover {
 
 tbody tr td {
   text-align: center;
-  width: 260px;
-  padding-left: 40px;
-  height: 80px; /* Increase this value to make the rows taller */
+  height: 80px;
 }
 
 .no-information {
   color: var(--galv-white);
 }
 
-.tableBody {
+.projects-table-body {
   background-color: #8e8e8e4e;
   color: var(--galv-darkgrey);
   margin-top: -10px;
@@ -70,28 +78,32 @@ tbody tr td {
   border-collapse: collapse;
 }
 
-.project-members {
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  font-size: 0.8rem;
-  height: 20px;
-  margin-top: 15px;
-  margin-left: 70px;
+  justify-content: center;
+  z-index: 9999;
 }
 
-.project-member-row {
+.modalContent {
   display: flex;
-  padding: 5px;
+  justify-content: center;
+  align-content: center;
+  width: 800px;
+  height: 600px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.project-member {
-  width: 100px;
+.arrow-down {
+  transform: scale(.6);
 }
 
-.project-member-dot {
-  display: inline-block;
-  margin: 0 5px; /* Adjust the spacing between members as needed */
-  color: var(--galv-darkgrey); /* Set the color of the dot */
-}

@@ -1,5 +1,6 @@
 /* User table inserts */
 INSERT INTO users(name, email, password) VALUES
+('test', 'test@test.com', '$2a$10$QDfb5WuqsQzbf8n2Ryxgtu/BWnSVTTfQ7NwpEcA5j0lPmqe/k6B3C'),
 ('Phil Witkin', 'pwitkins@hotmail.com', 'G3tP@1d'),
 ('Danny Andrews', 'dannyphantom@yahoo.com', 'Gh0stinthe$h3ll');
 
