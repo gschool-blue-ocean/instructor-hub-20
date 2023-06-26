@@ -68,7 +68,7 @@ Working together as an Agile group, we worked hard to redesign this application 
   - `docker-compose up -d` - Run Project.
     > **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
 - Point your browser to
-  - [http://localhost:5173](http://localhost:5173)
+  - [https://instructor-hub-20.onrender.com/](https://instructor-hub-20.onrender.com/)
 
 [Project Demonstration](deployment_link_will_go_here_when_complete)
 
