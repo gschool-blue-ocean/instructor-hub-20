@@ -21,7 +21,7 @@
 This project is the culmination of months of hard work growing our skills within the Galvanize course. We came together as a team to rework an existing project from a previous cohort in order to meet the demands of a client.
 
 - Project Manager: Tailon Dow
-- UI Manager: Jacob Phillips and Israr Ali
+- UI Manager: Jacob Philips and Israr Ali
 - Architecture Manager: Alex Peterec, Kendall Boone, and Weson Hilgenfeld
 
 Working together as an Agile group, we worked hard to redesign this application visually and functionally per our client's needs. We've reworked the authentication system that correctly stores hashed passwords in the database and keeps the user logged in, reworked the whole UI to fit the clients needs, and cleaned up the entire database for seamless expereince.
@@ -65,10 +65,19 @@ Working together as an Agile group, we worked hard to redesign this application 
   - npm install --prefix api
   - npm install --prefix client
   - `cp .env.example .env` - Copy over required environment variables.
-  - `docker-compose up -d` - Run Project.
+  - `docker-compose up` - Run Project.
     > **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
 - Point your browser to
   - [https://instructor-hub-20.onrender.com/](https://instructor-hub-20.onrender.com/)
+- Run Playwright tests
+	- The tests automatically run when running `docker-compose up -d`
+  - You can run just `docker-compose up` to run the containers and see the logs in the terminal
+	- The tests results can be viewed in the instructor-hub-20_tests_1 container log
+	- To run the test again:
+    - Make sure that all the other containers are running first
+		- Start up the test container from Docker Desktop
+		- Or `run docker start instructor-hub-20_tests_1` in the terminal
+
 
 [Project Demonstration](deployment_link_will_go_here_when_complete)
 
@@ -98,3 +107,4 @@ Working together as an Agile group, we worked hard to redesign this application 
   - Galvanize Inc. Admissions Hub assignment
 - Contributors:
   - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weson Hilgenfeld
+

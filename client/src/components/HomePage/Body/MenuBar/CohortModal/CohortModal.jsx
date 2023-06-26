@@ -7,6 +7,7 @@ const CohortModal = ({ isOpen, onClose }) => {
   const [currentCohorts, setCurrentCohorts] = useState([]);
 
   useEffect(() => {
+    // Make your API call here and update the options state when it's done
     fetch("/api/cohorts")
       .then((response) => response.json())
       .then((data) => setCurrentCohorts(data))
@@ -36,6 +37,8 @@ const CohortModal = ({ isOpen, onClose }) => {
           <ul>
             {currentCohorts.map((item) => (
               <li
+                id={"modal"+item.cohort_number}
+
                 key={item.cohort_number}
                 onClick={() => handleItemClick(item)}
               >
@@ -44,7 +47,7 @@ const CohortModal = ({ isOpen, onClose }) => {
             ))}
           </ul>
           <div className={styles["exit-btn-cont"]}>
-            <button onClick={onClose} className={styles["exit-btn"]}>
+            <button id="exit-btn" onClick={onClose} className={styles["exit-btn"]}>
               Exit
             </button>
           </div>

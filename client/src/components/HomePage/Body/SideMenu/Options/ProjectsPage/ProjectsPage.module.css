@@ -4,47 +4,47 @@
 }
 
 .student-title {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding-top: 20px;
-    font-size: 1.7rem;
-    font-weight: var(--bold);
-    transform: translateX(40px);
-    height: 80px;
-    width: 300px;
-    color: var(--galv-white);
-    background-color: var(--galv-purple);
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 20px;
+  font-size: 1.7rem;
+  font-weight: var(--bold);
+  transform: translateX(40px);
+  height: 80px;
+  width: 300px;
+  color: var(--galv-white);
+  background-color: var(--galv-purple);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .table-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 30px;
-    height: 550px;
-    padding: 30px 2px;
-    top: 0;
-    background-color: var(--galv-white);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 30px;
+  height: 550px;
+  padding: 30px 2px;
+  top: 0;
+  background-color: var(--galv-white);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .student-container-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
 }
 
 .page-header {
-    background-color: var(--galv-white);
-    color: var(--galv-darkgrey);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    font-size: 2.6rem;
-    padding: 5px 20px;
-    border-radius: 30px;
+  background-color: var(--galv-white);
+  color: var(--galv-darkgrey);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-size: 2.6rem;
+  padding: 5px 20px;
+  border-radius: 30px;
 }
 
 .add-button-container {
@@ -66,8 +66,9 @@
     transition: 0.3s ease-in;
   }
 
+
 .add-btn:hover {
-    background-color: var(--galv-purple);
+  background-color: var(--galv-purple);
 }
 
 

@@ -28,7 +28,7 @@ const AssessmentCard = ({
       const updatedFormData = Object.fromEntries(
         Object.entries(formData).filter(([key, value]) => value !== "")
       );
-
+      
       updatedFormData.student_id = parseInt(updatedFormData.student_id);
       updatedFormData.assess_id = parseInt(updatedFormData.assess_id);
 
@@ -60,7 +60,7 @@ const AssessmentCard = ({
     }
     closeCard();
   };
-
+  
   const handleDelete = async () => {
     try {
       setIsDeleting(true);

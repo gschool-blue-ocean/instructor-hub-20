@@ -39,29 +39,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// async function fetchDataFromRedisOrDatabase(req, res, next) {
-//   const id = req.params.id;
-//   console.log(id);
-//   try {
-//     const cacheResults = await new Promise((resolve, reject) => {
-//       redisClient.get(id, (error, result) => {
-//         if (error) reject(error);
-//         else resolve(result);
-//       });
-//     });
-//     if (cacheResults) {
-//       console.log(res);
-//       console.log("Data retrieved from cache");
-//       res.json(JSON.parse(cacheResults));
-//     } else {
-//       next();
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: `Something went wrong: ${err}` });
-//   }
-// }
-
 //-----------------------------------------ROUTES--------------------------------------------------//
 
 // --------------------- Users routes ----------------------------- //
@@ -86,6 +63,22 @@ app.post("/register", async (req, res) => {
       } else {
         res.status(500).send({ message: "Internal Error" });
       }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: error });
+  }
+});
+
+app.delete("/users/:name", async (req, res) => {
+  try {
+    const result = await pool.query("DELETE FROM users WHERE name = $1", [
+      req.params.name,
+    ]);
+    if (result.rows[0]) {
+      res.status(201).send({ message: "User successfully removed" });
+    } else {
+      res.status(404).send({ message: "No user with that name" });
     }
   } catch (error) {
     console.error(error);
@@ -246,26 +239,6 @@ app.get("/cohorts", async (req, res) => {
   }
 });
 
-// app.get("/cohorts/:id",  async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { rows } = await pool.query("SELECT * FROM cohorts WHERE id = $1", [
-//       id,
-//     ]);
-
-//     if (rows.length === 0) {
-//       res.sendStatus(404);
-//     } else {
-//       await redisClient.set(id, JSON.stringify(rows[0]));
-//       console.log("Data retrieved from the database");
-//       res.json(rows[0]);
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.sendStatus(500).json({ message: `Something went wrong: ${err}` });
-//   }
-// });
-
 app.post("/cohorts", async (req, res) => {
   try {
     const { cohort_number, start, graduation, user_id } = req.body;
@@ -350,60 +323,6 @@ app.get("/groups/:id", async (req, res) => {
   }
 });
 
-// app.post("/groups", async (req, res) => {
-//   try {
-//     const {
-//       group_name,
-
-//     } = req.body;
-//     const { rows } = await pool.query(
-//       "INSERT INTO groups (group_name, student1, student2, student3, student4, student5, student6) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-//       [group_name, student1, student2, student3, student4, student5, student6]
-//     );
-//     res.status(201).json(rows[0]);
-//   } catch (error) {
-//     console.error(error);
-//     res.sendStatus(500);
-//   }
-// });
-
-// app.put("/groups/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const {
-//       group_name,
-//       student1,
-//       student2,
-//       student3,
-//       student4,
-//       student5,
-//       student6,
-//     } = req.body;
-//     const { rowCount } = await pool.query(
-//       "UPDATE groups SET group_name = $1, student1 = $2, student2 = $3, student3 = $4, student4 = $5, student5 = $6, student6 = $7 WHERE id = $3",
-//       [
-//         group_name,
-//         student1,
-//         student2,
-//         student3,
-//         student4,
-//         student5,
-//         student6,
-//         id,
-//       ]
-//     );
-
-//     if (rowCount === 0) {
-//       res.sendStatus(404);
-//     } else {
-//       res.sendStatus(204);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.sendStatus(500);
-//   }
-// });
-
 app.delete("/groups/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -421,7 +340,6 @@ app.delete("/groups/:id", async (req, res) => {
     res.sendStatus(500);
   }
 });
-
 // ----------------- Assessments routes --------------------- //
 app.get("/assessments", async (req, res) => {
   try {
@@ -489,6 +407,7 @@ app.delete("/assessments/:id", async (req, res) => {
 
 // ---------------- Assessment Scores routes --------------------- //
 app.get(
+
   "/student_assessment_scores",
 
   async (req, res) => {
@@ -518,6 +437,7 @@ app.get(
 
 app.get(
   "/student_assessment_scores/:id",
+
 
   async (req, res) => {
     try {

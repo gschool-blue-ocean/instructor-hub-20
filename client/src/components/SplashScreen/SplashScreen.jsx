@@ -63,6 +63,7 @@ const SplashScreen = ({ logout }) => {
               <ul>
                 {currentCohorts.map((item) => (
                   <li
+                    id={'splash'+item.cohort_number}
                     key={item.cohort_number}
                     onClick={() => handleItemClick(item)}
                   >

@@ -25,7 +25,6 @@ const LoginPage = ({ showReg, userAuth }) => {
       let login = {};
       login.email = email.value;
       login.password = password.value;
-      // console.log(login);
       const response = await fetch(
         "/api/login",
         {
@@ -35,9 +34,8 @@ const LoginPage = ({ showReg, userAuth }) => {
           body: JSON.stringify(login),
         }
       );
+
       const loggedIn = await response.json();
-      // console.log(loggedIn);
-      // console.log(response);
       if (response.status === 404) {
         setErrorLogin("User email not found.");
         return;
@@ -78,6 +76,7 @@ const LoginPage = ({ showReg, userAuth }) => {
         <div>
           <form className="sign-in-form">
             <h3 className="error-text">{errorLogin}</h3>
+
             <input
               type="email"
               name="username"
@@ -97,10 +96,10 @@ const LoginPage = ({ showReg, userAuth }) => {
           </form>
         </div>
         <div className="login-button-container">
-          <button className="login-button" onClick={handleLogin}>
+          <button id="login-button" className="login-button" onClick={handleLogin}>
             Sign In
           </button>
-          <button className="login-button" onClick={handleReg}>
+          <button id="loginPage-register-button" className="login-button" onClick={handleReg}>
             Register
           </button>
           <span className="forgetYourPW">Forgot your password?</span>

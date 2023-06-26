@@ -22,7 +22,7 @@ const StudentsPage = () => {
     };
 
     fetchStudents();
-
+    
     return () => {};
   }, [cohort, students]);
 

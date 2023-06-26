@@ -27,6 +27,7 @@ const SideMenu = ({ logout }) => {
           </span>
           <ul className={styles["select-container"]}>
             <li
+              id="home"
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("main");
@@ -35,6 +36,7 @@ const SideMenu = ({ logout }) => {
               Home
             </li>
             <li
+              id="students"
               className={styles["students-li"]}
               onClick={() => {
                 setBodyDisplay("student");
@@ -43,6 +45,7 @@ const SideMenu = ({ logout }) => {
               Students
             </li>
             <li
+              id="projects"
               className={styles["projects-li"]}
               onClick={() => {
                 setBodyDisplay("project");
@@ -51,6 +54,7 @@ const SideMenu = ({ logout }) => {
               Projects
             </li>
             <li
+              id="assessments"
               className={styles["assessments-li"]}
               onClick={() => {
                 setBodyDisplay("assessment");
@@ -60,7 +64,7 @@ const SideMenu = ({ logout }) => {
             </li>
           </ul>
           <span className={styles["sign-out-button-container"]}>
-            <button className={styles["sign-out-btn"]} onClick={handleLogout}>
+            <button id="sign-out-btn" className={styles["sign-out-btn"]} onClick={handleLogout}>
               Sign Out
             </button>
           </span>

@@ -40,7 +40,7 @@ const RegisterPage = ({ showReg }) => {
         }
       );
       const register = await response.json();
-      // console.log(register);
+      
       if (response.status === 409) {
         setErrorText("Email already exists.");
         return;
@@ -111,7 +111,7 @@ const RegisterPage = ({ showReg }) => {
           </form>
         </div>
         <div className="login-button-container">
-          <button className="login-button" onClick={handleRegister}>
+          <button id="registerPage-register-button" className="login-button" onClick={handleRegister}>
             Register
           </button>
           <button className="login-button" onClick={handleCancel}>

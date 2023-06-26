@@ -1,7 +1,7 @@
 import React from "react";
 
-const NewProject = () => {
+const Cohorts = () => {
   return <div></div>;
 };
 
-export default NewProject;
+export default Cohorts;

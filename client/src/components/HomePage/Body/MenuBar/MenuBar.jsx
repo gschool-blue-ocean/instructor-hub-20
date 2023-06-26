@@ -21,7 +21,7 @@ const MenuBar = () => {
       <nav className={styles["nav-bar"]}>
         <div className={styles["instructor-title-cont"]}>
           <h2 className={styles["instructor-title"]}>Hello, Instructor</h2>
-          <span className={styles["currently-viewing"]}>
+          <span id="currently-viewing" className={styles["currently-viewing"]}>
             You're currently viewing <b>{`MCSP-${cohort}`}</b>
           </span>
         </div>
@@ -29,6 +29,7 @@ const MenuBar = () => {
           <span className={styles["wanna-change"]}>
             Want to change cohorts?{" "}
             <button
+              id="change-cohort-btn"
               className={`${styles["change-cohort-btn"]}`}
               onClick={handleOpenModal}
             >
