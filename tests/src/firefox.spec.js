@@ -127,7 +127,7 @@ test(`home button goes back to home dashboard - firefox`, async () => {
   await page.click("#students");
   const studentsIsVisible = await page.isVisible('#add-student-btn');
   await page.click("#home");
-  const homePageIsVisible = await page.getByText('Average Grades').isVisible();
+  const homePageIsVisible = await page.isVisible('#canvas');
   expect(studentsIsVisible).toBe(true);
   expect(homePageIsVisible).toBe(true);
   await browser.close();
