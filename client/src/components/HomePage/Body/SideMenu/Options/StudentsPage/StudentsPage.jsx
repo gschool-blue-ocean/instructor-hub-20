@@ -22,7 +22,7 @@ const StudentsPage = () => {
     };
 
     fetchStudents();
-
+    
     return () => {};
   }, [cohort, students]);
 
@@ -96,7 +96,7 @@ const StudentsPage = () => {
       <div className={styles["table-container"]}>
         <div className={styles["student-container-bar"]}>
           <div className={styles["add-button-container"]}>
-            <button className={styles["add-btn"]} onClick={handleAddStudent}>
+            <button id="add-student-btn" className={styles["add-btn"]} onClick={handleAddStudent}>
               Add Student
             </button>
             {showModal && (

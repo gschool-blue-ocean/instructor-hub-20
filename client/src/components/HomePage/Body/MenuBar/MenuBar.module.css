@@ -1,80 +1,80 @@
 .nav-container {
-    background-color: var(--galv-white);
-    width: 80%;
-    height: 140px;
-    margin-left: 245px;
-    border-bottom: 2px solid #c8c8c8;
-    z-index: 100;
+  background-color: var(--galv-white);
+  width: 80%;
+  height: 140px;
+  margin-left: 245px;
+  border-bottom: 2px solid #c8c8c8;
+  z-index: 100;
 }
 
 .nav-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
 .instructor-title-cont {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 30px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .instructor-title {
-    color: var(--galv-darkgrey);
-    font-size: 3.1rem;
+  color: var(--galv-darkgrey);
+  font-size: 3.1rem;
 }
 
 .currently-viewing {
-    color: var(--galv-darkgrey);
-    font-weight: var(--light);
-    font-size: 1.4rem;
+  color: var(--galv-darkgrey);
+  font-weight: var(--light);
+  font-size: 1.4rem;
 }
 
 .currently-viewing b {
-    padding: 1px 10px;
-    border-radius: 30px;
-   border: 2px solid var(--galv-orange);
+  padding: 1px 10px;
+  border-radius: 30px;
+  border: 2px solid var(--galv-orange);
 }
 
 .wanna-change-cont {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    margin-top: 30px;
-    padding: 0px 9px 9px 9px;
-    width: 300px;
-    border: 2px solid #bebebe;
-    border-radius: 15px;
-    background-color: #bebcbc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-top: 30px;
+  padding: 0px 9px 9px 9px;
+  width: 300px;
+  border: 2px solid #bebebe;
+  border-radius: 15px;
+  background-color: #bebcbc;
 }
 
 .wanna-change {
-    color: var(--galv-darkgrey);
-    font-weight: var(--light);
-    font-size: 1.1rem;
-    margin-top: 15px;
+  color: var(--galv-darkgrey);
+  font-weight: var(--light);
+  font-size: 1.1rem;
+  margin-top: 15px;
 }
 
 .change-cohort-btn {
-    cursor: pointer;
-    padding: 1px 10px;
-    background-color: var(--galv-darkgrey);
-    color: var(--galv-white);
-    border-radius: 30px;
-    transition: .3s ease-in;
+  cursor: pointer;
+  padding: 1px 10px;
+  background-color: var(--galv-darkgrey);
+  color: var(--galv-white);
+  border-radius: 30px;
+  transition: 0.3s ease-in;
 }
 
 .change-cohort-btn:hover {
-    background-color: var(--galv-purple);
-    color: var(--galv-white);
+  background-color: var(--galv-purple);
+  color: var(--galv-white);
 }
 
 .change-cohort-btn:active {
-    background-color: #61497d;
-    color: var(--galv-white);
+  background-color: #61497d;
+  color: var(--galv-white);
 }

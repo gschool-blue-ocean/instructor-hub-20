@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSignIn } from "react-auth-kit";
 import "../Login.css";
 
-const LoginPage = ({ showReg, userAuth }) => {
+const LoginPage = ({ registered, setRegistered, showReg, userAuth }) => {
   const [errorLogin, setErrorLogin] = useState("");
   const signIn = useSignIn();
 
@@ -25,19 +25,17 @@ const LoginPage = ({ showReg, userAuth }) => {
       let login = {};
       login.email = email.value;
       login.password = password.value;
-      // console.log(login);
       const response = await fetch(
         "/api/login",
         {
-          method: "POST",
-          credentials: "same-origin",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(login),
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(login),
         }
       );
+
       const loggedIn = await response.json();
-      // console.log(loggedIn);
-      // console.log(response);
       if (response.status === 404) {
         setErrorLogin("User email not found.");
         return;
@@ -77,7 +75,11 @@ const LoginPage = ({ showReg, userAuth }) => {
         <h2 className="login-sign-in-text">Sign In</h2>
         <div>
           <form className="sign-in-form">
-            <h3 className="error-text">{errorLogin}</h3>
+            {errorLogin ? (
+              <h3 className="error-text">{errorLogin}</h3>
+            ) : (
+              <h3 className="registered">{registered}</h3>
+            )}
             <input
               type="email"
               name="username"
@@ -97,10 +99,10 @@ const LoginPage = ({ showReg, userAuth }) => {
           </form>
         </div>
         <div className="login-button-container">
-          <button className="login-button" onClick={handleLogin}>
+          <button id="login-button" className="login-button" onClick={handleLogin}>
             Sign In
           </button>
-          <button className="login-button" onClick={handleReg}>
+          <button id="loginPage-register-button" className="login-button" onClick={handleReg}>
             Register
           </button>
           <span className="forgetYourPW">Forgot your password?</span>

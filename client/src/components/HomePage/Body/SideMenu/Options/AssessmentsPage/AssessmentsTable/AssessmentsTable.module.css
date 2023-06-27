@@ -25,6 +25,7 @@
   width: calc(100% / 5); /* Divide the width equally among 5 columns */
   box-sizing: border-box; /* Include padding and border in the width calculation */
   padding: 10px; /* Adjust the padding as needed */
+
 }
 
 .column1,
@@ -71,13 +72,13 @@
 }
 
 .assessment-table-body {
+
   background-color: #8e8e8e4e;
   color: var(--galv-darkgrey);
   margin-top: -10px;
   width: 100%;
   border-collapse: collapse;
 }
-
 
 .modal {
   position: fixed;
@@ -106,3 +107,4 @@
 .arrow-down {
   transform: scale(.6);
 }
+

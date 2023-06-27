@@ -2,22 +2,27 @@
   "type": "module",
   "dependencies": {
     "@redis/client": "^1.5.8",
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.17.3",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
+    "path": "^0.12.7",
     "pg": "^8.10.0",
     "redis": "^4.6.7"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/serverDeployed.js",
-    "test": "echo 'add tests'",
-    "migrate": "node src/db/migration.js",
-    "seed": "node src/db/seed.js"
+    "dev": "nodemon src/index.js --host",
+    "start": "node src/serverDeployed.js --host",
+    "test": "jest --collectCoverage",
+    "migrate": "node ./src/db/migration.js",
+    "seed": "node ./src/db/seed.js"
   },
   "devDependencies": {
+    "jest": "^29.5.0",
+    "msw": "^1.2.2",
     "nodemon": "^2.0.12",
     "supertest": "^6.3.3",
     "vitest": "^0.29.2"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Login.css";
 
-const RegisterPage = ({ showReg }) => {
+const RegisterPage = ({ setRegistered, showReg }) => {
   const [errorText, setErrorText] = useState("");
 
   function isValidEmail(email) {
@@ -33,14 +33,14 @@ const RegisterPage = ({ showReg }) => {
       const response = await fetch(
         "/api/register",
         {
-          method: "POST",
-          credentials: "same-origin",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(registerVals),
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registerVals),
         }
       );
       const register = await response.json();
-      // console.log(register);
+
       if (response.status === 409) {
         setErrorText("Email already exists.");
         return;
@@ -48,7 +48,7 @@ const RegisterPage = ({ showReg }) => {
         setErrorText("Internal Error");
         return;
       } else if (response.status === 201) {
-        alert("Account successfully registered!");
+        setRegistered("Account successfully registered!");
         showReg(false);
       }
     } catch (error) {
@@ -111,7 +111,7 @@ const RegisterPage = ({ showReg }) => {
           </form>
         </div>
         <div className="login-button-container">
-          <button className="login-button" onClick={handleRegister}>
+          <button id="registerPage-register-button" className="login-button" onClick={handleRegister}>
             Register
           </button>
           <button className="login-button" onClick={handleCancel}>

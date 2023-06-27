@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "./StudentCard.module.css";
+import CohortContext from "../../../../../../../Context/CohortContext";
 
 
 const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
@@ -8,8 +9,7 @@ const StudentCard = ({ student, updateStudent, closeModal, selectedRow}) => {
     stu_name: student.stu_name || "",
     email: student.email || "",
     github: student.github || "",
-    graduation: student.graduation || "",
-    cohort: cohort,
+    cohort_number: cohort,
   });
 
   const [updatedStudent, setUpdatedStudent] = useState(student);

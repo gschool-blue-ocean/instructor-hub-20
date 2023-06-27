@@ -16,7 +16,7 @@ const MainPage = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `https://blueoceanapi-ucyq.onrender.com/student_assessment_scores/${cohort}`
+        `/api/student_assessment_scores/${cohort}`
       );
       const assess = await response.json();
       setAssessments(assess);
@@ -97,7 +97,7 @@ const MainPage = () => {
       <div className={styles["table-container"]}>
         <div className={styles["table-cont"]}>
           <div className={styles["chart-container"]}>
-            <canvas ref={chartRef}></canvas>
+            <canvas id="canvas" ref={chartRef}></canvas>
           </div>
         </div>
       </div>

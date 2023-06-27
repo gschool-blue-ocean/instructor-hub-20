@@ -27,7 +27,6 @@ useEffect(() => {
   const sortedProjects = [...projects].sort((a, b) => {
     const key = sortConfig.key;
     const direction = sortConfig.direction === "ascending" ? 1 : -1;
-
     if (key === "group_name" || key === "project_name" || key === "stu_name") {
       return (a[key] || "").localeCompare(b[key] || "") * direction;
     } else if (key === "grade") {

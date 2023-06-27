@@ -65,10 +65,19 @@ Working together as an Agile group, we worked hard to redesign this application 
   - npm install --prefix api
   - npm install --prefix client
   - `cp .env.example .env` - Copy over required environment variables.
-  - `docker-compose up -d` - Run Project.
+  - `docker-compose up` - Run Project.
     > **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
 - Point your browser to
-  - [http://localhost:5173](http://localhost:5173)
+  - [https://instructor-hub-20.onrender.com/](https://instructor-hub-20.onrender.com/)
+- Run Playwright tests
+	- The tests automatically run when running `docker-compose up -d`
+  - You can run just `docker-compose up` to run the containers and see the logs in the terminal
+	- The tests results can be viewed in the instructor-hub-20_tests_1 container log
+	- To run the test again:
+    - Make sure that all the other containers are running first
+		- Start up the test container from Docker Desktop
+		- Or `run docker start instructor-hub-20_tests_1` in the terminal
+
 
 [Project Demonstration](deployment_link_will_go_here_when_complete)
 

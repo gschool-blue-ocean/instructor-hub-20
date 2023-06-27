@@ -117,9 +117,9 @@ const AssessmentsPage = () => {
       <div className={styles["table-container"]}>
         <div className={styles["student-container-bar"]}>
           <div className={styles["add-button-container"]}>
-            <button className={styles["add-btn"]} onClick={handleAddAssessment}>
-              Add Assessment
-            </button>
+          <button id="add-assessment-btn" className={styles["add-btn"]}>
+            Add Assessment
+              </button>
             {showModal && (
               <>
                 <div className={styles["page-overlay"]} />

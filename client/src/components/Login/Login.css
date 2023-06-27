@@ -108,7 +108,7 @@ span.or-sign-in-text:after {
   height: 0;
   margin: 10px 10px;
   border-top: 2px solid #e6e6e6;
-  content: '';
+  content: "";
 }
 
 .login-github-container {
@@ -130,6 +130,7 @@ span.or-sign-in-text:after {
   overflow: hidden;
 }
 
+.registered,
 .error-text {
   color: rgb(239, 110, 71);
   margin: 40px 0 0px 0;
