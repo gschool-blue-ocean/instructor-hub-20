@@ -22,7 +22,7 @@ This project is the culmination of months of hard work growing our skills within
 
 - Project Manager: Tailon Dow
 - UI Manager: Jacob Phillips and Israr Ali
-- Architecture Manager: Alex Peterec, Kendall Boone, and Weson Hilgenfeld
+- Architecture Manager: Alex Peterec, Kendall Boone, and Weston Hilgenfeld
 
 Working together as an Agile group, we worked hard to redesign this application visually and functionally per our client's needs. We've reworked the authentication system that correctly stores hashed passwords in the database and keeps the user logged in, reworked the whole UI to fit the clients needs, and cleaned up the entire database for seamless expereince.
 
@@ -46,16 +46,27 @@ Working together as an Agile group, we worked hard to redesign this application 
 
 ### Login
 
-![Login](/documentation/images/mcsp-20/login.png)
-![Create_Account](/documentation/images/mcsp-20/create_account.png)
+![Login](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/221a658d-77f4-4532-8607-defd20ae346d)
+
+![Create_Account](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/c9815872-dddc-40cd-9dc0-1d15c7f1f045)
 
 ### Dashboard
 
-![Dashboard](/documentation/images/mcsp-20/dashboard.png)
+![Dashboard](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/73214644-1cde-4372-8426-7b1c1c4a21cd)
+ 
+![Student Dashboard](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/f514dee6-94b2-43ff-8daa-7139ab1462ed)
 
-### Interview
+![Edit Student](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/ffe12a08-f2d1-4646-a0ba-0204f731c33f)
 
-![Interview](/documentation/images/mcsp-20/interview.png)
+![Change Cohort](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/96124ed9-235e-4e86-a375-c0604a321dc5)
+
+
+## Original Project 
+
+![Dashboard](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/4b4a108c-2b8e-4b94-b6f5-1fac12f1bf80)
+
+![Assessment Modal](https://github.com/gschool-blue-ocean/instructor-hub-20/assets/121460844/828ae242-f946-4e12-a5e8-b978aaf115c1)
+
 
 ## Setup
 
@@ -79,7 +90,7 @@ Working together as an Agile group, we worked hard to redesign this application 
 		- Or `run docker start instructor-hub-20_tests_1` in the terminal
 
 
-[Project Demonstration](deployment_link_will_go_here_when_complete)
+[Project Demonstration](https://instructor-hub-20.onrender.com/)
 
 ## Usage
 
@@ -90,14 +101,14 @@ Working together as an Agile group, we worked hard to redesign this application 
 
 ## Current Status
 
-> Sprint 1 of 2 Complete
+> Completed Project
 
 ## Room For Improvement
 
 - Ideas:
   - Adding a scalable option
-- Todo:
-  - deployment
+- To-Do:
+  - Present Project
 
 ## Acknowledgements
 
@@ -106,4 +117,5 @@ Working together as an Agile group, we worked hard to redesign this application 
 - Based On:
   - Galvanize Inc. Admissions Hub assignment
 - Contributors:
-  - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weson Hilgenfeld
+  - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weston Hilgenfeld
+
