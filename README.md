@@ -28,12 +28,26 @@ Working together as an Agile group, we worked hard to redesign this application 
 
 ## Technologies Used
 
-- HTML5, CSS3, JavaScript, express.js, node.js,
-- React, react-auth,
-- jest, Vitest, Playwright,
-- Docker, PostgreSQL, Git, NPM,
-- Visual Studio Code, Github Projects,
-- Discord, Slack, Zoom
+###Front-End
+- HTML5, CSS3, React
+
+###Back-End
+- Node.js, Express.js, PostgreSQL
+
+###Testing
+- jest, Vitest, Playwright
+
+###Authentication
+- react-auth, jwt, bcrypt
+
+###Deployment
+- Docker, Render
+
+###Version Control
+- Visual Studio Code, npm, Git
+
+###Workflow/Communication
+- Github Projects, Discord, Slack, Zoom
 
 ## Features
 
