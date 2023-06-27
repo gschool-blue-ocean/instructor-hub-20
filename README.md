@@ -44,7 +44,7 @@ Working together as an Agile group, we worked hard to redesign this application 
 - Docker, Render
 
 ### Version Control
-- Visual Studio Code, npm, Git
+- Git, npm
 
 ### Workflow/Communication
 - Github Projects, Discord, Slack, Zoom
