@@ -29,25 +29,28 @@ Working together as an Agile group, we worked hard to redesign this application 
 ## Technologies Used
 
 ### Front-End
-- HTML5, CSS3, React
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAF)
 
 ### Back-End
-- Node.js, Express.js, PostgreSQL
+- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ### Testing
-- jest, Vitest, Playwright
+- ![jest](https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white) Vitest | Playwright
 
 ### Authentication
-- react-auth, jwt, bcrypt
+- ![jwt](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink) bcrypt | react-auth
 
 ### Deployment
-- Docker, Render
+- ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![github_actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) Render 
 
 ### Version Control
-- Git, npm
+- ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
 ### Workflow/Communication
-- Github Projects, Discord, Slack, Zoom
+- ![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white) ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white) ![Zoom](https://img.shields.io/badge/Zoom-2D8CFF?style=for-the-badge&logo=zoom&logoColor=white)  Github Projects
+
+### Formatting
+- ![eslint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white) ![prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 
 ## Features
 
@@ -102,6 +105,14 @@ Working together as an Agile group, we worked hard to redesign this application 
     - Make sure that all the other containers are running first
 		- Start up the test container from Docker Desktop
 		- Or `run docker start instructor-hub-20_tests_1` in the terminal
+- ### Running Unit Test
+	- To run the unit test for the server
+ 	````
+  	cd api/
+  	npm i
+  	npm run test
+  	````
+  - This will show all the tests for each of the routes.  There will also be a coverage section at the end of the test. This shows the percentage of all the test that passed and failed and what portion of the test files were successful. 
 
 
 [Project Demonstration](https://instructor-hub-20.onrender.com/)
@@ -120,16 +131,18 @@ Working together as an Agile group, we worked hard to redesign this application 
 ## Room For Improvement
 
 - Ideas:
-  - Adding a scalable option
-- To-Do:
-  - Present Project
+  - Implemnting Redis for cahcing the database
+  - Adding search feature to the homepage
+  - Updating the homepage:
+  	- Having a legend for the charts
+  	- Showing multiple charts for each assessment and project
 
 ## Acknowledgements
 
 - Inspired By:
   - Our instructors, all of our hard work, and the hard work of previous cohorts
 - Based On:
-  - Galvanize Inc. Admissions Hub assignment
+  - Galvanize Inc. Instructor Hub assignment
 - Contributors:
   - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weston Hilgenfeld
 
