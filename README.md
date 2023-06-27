@@ -29,7 +29,7 @@ Working together as an Agile group, we worked hard to redesign this application 
 ## Technologies Used
 
 - HTML5, CSS3, JavaScript, express.js, node.js,
-- React, react-router, react-auth,
+- React, react-auth,
 - jest, Vitest, Playwright,
 - Docker, PostgreSQL, Git, NPM,
 - Visual Studio Code, Github Projects,
