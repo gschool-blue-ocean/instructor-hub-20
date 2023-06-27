@@ -101,7 +101,7 @@ Working together as an Agile group, we worked hard to redesign this application 
 	- The tests automatically run when running `docker-compose up`
 	- The tests results can be viewed in the instructor-hub-20_tests_1 container log
 	- To run the test again:
-    		- Make sure that all the other containers are running first
+ 		- Make sure that all the other containers are running first
 		- Start up the test container from Docker Desktop
 		- Or run `docker start instructor-hub-20_tests_1` in the terminal
 - ### Running Unit Test
