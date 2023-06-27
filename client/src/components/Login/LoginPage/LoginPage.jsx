@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSignIn } from "react-auth-kit";
 import "../Login.css";
 
-const LoginPage = ({ showReg, userAuth }) => {
+const LoginPage = ({ registered, setRegistered, showReg, userAuth }) => {
   const [errorLogin, setErrorLogin] = useState("");
   const signIn = useSignIn();
 
@@ -28,10 +28,10 @@ const LoginPage = ({ showReg, userAuth }) => {
       const response = await fetch(
         "/api/login",
         {
-          method: "POST",
-          credentials: "same-origin",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(login),
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(login),
         }
       );
 
@@ -75,8 +75,11 @@ const LoginPage = ({ showReg, userAuth }) => {
         <h2 className="login-sign-in-text">Sign In</h2>
         <div>
           <form className="sign-in-form">
-            <h3 className="error-text">{errorLogin}</h3>
-
+            {errorLogin ? (
+              <h3 className="error-text">{errorLogin}</h3>
+            ) : (
+              <h3 className="registered">{registered}</h3>
+            )}
             <input
               type="email"
               name="username"

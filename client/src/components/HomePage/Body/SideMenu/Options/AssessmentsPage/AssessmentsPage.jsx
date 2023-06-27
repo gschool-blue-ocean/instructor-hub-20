@@ -189,7 +189,6 @@ const AssessmentsPage = () => {
           </CohortProvider>
         </div>
       </div>
-    </div>
   );
 };
 

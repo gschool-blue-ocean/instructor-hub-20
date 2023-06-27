@@ -64,15 +64,15 @@ const ProjectsPage = () => {
     const response = await fetch(
       "/api/student_project_scores",
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          student_id,
-          project_id,
-          grade,
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        student_id,
+        project_id,
+        grade,
+      }),
       }
     );
     if (response.ok) {
@@ -110,7 +110,7 @@ const ProjectsPage = () => {
       <div className={styles["table-container"]}>
         <div className={styles["student-container-bar"]}>
           <div className={styles["add-button-container"]}>
-            <button className={styles["add-btn"]} onClick={handleAddProject}>
+            <button id="add-project-btn" className={styles["add-btn"]} onClick={handleAddProject}>
               Add Project
             </button>
             {showModal && (
