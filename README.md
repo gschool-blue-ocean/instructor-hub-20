@@ -98,13 +98,12 @@ Working together as an Agile group, we worked hard to redesign this application 
 - Point your browser to
   - [https://instructor-hub-20.onrender.com/](https://instructor-hub-20.onrender.com/)
 - Run Playwright tests
-	- The tests automatically run when running `docker-compose up -d`
-  - You can run just `docker-compose up` to run the containers and see the logs in the terminal
+	- The tests automatically run when running `docker-compose up`
 	- The tests results can be viewed in the instructor-hub-20_tests_1 container log
 	- To run the test again:
-    - Make sure that all the other containers are running first
+    		- Make sure that all the other containers are running first
 		- Start up the test container from Docker Desktop
-		- Or `run docker start instructor-hub-20_tests_1` in the terminal
+		- Or run `docker start instructor-hub-20_tests_1` in the terminal
 - ### Running Unit Test
 	- To run the unit test for the server
  	````
