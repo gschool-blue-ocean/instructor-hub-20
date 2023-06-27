@@ -144,5 +144,10 @@ Working together as an Agile group, we worked hard to redesign this application 
 - Based On:
   - Galvanize Inc. Instructor Hub assignment
 - Contributors:
-  - Jacob Phillips, Tailon Dow, Israr Ali, Alex Peterec, Kendall Boone, and Weston Hilgenfeld
+  - Tailon Dow - github: [@tdow520](https://github.com/TDow520)  LinkedIn: [@tailon-dow](https://www.linkedin.com/in/tailon-dow/)
+  - Jacob Phillips - github: [@jacobrphillips](https://github.com/jacobrphillips)  LinkedIn [@jacobphillips-dev](https://www.linkedin.com/in/jacobphillips-dev/)
+  - Israr Ali - github: [@israr2468](https://github.com/israr2468)  LinkedIn: [@israrali-](https://www.linkedin.com/in/israrali-/)
+  - Alex Peterec - github: [@tpeterec](https://github.com/tpeterec)  LinkedIn: [@tapeterec](https://www.linkedin.com/in/tapeterec/)  Medium: [@thomaspeterec](https://medium.com/@thomaspeterec)
+  - Kendall Boone - github: [@legacyunlimited](https://github.com/legacyunlimited)  LinkedIn: [@kendall-boone](https://www.linkedin.com/in/kendall-boone/)
+  - Weston Hilgenfeld - github: [@Rusty12321](https://github.com/Rusty12321)  LinkedIn: [@westonhilgenfeld](https://www.linkedin.com/in/westonhilgenfeld/)
 
